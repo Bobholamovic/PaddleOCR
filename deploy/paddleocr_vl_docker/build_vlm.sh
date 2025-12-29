@@ -4,7 +4,7 @@ device_type='gpu'
 backend='vllm'
 build_for_offline='false'
 paddleocr_version='>=3.3.2,<3.4'
-paddlex_version='>=3.3.12,<3.4'
+paddlex_version='>=3.3.13,<3.4'
 tag_suffix='latest'
 
 while [[ $# -gt 0 ]]; do

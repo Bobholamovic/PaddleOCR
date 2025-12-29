@@ -14,7 +14,7 @@ RUN python -m pip install paddlepaddle==3.3.0.dev20251219 -i https://www.paddlep
     && python -m pip install paddle-iluvatar-gpu==3.0.0.dev20251223 -i https://www.paddlepaddle.org.cn/packages/nightly/ixuca/
 
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
-ARG PADDLEX_VERSION=">=3.3.12,<3.4"
+ARG PADDLEX_VERSION=">=3.3.13,<3.4"
 RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" "paddlex${PADDLEX_VERSION}" \
     && paddlex --install serving
 
