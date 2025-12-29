@@ -11,7 +11,9 @@ FROM base-${BACKEND}
 ARG BACKEND
 
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
-RUN python -m pip install "paddleocr${PADDLEOCR_VERSION}"
+ARG PADDLEX_VERSION=">=3.3.12,<3.4"
+RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" "paddlex${PADDLEX_VERSION}" \
+    && paddlex --install serving
 
 RUN groupadd -g 1000 paddleocr \
     && useradd -m -s /bin/bash -u 1000 -g 1000 paddleocr

@@ -13,7 +13,8 @@ RUN python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safeten
 RUN python -m pip install paddlepaddle-xpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/xpu-p800/; \
 
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
-RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" \
+ARG PADDLEX_VERSION=">=3.3.12,<3.4"
+RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" "paddlex${PADDLEX_VERSION}" \
     && paddlex --install serving
 
 RUN groupadd -g 1000 paddleocr \

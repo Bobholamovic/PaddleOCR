@@ -4,6 +4,7 @@ device_type='gpu'
 backend='vllm'
 build_for_offline='false'
 paddleocr_version='>=3.3.2,<3.4'
+paddlex_version='>=3.3.12,<3.4'
 tag_suffix='latest'
 
 while [[ $# -gt 0 ]]; do
@@ -54,6 +55,15 @@ while [[ $# -gt 0 ]]; do
             shift
             shift
             ;;
+        --paddlex-version)
+            [ -z "$2" ] && {
+                echo "`--paddlex-version` requires a value" >&2
+                exit 2
+            }
+            paddlex_version="==$2"
+            shift
+            shift
+            ;;
         --tag-suffix)
             [ -z "$2" ] && {
                 echo "`--tag-suffix` requires a value" >&2
@@ -85,6 +95,7 @@ docker build \
     -t "ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-${backend}-server:${tag_suffix}" \
     --build-arg BUILD_FOR_OFFLINE="${build_for_offline}" \
     --build-arg PADDLEOCR_VERSION="${paddleocr_version}" \
+    --build-arg PADDLEX_VERSION="${paddlex_version}" \
     --build-arg BACKEND="${backend}" \
     --build-arg http_proxy="${http_proxy}" \
     --build-arg https_proxy="${https_proxy}" \

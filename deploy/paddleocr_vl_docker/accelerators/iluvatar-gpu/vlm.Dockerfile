@@ -1,7 +1,9 @@
+# TODO: Allow regular users
+
 ARG BACKEND
 
 
-FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-genai-vllm-server:latest-sm120 AS base-vllm
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-fastdeploy-metax-gpu:2.3.0 AS base-fastdeploy
 
 
 FROM base-${BACKEND}
@@ -19,6 +21,11 @@ ENV HOME=/home/paddleocr
 WORKDIR /home/paddleocr
 
 USER paddleocr
+
+# TODO: Set these env vars only in FastDeploy image
+ENV PADDLE_XCCL_BACKEND=iluvatar_gpu
+ENV FD_SAMPLING_CLASS=rejection
+ENV LD_PRELOAD=/usr/local/corex/lib64/libcuda.so.1
 
 ARG BUILD_FOR_OFFLINE=false
 RUN if [ "${BUILD_FOR_OFFLINE}" = 'true' ]; then \

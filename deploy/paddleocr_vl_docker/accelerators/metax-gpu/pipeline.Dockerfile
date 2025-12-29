@@ -11,7 +11,8 @@ ENV PYTHONDONTWRITEBYTECODE=1
 RUN python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors/safetensors-0.6.2.dev0-cp38-abi3-linux_x86_64.whl
 
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
-RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" \
+ARG PADDLEX_VERSION=">=3.3.12,<3.4"
+RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" "paddlex${PADDLEX_VERSION}" \
     && paddlex --install serving
 
 RUN groupadd -g 1000 paddleocr \
