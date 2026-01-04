@@ -967,6 +967,26 @@ If not set, the initialized parameter value will be used.
 <td><code>list|None</code></td>
 <td></td>
 </tr>
+<tr>
+<td><code>vlm_extra_kwargs</code></td>
+<td>Additional configuration parameters for the VLM. The currently supported custom parameters are as follows:
+<ul>
+  <li><code>ocr_min_pixels</code>: Minimum resolution for OCR</li>
+  <li><code>ocr_max_pixels</code>: Maximum resolution for OCR</li>
+  <li><code>table_min_pixels</code>: Minimum resolution for tables</li>
+  <li><code>table_max_pixels</code>: Maximum resolution for tables</li>
+  <li><code>chart_min_pixels</code>: Minimum resolution for charts</li>
+  <li><code>chart_max_pixels</code>: Maximum resolution for charts</li>
+  <li><code>formula_min_pixels</code>: Minimum resolution for formulas</li>
+  <li><code>formula_max_pixels</code>: Maximum resolution for formulas</li>
+  <li><code>spotting_min_pixels</code>: Minimum resolution for grounding</li>
+  <li><code>spotting_max_pixels</code>: Maximum resolution for grounding</li>
+  <li><code>seal_min_pixels</code>: Minimum resolution for seals</li>
+  <li><code>seal_max_pixels</code>: Maximum resolution for seals</li>
+</ul></td>
+<td><code>dict|None</code></td>
+<td><code>None</code></td>
+</tr>
 </table>
 </details>
 <details><summary>(3) Process the prediction results: The prediction result for each sample is a corresponding Result object, supporting operations such as printing, saving as an image, and saving as a <code>json</code> file:</summary>
