@@ -968,7 +968,7 @@ If set to <code>None</code>, the initialized parameter value will be used.
 <td></td>
 </tr>
 <tr>
-<td><code>vlm_extra_kwargs</code></td>
+<td><code>vlm_extra_args</code></td>
 <td>Additional configuration parameters for the VLM. The currently supported custom parameters are as follows:
 <ul>
   <li><code>ocr_min_pixels</code>: Minimum resolution for OCR</li>

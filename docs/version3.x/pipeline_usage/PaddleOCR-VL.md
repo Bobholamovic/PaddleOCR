@@ -1001,7 +1001,7 @@ MKL-DNN 缓存容量。
 <td><code>None</code></td>
 </tr>
 <tr>
-<td><code>vlm_extra_kwargs</code></td>
+<td><code>vlm_extra_args</code></td>
 <td>VLM额外配置参数。目前支持的自定义参数如下：
 <ul>
   <li><code>ocr_min_pixels</code>：OCR 最小分辨率</li>
@@ -1825,7 +1825,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 <tr>
 <td><code>vlmExtraArgs</code></td>
 <td><code>object</code> | <code>null</code></td>
-<td>请参阅PaddleOCR-VL对象中 <code>predict</code> 方法的 <code>vlm_extra_kwargs</code> 参数相关说明。</td>
+<td>请参阅PaddleOCR-VL对象中 <code>predict</code> 方法的 <code>vlm_extra_args</code> 参数相关说明。</td>
 <td>否</td>
 </tr>
 <tr>
