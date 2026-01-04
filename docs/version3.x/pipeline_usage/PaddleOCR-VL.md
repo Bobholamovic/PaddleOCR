@@ -1783,6 +1783,31 @@ INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 </td>
 <td>是</td>
 </tr>
+<tr>
+<td><code>mergeTable</code></td>
+<td><code>boolean</code></td>
+<td>是否跨页合并表格。默认为<code>true</code>。</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>titleLevel</code></td>
+<td><code>boolean</code></td>
+<td>是否配置分级标题。默认为<code>true</code>。</td>
+<td>否</td>
+</tr>
+</tr>
+<tr>
+<td><code>prettifyMarkdown</code></td>
+<td><code>boolean</code></td>
+<td>是否输出美化后的 Markdown 文本。默认为 <code>true</code>。</td>
+<td>否</td>
+</tr>
+<tr>
+<td><code>showFormulaNumber</code></td>
+<td><code>boolean</code></td>
+<td>输出的 Markdown 文本中是否包含公式编号。默认为 <code>false</code>。</td>
+<td>否</td>
+</tr>
 </tbody>
 </table>
 <ul>
@@ -1800,7 +1825,7 @@ INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
 <tr>
 <td><code>layoutParsingResult</code></td>
 <td><code>object</code></td>
-<td>拼接后的版面解析结果。其中包含的字段请参见对<code>infer</code>操作的说明。</td>
+<td>拼接后的版面解析结果。其中包含的字段请参见对<code>infer</code>操作返回结果的说明（不含可视化结果图和中间图像）。</td>
 </tr>
 </tbody>
 </table>
@@ -1814,7 +1839,7 @@ import base64
 import requests
 import pathlib
 
-API_URL = "http://localhost:8080/layout-parsing" # 服务URL
+BASE_URL = "http://localhost:8080"
 
 image_path = "./demo.jpg"
 
@@ -1828,14 +1853,14 @@ payload = {
     "fileType": 1, # 文件类型，1表示图像文件
 }
 
-# 调用API
-response = requests.post(API_URL, json=payload)
+response = requests.post(BASE_URL + "/layout-parsing", json=payload)
+assert response.status_code == 200, (response.status_code, response.content)
 
-# 处理接口返回数据
-assert response.status_code == 200
 result = response.json()["result"]
+pruned_results = []
 for i, res in enumerate(result["layoutParsingResults"]):
     print(res["prunedResult"])
+    pruned_results.append(res["prunedResult"])
     md_dir = pathlib.Path(f"markdown_{i}")
     md_dir.mkdir(exist_ok=True)
     (md_dir / "doc.md").write_text(res["markdown"]["text"])
@@ -1846,10 +1871,19 @@ for i, res in enumerate(result["layoutParsingResults"]):
     print(f"Markdown document saved at {md_dir / 'doc.md'}")
     for img_name, img in res["outputImages"].items():
         img_path = f"{img_name}_{i}.jpg"
-        pathlib.Path(img_path).parent.mkdir(exist_ok=True)
         with open(img_path, "wb") as f:
             f.write(base64.b64decode(img))
         print(f"Output image saved at {img_path}")
+
+payload = {
+    "pages": pruned_results,
+}
+
+response = requests.post(BASE_URL + "/concatenate-pages", json=payload)
+assert response.status_code == 200, (response.status_code, response.content)
+
+result = response.json()["result"]
+pathlib.Path("concatenated_doc.md").write_text(result["layoutParsingResult"]["markdown"]["text"])
 </code></pre></details>
 
 <details><summary>C++</summary>
