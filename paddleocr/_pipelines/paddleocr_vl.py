@@ -51,6 +51,9 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         format_block_content=None,
         merge_layout_blocks=None,
         markdown_ignore_labels=None,
+        use_polygon_points=None,
+        use_seal_recognition=None,
+        use_ocr_for_image_block=None,
         **kwargs,
     ):
         if vl_rec_backend is not None and vl_rec_backend not in _SUPPORTED_VL_BACKENDS:
@@ -76,7 +79,10 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         use_doc_orientation_classify=None,
         use_doc_unwarping=None,
         use_layout_detection=None,
+        use_polygon_points=None,
         use_chart_recognition=None,
+        use_seal_recognition=None,
+        use_ocr_for_image_block=None,
         layout_threshold=None,
         layout_nms=None,
         layout_unclip_ratio=None,
@@ -92,6 +98,7 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         max_new_tokens=None,
         merge_layout_blocks=None,
         markdown_ignore_labels=None,
+        vlm_extra_args=None,
         **kwargs,
     ):
         return self.paddlex_pipeline.predict(
@@ -99,7 +106,10 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
             use_doc_orientation_classify=use_doc_orientation_classify,
             use_doc_unwarping=use_doc_unwarping,
             use_layout_detection=use_layout_detection,
+            use_polygon_points=use_polygon_points,
             use_chart_recognition=use_chart_recognition,
+            use_seal_recognition=use_seal_recognition,
+            use_ocr_for_image_block=use_ocr_for_image_block,
             layout_threshold=layout_threshold,
             layout_nms=layout_nms,
             layout_unclip_ratio=layout_unclip_ratio,
@@ -115,6 +125,7 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
             max_new_tokens=max_new_tokens,
             merge_layout_blocks=merge_layout_blocks,
             markdown_ignore_labels=markdown_ignore_labels,
+            vlm_extra_args=vlm_extra_args,
             **kwargs,
         )
 
@@ -125,7 +136,10 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         use_doc_orientation_classify=None,
         use_doc_unwarping=None,
         use_layout_detection=None,
+        use_polygon_points=None,
         use_chart_recognition=None,
+        use_seal_recognition=None,
+        use_ocr_for_image_block=None,
         layout_threshold=None,
         layout_nms=None,
         layout_unclip_ratio=None,
@@ -141,6 +155,7 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         max_new_tokens=None,
         merge_layout_blocks=None,
         markdown_ignore_labels=None,
+        vlm_extra_args=None,
         **kwargs,
     ):
         return list(
@@ -149,7 +164,10 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
                 use_doc_orientation_classify=use_doc_orientation_classify,
                 use_doc_unwarping=use_doc_unwarping,
                 use_layout_detection=use_layout_detection,
+                use_polygon_points=use_polygon_points,
                 use_chart_recognition=use_chart_recognition,
+                use_seal_recognition=use_seal_recognition,
+                use_ocr_for_image_block=use_ocr_for_image_block,
                 layout_threshold=layout_threshold,
                 layout_nms=layout_nms,
                 layout_unclip_ratio=layout_unclip_ratio,
@@ -165,6 +183,7 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
                 max_new_tokens=max_new_tokens,
                 merge_layout_blocks=merge_layout_blocks,
                 markdown_ignore_labels=markdown_ignore_labels,
+                vlm_extra_args=vlm_extra_args,
                 **kwargs,
             )
         )
@@ -231,6 +250,9 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
             "SubPipelines.DocPreprocessor.SubModules.DocUnwarping.model_dir": self._params[
                 "doc_unwarping_model_dir"
             ],
+            "use_polygon_points": self._params["use_polygon_points"],
+            "use_seal_recognition": self._params["use_seal_recognition"],
+            "use_ocr_for_image_block": self._params["use_ocr_for_image_block"],
         }
         return create_config_from_structure(STRUCTURE)
 
@@ -362,6 +384,22 @@ class PaddleOCRVLCLISubcommandExecutor(PipelineCLISubcommandExecutor):
             type=str,
             nargs="+",
             help="List of layout labels to ignore in Markdown output.",
+        )
+
+        subparser.add_argument(
+            "--use_polygon_points",
+            type=str2bool,
+            help="Whether to use polygon bounding boxes for layout detection results.",
+        )
+        subparser.add_argument(
+            "--use_seal_recognition",
+            type=str2bool,
+            help="Whether to use seal recognition.",
+        )
+        subparser.add_argument(
+            "--use_ocr_for_image_block",
+            type=str2bool,
+            help="Whether to use OCR for image blocks.",
         )
 
         subparser.add_argument(
