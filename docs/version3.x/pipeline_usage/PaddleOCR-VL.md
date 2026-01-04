@@ -1946,59 +1946,70 @@ int main() {
 </code></pre></details>
 
 <details><summary>Java</summary>
+
 <pre><code class="language-java">import okhttp3.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+
 public class Main {
     public static void main(String[] args) throws IOException {
         String API_URL = "http://localhost:8080/layout-parsing";
         String imagePath = "./demo.jpg";
+
         File file = new File(imagePath);
         byte[] fileContent = java.nio.file.Files.readAllBytes(file.toPath());
         String base64Image = Base64.getEncoder().encodeToString(fileContent);
+
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectNode payload = objectMapper.createObjectNode();
         payload.put("file", base64Image);
         payload.put("fileType", 1);
+
         OkHttpClient client = new OkHttpClient();
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
+
         RequestBody body = RequestBody.create(JSON, payload.toString());
+
         Request request = new Request.Builder()
                 .url(API_URL)
                 .post(body)
                 .build();
+
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 String responseBody = response.body().string();
                 JsonNode root = objectMapper.readTree(responseBody);
                 JsonNode result = root.get("result");
+
                 JsonNode layoutParsingResults = result.get("layoutParsingResults");
                 for (int i = 0; i < layoutParsingResults.size(); i++) {
                     JsonNode item = layoutParsingResults.get(i);
                     int finalI = i;
                     JsonNode prunedResult = item.get("prunedResult");
                     System.out.println("Pruned Result [" + i + "]: " + prunedResult.toString());
+
                     JsonNode outputImages = item.get("outputImages");
                     outputImages.fieldNames().forEachRemaining(imgName -> {
                         try {
                             String imgBase64 = outputImages.get(imgName).asText();
                             byte[] imgBytes = Base64.getDecoder().decode(imgBase64);
                             String imgPath = imgName + "_" + finalI + ".jpg";
-                            
+
                             File outputFile = new File(imgPath);
                             File parentDir = outputFile.getParentFile();
                             if (parentDir != null && !parentDir.exists()) {
                                 parentDir.mkdirs();
                                 System.out.println("Created directory: " + parentDir.getAbsolutePath());
                             }
-                            
+
                             try (FileOutputStream fos = new FileOutputStream(outputFile)) {
                                 fos.write(imgBytes);
                                 System.out.println("Saved image: " + imgPath);
