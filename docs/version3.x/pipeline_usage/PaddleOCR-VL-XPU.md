@@ -23,13 +23,14 @@ docker run \
     -it \
     --network host \
     --user root \
-    --shm-size 64G \
+    --priviledged \
+    --shm-size 64g \
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-xpu \
     /bin/bash
 # 在容器中调用 PaddleOCR CLI 或 Python API
 ```
 
-如果您希望在无法连接互联网的环境中启动服务，请将上述命令中的 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-xpu`（镜像大小约为 12 GB）更换为离线版本镜像 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-xpu-offline`（镜像大小约为 14 GB）。
+如果您希望在无法连接互联网的环境中启动服务，请将上述命令中的 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-xpu` 更换为离线版本镜像 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-xpu-offline`。
 
 ### 1.2 方法二：手动安装 PaddlePaddle 和 PaddleOCR
 
@@ -56,7 +57,7 @@ python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors
 
 ## 2. 快速开始
 
-请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md)相同章节。
+请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md)相同章节，注意需要指定 `deivce="xpu"`。
 
 ## 3. 使用推理加速框架提升 VLM 推理性能
 
@@ -69,15 +70,15 @@ PaddleOCR 提供了 Docker 镜像，用于快速启动 FastDeploy 推理服务�
 ```shell
 docker run \
     -it \
-    --rm \
-    --gpus all \
     --network host \
-    --shm-size 64G \
+    --user root \
+    --privileged \
+    --shm-size 64g \
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu \
     paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy
 ```
 
-如果您希望在无法连接互联网的环境中启动服务，请将上述命令中的 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu`（镜像大小约为 47 GB）更换为离线版本镜像 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu-offline`（镜像大小约为 49 GB）。
+如果您希望在无法连接互联网的环境中启动服务，请将上述命令中的 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu` 更换为离线版本镜像 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu-offline`。
 
 启动 FastDeploy 推理服务时，我们提供了一套默认参数设置。如果您有调整显存占用等更多参数的需求，可以自行配置更多参数。请参考 [3.3.1 服务端参数调整](./PaddleOCR-VL.md#331-服务端参数调整) 创建配置文件，然后将该文件挂载到容器中，并在启动服务的命令中使用 `backend_config` 指定配置文件，例如：
 
@@ -85,14 +86,20 @@ docker run \
 docker run \
     -it \
     --rm \
-    --gpus all \
     --network host \
+    --user root \
+    --privileged \
+    --shm-size 64G \
     -v fastdeploy_config.yml:/tmp/fastdeploy_config.yml \  
-    ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-xpu \
+    ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu \
     paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/fastdeploy_config.yml
 ```
 
 ### 3.2 客户端使用方法
+
+请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md) 相同章节。
+
+### 3.3 性能调优
 
 请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md) 相同章节。
 
@@ -103,17 +110,9 @@ docker run \
 此步骤主要介绍如何使用 Docker Compose 将 PaddleOCR-VL 部署为服务并调用，具体流程如下：
 
 
-1. 从 [此处](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/compose_xpu.yaml) 复制内容保存为 `compose.yaml` 文件。
+1. 分别从 [此处](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/accelerators/xpu/compose.yaml) 和 [此处](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/accelerators/xpu/.env) 获取 Compose 文件与环境变量配置文件并下载到本地。
 
-2. 复制以下内容并保存为 `.env` 文件：
-
-    ```
-    API_IMAGE_TAG_SUFFIX=latest-xpu-offline
-    VLM_BACKEND=fastdeploy
-    VLM_IMAGE_TAG_SUFFIX=latest-xpu-offline
-    ```
-
-3. 在 `compose.yaml` 和 `.env` 文件所在目录下执行以下命令启动服务器，默认监听 **8080** 端口：
+2. 在 `compose.yaml` 和 `.env` 文件所在目录下执行以下命令启动服务器，默认监听 **8080** 端口：
 
     ```shell
     # 必须在 compose.yaml 和 .env 文件所在的目录中执行
@@ -146,7 +145,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 <details>
 <summary>1. 更改 PaddleOCR-VL 服务的端口</summary>
 
-编辑 `compose.yaml` 文件中的 `paddleocr-vl-api.ports` 来更改端口。例如，如果您需要将服务端口更换为 8111，可以进行以下修改：
+编辑 <code>compose.yaml</code> 文件中的 <code>paddleocr-vl-api.ports</code> 来更改端口。例如，如果您需要将服务端口更换为 8111，可以进行以下修改：
 
 ```diff
   paddleocr-vl-api:
@@ -162,7 +161,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 <details>
 <summary>2. 指定 PaddleOCR-VL 服务所使用的 XPU</summary>
 
-编辑 `compose.yaml` 文件中的 `environment` 来更改所使用的 XPU。例如，如果您需要使用卡 1 进行部署，可以进行以下修改：
+编辑 <code>compose.yaml</code> 文件中的 <code>environment</code> 来更改所使用的 XPU。例如，如果您需要使用卡 1 进行部署，可以进行以下修改：
 
 ```diff
   paddleocr-vl-api:
@@ -182,15 +181,15 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 <details>
 <summary>3. 调整 VLM 服务端配置</summary>
 
-若您想调整 VLM 服务端的配置，可以参考 [3.3.1 服务端参数调整](./PaddleOCR-VL.md#331-服务端参数调整) 生成配置文件。
+若您想调整 VLM 服务端的配置，可以参考 <a href="./PaddleOCR-VL.md#331-服务端参数调整">3.3.1 服务端参数调整</a> 生成配置文件。
 
-生成配置文件后，将以下的 `paddleocr-vlm-server.volumes` 和 `paddleocr-vlm-server.command` 字段增加到您的 `compose.yaml` 中。请将 `/path/to/your_config.yaml` 替换为您的实际配置文件路径。
+生成配置文件后，将以下的 <code>paddleocr-vlm-server.volumes</code> 和 <code>paddleocr-vlm-server.command</code> 字段增加到您的 <code>compose.yaml</code> 中。请将 <code>/path/to/your_config.yaml</code> 替换为您的实际配置文件路径。
 
 ```yaml
   paddleocr-vlm-server:
     ...
     volumes: /path/to/your_config.yaml:/home/paddleocr/vlm_server_config.yaml
-    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend fastdeploy --backend_config /home/paddleocr/vlm_server_config.yaml
+    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy --backend_config /home/paddleocr/vlm_server_config.yaml
     ...
 ```
 
@@ -199,7 +198,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 <details>
 <summary>4. 调整产线相关配置（如模型路径、批处理大小、部署设备等）</summary>
 
-参考 [4.4 产线配置调整说明](./PaddleOCR-VL.md#44-产线配置调整说明) 小节。
+参考 <a href="./PaddleOCR-VL.md#44-产线配置调整说明">4.4 产线配置调整说明</a> 小节。
 
 </details>
 

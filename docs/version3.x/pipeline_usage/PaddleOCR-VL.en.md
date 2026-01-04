@@ -16,22 +16,22 @@ For some inference hardware, you may need to refer to other environment configur
 
 1. **Want to quickly experience PaddleOCR-VL**:
 
-    If you wish to quickly experience the inference effects of PaddleOCR-VL, please read [1. Environment Preparation](#1-environment-preparation) and [2. Quick Start](#2-quick-start).
+    If you wish to quickly experience the inference effects of PaddleOCR-VL, please read [1. Environment Preparation](#1-environment-preparation) and [2. Quick Start](#2-quick-start), or the corresponding chapters in documentation for other hardware.
 
 2. **Want to use PaddleOCR-VL in a production environment**:
 
-    Although the quick experience allows you to feel the effects of PaddleOCR-VL, it may not be optimal in terms of inference speed and GPU memory usage. If you wish to apply PaddleOCR-VL in a production environment and have higher requirements for inference performance, please read [3. Enhancing VLM Inference Performance Using Inference Acceleration Frameworks](#3-enhancing-vlm-inference-performance-using-inference-acceleration-frameworks).
+    Although the quick experience allows you to feel the effects of PaddleOCR-VL, it may not be optimal in terms of inference speed and GPU memory usage. If you wish to apply PaddleOCR-VL in a production environment and have higher requirements for inference performance, please read [3. Enhancing VLM Inference Performance Using Inference Acceleration Frameworks](#3-enhancing-vlm-inference-performance-using-inference-acceleration-frameworks) or the corresponding chapter in documentation for other hardware.
 
 3. **Want to deploy PaddleOCR-VL as an API service**:
 
     If you want to deploy PaddleOCR-VL as a web service (API) so that other devices or applications can access and call it through a specific URL without configuring the environment, we offer two methods:
 
-    - Deployment using Docker Compose (one-click start, recommended): Please read [4.1 Method 1: Deploy Using Docker Compose](#41-method-1-deploy-using-docker-compose-recommended) and [4.3 Client-Side Invocation](#43-client-side-invocation).
-    - Manual deployment: Please read [1. Environment Preparation](#1-environment-preparation), [4.2 Method 2: Manual Deployment](#42-method-2-manual-deployment), and [4.3 Client-Side Invocation](#43-client-side-invocation).
+    - Deployment using Docker Compose (one-click start, recommended): Please read [4.1 Method 1: Deploy Using Docker Compose](#41-method-1-deploy-using-docker-compose-recommended) and [4.3 Client-Side Invocation](#43-client-side-invocation), or the corresponding chapters in documentation for other hardware.
+    - Manual deployment: Please read [1. Environment Preparation](#1-environment-preparation), [4.2 Method 2: Manual Deployment](#42-method-2-manual-deployment), and [4.3 Client-Side Invocation](#43-client-side-invocation), or the corresponding chapters in documentation for other hardware.
 
 4. **Want to fine-tune PaddleOCR-VL to adapt to specific business needs**:
 
-    If you find that the accuracy performance of PaddleOCR-VL in specific business scenarios does not meet expectations, please read [5. Model Fine-tuning](#5-model-fine-tuning).
+    If you find that the accuracy performance of PaddleOCR-VL in specific business scenarios does not meet expectations, please read [5. Model Fine-tuning](#5-model-fine-tuning) or the corresponding chapter in documentation for other hardware.
 
 ## Inference Device Support for PaddleOCR-VL
 
@@ -89,50 +89,28 @@ Currently, PaddleOCR-VL offers four inference methods, with varying levels of su
 </tbody>
 </table>
 
-> [!TIP]
-> 1. When using NVIDIA GPU for inference, ensure that the Compute Capability (CC) and CUDA version meet the requirements:
-> - PaddlePaddle: CC ≥ 7.0, CUDA ≥ 11.8
-> - vLLM: CC ≥ 8.0, CUDA ≥ 12.6
-> - SGLang: 8.0 ≤ CC < 12.0, CUDA ≥ 12.6
-> - FastDeploy: 8.0 ≤ CC < 12.0, CUDA ≥ 12.6
-> - Common GPUs with CC ≥ 8 include RTX 30/40/50 series and A10/A100, etc. For more models, refer to [CUDA GPU Compute Capability](https://developer.nvidia.com/cuda-gpus)
-> 2. vLLM compatibility note: Although vLLM can be launched on NVIDIA GPUs with CC 7.x such as T4/V100, timeout or OOM issues may occur, and its use is not recommended.
-> 3. Currently, PaddleOCR-VL does not support ARM architecture CPUs. More hardware support will be expanded based on actual needs in the future, so stay tuned!
-> 4. vLLM, SGLang, and FastDeploy cannot run natively on Windows or macOS. Please use the Docker images we provide.
+> TIP:
+> - When using NVIDIA GPU for inference, ensure that the Compute Capability (CC) and CUDA version meet the requirements:
+> >  - PaddlePaddle: CC ≥ 7.0, CUDA ≥ 11.8
+> >  - vLLM: CC ≥ 8.0, CUDA ≥ 12.6
+> >  - SGLang: 8.0 ≤ CC < 12.0, CUDA ≥ 12.6
+> >  - FastDeploy: 8.0 ≤ CC < 12.0, CUDA ≥ 12.6
+> >  - Common GPUs with CC ≥ 8 include RTX 30/40/50 series and A10/A100, etc. For more models, refer to [CUDA GPU Compute Capability](https://developer.nvidia.com/cuda-gpus)
+> - vLLM compatibility note: Although vLLM can be launched on NVIDIA GPUs with CC 7.x such as T4/V100, timeout or OOM issues may occur, and its use is not recommended.
+> - Currently, PaddleOCR-VL does not support ARM architecture CPUs. More hardware support will be expanded based on actual needs in the future, so stay tuned!
+> - vLLM, SGLang, and FastDeploy cannot run natively on Windows or macOS. Please use the Docker images we provide.
 
 Since different hardware requires different dependencies, if your hardware meets the requirements in the table above, please refer to the following table for the corresponding tutorial to configure your environment:
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>Hardware Type</th>
-      <th>Environment Configuration Tutorial</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>x64 CPU</td>
-      <td>This tutorial</td>
-    </tr>
-    <tr>
-      <td>NVIDIA GPU</td>
-      <td>
-      <li>NVIDIA Blackwell architecture GPU (e.g., RTX 50 series) refer to <a href="./PaddleOCR-VL-NVIDIA-Blackwell.en.md">PaddleOCR-VL NVIDIA Blackwell Architecture GPU Environment Configuration Tutorial</a></li>
-      <li>Other NVIDIA GPUs refer to this tutorial</li>
-      </td>
-    </tr>
-    <tr>
-      <td>KUNLUNXIN XPU</td>
-      <td><a href="./PaddleOCR-VL-XPU.en.md">PaddleOCR-VL XPU Environment Configuration Tutorial</a></td>
-    </tr>
-    <tr>
-      <td>HYGON DCU</td>
-      <td><a href="./PaddleOCR-VL-DCU.en.md">PaddleOCR-VL DCU Environment Configuration Tutorial</a></td>
-    </tr>
-  </tbody>
-</table>
+| Hardware Type  | Environment Configuration Tutorial                                                                                           |
+|----------------|------------------------------------------------------------------------------------------------------------------------------|
+| x64 CPU        | This tutorial                                                                                                                |
+| NVIDIA GPU     | - NVIDIA Blackwell architecture GPU (e.g., RTX 50 series) refer to [PaddleOCR-VL NVIDIA Blackwell Architecture GPU Environment Configuration Tutorial](./PaddleOCR-VL-NVIDIA-Blackwell.en.md) <br/> - Other NVIDIA GPUs refer to this tutorial |
+| KUNLUNXIN XPU  | [PaddleOCR-VL XPU Environment Configuration Tutorial](./PaddleOCR-VL-XPU.en.md)                                              |
+| HYGON DCU      | [PaddleOCR-VL DCU Environment Configuration Tutorial](./PaddleOCR-VL-DCU.en.md)                                              |
+| MetaX GPU      | [PaddleOCR-VL MetaX GPU Environment Configuration Tutorial](./PaddleOCR-VL-MetaX-GPU.en.md)                                              |
 
-> [!TIP]
+> TIP:
 > For example, if you are using an RTX 50 series GPU that meets the device requirements for both PaddlePaddle and vLLM inference methods, please refer to the [PaddleOCR-VL NVIDIA Blackwell Architecture GPU Environment Configuration Tutorial](./PaddleOCR-VL-NVIDIA-Blackwell.en.md) to complete the environment configuration before using PaddleOCR-VL.
 
 ## 1. Environment Preparation
@@ -192,20 +170,20 @@ Run the following commands to complete the installation:
 # The following command installs the PaddlePaddle version for CUDA 12.6. For other CUDA versions and the CPU version, please refer to https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/develop/install/pip/linux-pip.html
 python -m pip install paddlepaddle-gpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
 python -m pip install -U "paddleocr[doc-parser]"
-# For Linux systems, run:
+# For Linux systems, please directly copy and execute the following commands without modifying the cuda version in the link:
 python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors/safetensors-0.6.2.dev0-cp38-abi3-linux_x86_64.whl
-# For Windows systems, run:
+# For Windows systems, directly copy and execute the following command:
 python -m pip install https://xly-devops.cdn.bcebos.com/safetensors-nightly/safetensors-0.6.2.dev0-cp38-abi3-win_amd64.whl
 ```
 
-> [!IMPORTANT]
+> IMPORTANT:
 > **Please ensure that you install PaddlePaddle framework version 3.2.1 or above, along with the special version of safetensors.** For macOS users, please use Docker to set up the environment.
 
 ## 2. Quick Start
 
 PaddleOCR-VL supports two usage methods: CLI command line and Python API. The CLI command line method is simpler and suitable for quickly verifying functionality, while the Python API method is more flexible and suitable for integration into existing projects.
 
-> [!TIP]
+> TIP:
 > The methods introduced in this section are primarily for rapid validation. Their inference speed, memory usage, and stability may not meet the requirements of a production environment. **If deployment to a production environment is needed, we strongly recommend using a dedicated inference acceleration framework**. For specific methods, please refer to the next section.
 
 ### 2.1 Command Line Usage
@@ -213,7 +191,17 @@ PaddleOCR-VL supports two usage methods: CLI command line and Python API. The CL
 Run a single command to quickly test the PaddleOCR-VL ：
 
 ```shell
+# NVIDIA GPU
 paddleocr doc_parser -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/paddleocr_vl_demo.png
+
+# KUNLUNXIN XPU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device xpu
+
+# HYGON DCU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device dcu
+
+# MetaX GPU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device metax_gpu
 
 # Use --use_doc_orientation_classify to enable document orientation classification
 paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_doc_orientation_classify True
@@ -420,6 +408,8 @@ If not set, the initialized parameter value will be used.
 <li><b>XPU</b>: For example,<code>xpu:0</code> indicates using the first XPU for inference;</li>
 <li><b>MLU</b>: For example,<code>mlu:0</code> indicates using the first MLU for inference;</li>
 <li><b>DCU</b>: For example,<code>dcu:0</code> indicates using the first DCU for inference;</li>
+<li><b>MetaX GPU</b>: For example,<code>metax_gpu:0</code> indicates using the first MetaX GPU for inference;</li>
+<li><b>Iluvatar GPU</b>: For example,<code>iluvatar_gpu:0</code> indicates using the first Iluvatar GPU for inference;</li>
 </ul>If not set, the initialized default value will be used. During initialization, the local GPU device 0 will be used preferentially. If it is not available, the CPU device will be used.</td>
 <td><code>str</code></td>
 <td></td>
@@ -485,10 +475,19 @@ The command line method is for quick testing and visualization. In actual projec
 ```python
 from paddleocr import PaddleOCRVL
 
+# NVIDIA GPU
 pipeline = PaddleOCRVL()
+# KUNLUNXIN XPU
+# pipeline = PaddleOCRVL(device="xpu")
+# HYGON DCU
+# pipeline = PaddleOCRVL(device="dcu")
+# MetaX GPU
+# pipeline = PaddleOCRVL(device="metax_gpu")
+
 # pipeline = PaddleOCRVL(use_doc_orientation_classify=True) # Use use_doc_orientation_classify to enable/disable document orientation classification model
 # pipeline = PaddleOCRVL(use_doc_unwarping=True) # Use use_doc_unwarping to enable/disable document unwarping module
 # pipeline = PaddleOCRVL(use_layout_detection=False) # Use use_layout_detection to enable/disable layout detection module
+
 output = pipeline.predict("./paddleocr_vl_demo.png")
 for res in output:
     res.print() ## Print the structured prediction output
@@ -505,7 +504,15 @@ from paddleocr import PaddleOCRVL
 input_file = "./your_pdf_file.pdf"
 output_path = Path("./output")
 
+# NVIDIA GPU
 pipeline = PaddleOCRVL()
+# KUNLUNXIN XPU
+# pipeline = PaddleOCRVL(device="xpu")
+# HYGON DCU
+# pipeline = PaddleOCRVL(device="dcu")
+# MetaX GPU
+# pipeline = PaddleOCRVL(device="metax_gpu")
+
 output = pipeline.predict(input=input_file)
 
 markdown_list = []
@@ -715,6 +722,8 @@ If not set, the initialized parameter value will be used.
 <li><b>XPU</b>: For example,<code>xpu:0</code> indicates using the first XPU for inference;</li>
 <li><b>MLU</b>: For example,<code>mlu:0</code> indicates using the first MLU for inference;</li>
 <li><b>DCU</b>: For example,<code>dcu:0</code> indicates using the first DCU for inference;</li>
+<li><b>MetaX GPU</b>: For example,<code>metax_gpu:0</code> indicates using the first MetaX GPU for inference;</li>
+<li><b>Iluvatar GPU</b>: For example,<code>iluvatar_gpu:0</code> indicates using the first Iluvatar GPU for inference;</li>
 </ul>If not set, the initialized default value will be used. During initialization, the local GPU device 0 will be used preferentially. If it is not available, the CPU device will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
@@ -1323,7 +1332,7 @@ You can meet custom requirements by modifying `.env` and `compose.yaml`, for exa
 <details>
 <summary>1. Change the port of the PaddleOCR-VL service</summary>
 
-Edit `paddleocr-vl-api.ports` in the `compose.yaml` file to change the port. For example, if you need to change the service port to 8111, make the following modifications:
+Edit <code>paddleocr-vl-api.ports</code> in the <code>compose.yaml</code> file to change the port. For example, if you need to change the service port to 8111, make the following modifications:
 
 ```diff
   paddleocr-vl-api:
@@ -1339,7 +1348,7 @@ Edit `paddleocr-vl-api.ports` in the `compose.yaml` file to change the port. For
 <details>
 <summary>2. Specify the GPU used by the PaddleOCR-VL service</summary>
 
-Edit `device_ids` in the `compose.yaml` file to change the GPU used. For example, if you need to use GPU card 1 for deployment, make the following modifications:
+Edit <code>device_ids</code> in the <code>compose.yaml</code> file to change the GPU used. For example, if you need to use GPU card 1 for deployment, make the following modifications:
 
 ```diff
   paddleocr-vl-api:
@@ -1371,15 +1380,15 @@ Edit `device_ids` in the `compose.yaml` file to change the GPU used. For example
 <details>
 <summary>3. Adjust VLM server-side configuration</summary>
 
-If you want to adjust the VLM server-side configuration, please refer to [3.3.1 Server-side Parameter Adjustment](#331-server-side-parameter-adjustment) to generate a configuration file.
+If you want to adjust the VLM server-side configuration, please refer to <a href="#331-server-side-parameter-adjustment">3.3.1 Server-side Parameter Adjustment</a> to generate a configuration file.
 
-After generating the configuration file, add the following `paddleocr-vlm-server.volumes` and `paddleocr-vlm-server.command` fields to your `compose.yaml`. Please replace `/path/to/your_config.yaml` with your actual configuration file path.
+After generating the configuration file, add the following <code>paddleocr-vlm-server.volumes</code> and <code>paddleocr-vlm-server.command</code> fields to your <code>compose.yaml</code>. Please replace <code>/path/to/your_config.yaml</code> with your actual configuration file path.
 
 ```yaml
   paddleocr-vlm-server:
     ...
     volumes: /path/to/your_config.yaml:/home/paddleocr/vlm_server_config.yaml
-    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
+    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
     ...
 ```
 
@@ -1388,7 +1397,7 @@ After generating the configuration file, add the following `paddleocr-vlm-server
 <details>
 <summary>4. Change the VLM inference backend</summary>
 
-Modify `VLM_BACKEND` in the `.env` file, for example, to change the VLM inference backend to `fastdeploy`:
+Modify <code>VLM_BACKEND</code> in the <code>.env</code> file, for example, to change the VLM inference backend to <code>fastdeploy</code>:
 
 ```diff
   API_IMAGE_TAG_SUFFIX=latest-offline
@@ -1402,7 +1411,7 @@ Modify `VLM_BACKEND` in the `.env` file, for example, to change the VLM inferenc
 <details>
 <summary>5. Adjust pipeline configurations (such as model path, batch size, deployment device, etc.)</summary>
 
-Refer to section [4.4 Pipeline Configuration Adjustment Instructions](#44-pipeline-configuration-adjustment-instructions) in this document.
+Refer to section <a href="#44-pipeline-configuration-adjustment-instructions">4.4 Pipeline Configuration Adjustment Instructions</a> in this document.
 
 </details>
 
@@ -2323,7 +2332,7 @@ foreach ($result as $i => $item) {
 
 ### 4.4 Pipeline Configuration Adjustment Instructions
 
-> [!NOTE]
+> NOTE:
 > If you do not need to adjust pipeline configurations, you can ignore this section.
 
 Adjusting the PaddleOCR-VL configuration for service deployment involves only three steps:

@@ -16,22 +16,22 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
 
 1. **希望快速体验 PaddleOCR-VL**：
     
-    如果您希望快速体验 PaddleOCR-VL 的推理效果，请阅读 [1. 环境准备](#1-环境准备) 和 [2. 快速开始](#2-快速开始)。
+    如果您希望快速体验 PaddleOCR-VL 的推理效果，请阅读 [1. 环境准备](#1-环境准备) 和 [2. 快速开始](#2-快速开始)，或其他硬件文档中的对应章节。
 
 2. **希望将 PaddleOCR-VL 用于生产环境**：
     
-    快速体验虽然可以让您感受到 PaddleOCR-VL 的效果，但在推理速度、显存占用等方面不是最佳状态。如果您希望将 PaddleOCR-VL 应用于生产环境，并且对推理性能有更高的要求，请阅读 [3. 使用推理加速框架提升 VLM 推理性能](#3-使用推理加速框架提升-vlm-推理性能) 。
+    快速体验虽然可以让您感受到 PaddleOCR-VL 的效果，但在推理速度、显存占用等方面不是最佳状态。如果您希望将 PaddleOCR-VL 应用于生产环境，并且对推理性能有更高的要求，请阅读 [3. 使用推理加速框架提升 VLM 推理性能](#3-使用推理加速框架提升-vlm-推理性能) 或其他硬件文档中的对应章节。
 
 3. **希望将 PaddleOCR-VL 部署为 API 服务**：
 
     如果您想将 PaddleOCR-VL 部署为一个网络服务（API），这样其他设备或应用程序无需配置环境，仅通过一个特定的网址就可以来访问和调用它，我们提供两种方式：
 
-    - 使用 Docker Compose 部署（一键启动，推荐使用）：请阅读 [4.1 方法一：使用 Docker Compose 部署](#41-方法一使用-docker-compose-部署推荐使用) 和 [4.3 客户端调用方式](#43-客户端调用方式)。
-    - 进行手动部署：请阅读 [1. 环境准备](#1-环境准备)、 [4.2 方法二：手动部署](#42-方法二手动部署) 和 [4.3 客户端调用方式](#43-客户端调用方式)。
+    - 使用 Docker Compose 部署（一键启动，推荐使用）：请阅读 [4.1 方法一：使用 Docker Compose 部署](#41-方法一使用-docker-compose-部署推荐使用) 和 [4.3 客户端调用方式](#43-客户端调用方式)，或其他硬件文档中的对应章节。
+    - 进行手动部署：请阅读 [1. 环境准备](#1-环境准备)、 [4.2 方法二：手动部署](#42-方法二手动部署) 和 [4.3 客户端调用方式](#43-客户端调用方式)，或其他硬件文档中的对应章节。
 
 4. **希望对 PaddleOCR-VL 进行微调以适配特定业务**：
 
-    如果您发现 PaddleOCR-VL 在特定业务场景中的精度表现未达预期，请阅读 [5. 模型微调](#5-模型微调)
+    如果您发现 PaddleOCR-VL 在特定业务场景中的精度表现未达预期，请阅读 [5. 模型微调](#5-模型微调) 或其他硬件文档中的对应章节。
 
 ## PaddleOCR-VL 对推理设备的支持情况
 
@@ -55,7 +55,7 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
     <td>✅</td>
     <td>✅</td>
     <td>✅</td>
-    <td>🚧</td>
+    <td>✅</td>
     <td>🚧</td>
     <td>✅</td>
   </tr>
@@ -82,57 +82,35 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
     <td>✅</td>
     <td>✅</td>
     <td>🚧</td>
-    <td>🚧</td>
+    <td>✅</td>
     <td>🚧</td>
     <td>❌</td>
   </tr>
 </tbody>
 </table>
 
-> [!TIP]
-> 1. 使用英伟达 GPU 推理时需要注意 Compute Capability（简称 CC） 和 CUDA 版本（简称 CUDA）是否满足要求：
-> - PaddlePaddle: CC ≥ 7.0, CUDA ≥ 11.8
-> - vLLM: CC ≥ 8.0, CUDA ≥ 12.6
-> - SGLang: 8.0 ≤ CC < 12.0, CUDA ≥ 12.6
-> - FastDeploy: 8.0 ≤ CC < 12.0, CUDA ≥ 12.6
-> - CC ≥ 8 的常见显卡包括 RTX 30/40/50 系列及 A10/A100 等，更多型号可查看 [CUDA GPU 计算能力](https://developer.nvidia.cn/cuda-gpus)
-> 2. 虽然 vLLM 可在 T4/V100 等 CC 7.x 的 NVIDIA GPU 上启动，但容易出现超时或 OOM，不推荐使用。
-> 3. 当前，PaddleOCR-VL 暂不支持 ARM 架构 CPU。后续将根据实际需求扩展更多硬件支持，敬请期待！  
-> 4. vLLM、SGLang 和 FastDeploy 无法在 Windows 或 macOS 上原生运行，请使用我们提供的 Docker 镜像。
+> TIP:
+> - 使用英伟达 GPU 推理时需要注意 Compute Capability（简称 CC） 和 CUDA 版本（简称 CUDA）是否满足要求：
+> >  - PaddlePaddle: CC ≥ 7.0, CUDA ≥ 11.8
+> >  - vLLM: CC ≥ 8.0, CUDA ≥ 12.6
+> >  - SGLang: 8.0 ≤ CC < 12.0, CUDA ≥ 12.6
+> >  - FastDeploy: 8.0 ≤ CC < 12.0, CUDA ≥ 12.6
+> >  - CC ≥ 8 的常见显卡包括 RTX 30/40/50 系列及 A10/A100 等，更多型号可查看 [CUDA GPU 计算能力](https://developer.nvidia.cn/cuda-gpus)
+> - 虽然 vLLM 可在 T4/V100 等 CC 7.x 的 NVIDIA GPU 上启动，但容易出现超时或 OOM，不推荐使用。
+> - 当前，PaddleOCR-VL 暂不支持 ARM 架构 CPU。后续将根据实际需求扩展更多硬件支持，敬请期待！  
+> - vLLM、SGLang 和 FastDeploy 无法在 Windows 或 macOS 上原生运行，请使用我们提供的 Docker 镜像。
 
 由于不同硬件所需的依赖各不相同，如果您的硬件满足上述表格的要求，请参考下表查看对应的教程进行环境配置：
 
-<table border="1">
-  <thead>
-    <tr>
-      <th>硬件类型</th>
-      <th>环境配置教程</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>x64 CPU</td>
-      <td>本教程</td>
-    </tr>
-    <tr>
-      <td>英伟达 GPU</td>
-      <td>
-      <li>NVIDIA Blackwell 架构 GPU（如RTX 50 系）参考 <a href="./PaddleOCR-VL-NVIDIA-Blackwell.md">PaddleOCR-VL NVIDIA Blackwell 架构 GPU 环境配置教程</a></li>
-      <li>其他 NVIDIA GPU 参考本教程</li>
-      </td>
-    </tr>
-    <tr>
-      <td>昆仑芯 XPU</td>
-      <td><a href="./PaddleOCR-VL-XPU.md">PaddleOCR-VL XPU 环境配置教程</a></td>
-    </tr>
-    <tr>
-      <td>海光 DCU</td>
-      <td><a href="./PaddleOCR-VL-DCU.md">PaddleOCR-VL DCU 环境配置教程</a></td>
-    </tr>
-  </tbody>
-</table>
+| 硬件类型         | 环境配置教程 |
+|-----------------|--------------------------------------------------|
+| x64 CPU         | 本教程                                           |
+| 英伟达 GPU      | - NVIDIA Blackwell 架构 GPU（如RTX 50 系）参考 [PaddleOCR-VL NVIDIA Blackwell 架构 GPU 环境配置教程](./PaddleOCR-VL-NVIDIA-Blackwell.md) <br/> - 其他 NVIDIA GPU 参考本教程 |
+| 昆仑芯 XPU      | [PaddleOCR-VL XPU 环境配置教程](./PaddleOCR-VL-XPU.md) |
+| 海光 DCU        | [PaddleOCR-VL DCU 环境配置教程](./PaddleOCR-VL-DCU.md) |
+| 沐曦 GPU        | [PaddleOCR-VL 沐曦 GPU 环境配置教程](./PaddleOCR-VL-MetaX-GPU.md) |
 
-> [!TIP]
+> TIP:
 > 例如您使用的是 RTX 50 系 GPU，满足 PaddlePaddle 和 vLLM 推理方式的设备要求，请参考 [PaddleOCR-VL NVIDIA Blackwell 架构 GPU 环境配置教程](./PaddleOCR-VL-NVIDIA-Blackwell.md) 完成环境配置后再进行 PaddleOCR-VL 的使用。
 
 ## 1. 环境准备
@@ -192,13 +170,13 @@ source .venv_paddleocr/bin/activate
 # 以下命令安装 CUDA 12.6 版本的 PaddlePaddle，对于其他 CUDA 版本以及 CPU 版本，请参考 https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/develop/install/pip/linux-pip.html
 python -m pip install paddlepaddle-gpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
 python -m pip install -U "paddleocr[doc-parser]"
-# 对于 Linux 系统，执行：
+# 对于 Linux 系统，请直接复制并执行以下命令，无需修改链接中的 cuda 版本：
 python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors/safetensors-0.6.2.dev0-cp38-abi3-linux_x86_64.whl
-# 对于Windows 系统，执行：
+# 对于Windows 系统，请直接复制并执行以下命令：
 python -m pip install https://xly-devops.cdn.bcebos.com/safetensors-nightly/safetensors-0.6.2.dev0-cp38-abi3-win_amd64.whl
 ```
 
-> [!IMPORTANT]
+> IMPORTANT:
 > **请注意安装 3.2.1 及以上版本的飞桨框架，同时安装特殊版本的 safetensors。** 对于 macOS 用户，请使用 Docker 进行环境搭建。
 
 ## 2. 快速开始
@@ -207,7 +185,7 @@ python -m pip install https://xly-devops.cdn.bcebos.com/safetensors-nightly/safe
 
 PaddleOCR-VL 支持 CLI 命令行方式和 Python API 两种使用方式，其中 CLI 命令行方式更简单，适合快速验证功能，而 Python API 方式更灵活，适合集成到现有项目中。
 
-> [!TIP]
+> TIP:
 > 本节所介绍的方法主要用于快速验证，其推理速度、显存占用及稳定性表现未必能满足生产环境的要求。**若需部署至生产环境，我们强烈建议使用专门的推理加速框架** ，具体方法请参考下一节。
 
 ### 2.1 命令行方式体验
@@ -215,7 +193,17 @@ PaddleOCR-VL 支持 CLI 命令行方式和 Python API 两种使用方式，其�
 一行命令即可快速体验 PaddleOCR-VL 效果：
 
 ```shell
+# 英伟达 GPU
 paddleocr doc_parser -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/paddleocr_vl_demo.png
+
+# 昆仑芯 XPU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device xpu
+
+# 海光 DCU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device dcu
+
+# 沐曦 GPU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device metax_gpu
 
 # 通过 --use_doc_orientation_classify 指定是否使用文档方向分类模型
 paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_doc_orientation_classify True
@@ -441,6 +429,8 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <li><b>XPU</b>：如 <code>xpu:0</code> 表示使用第 1 块 XPU 进行推理；</li>
 <li><b>MLU</b>：如 <code>mlu:0</code> 表示使用第 1 块 MLU 进行推理；</li>
 <li><b>DCU</b>：如 <code>dcu:0</code> 表示使用第 1 块 DCU 进行推理；</li>
+<li><b>沐曦 GPU</b>：如 <code>metax_gpu:0</code> 表示使用第 1 块沐曦 GPU 进行推理；</li>
+<li><b>天数 GPU</b>：如 <code>iluvatar_gpu:0</code> 表示使用第 1 块天数 GPU 进行推理；</li>
 </ul>如果不设置，将使用初始化的默认值，初始化时，会优先使用本地的 GPU 0号设备，如果没有，则使用 CPU 设备。
 </td>
 <td><code>str</code></td>
@@ -510,10 +500,19 @@ MKL-DNN 缓存容量。
 ```python
 from paddleocr import PaddleOCRVL
 
+# 英伟达 GPU
 pipeline = PaddleOCRVL()
+# 昆仑芯 XPU
+# pipeline = PaddleOCRVL(device="xpu")
+# 海光 DCU
+# pipeline = PaddleOCRVL(device="dcu")
+# 沐曦 GPU
+# pipeline = PaddleOCRVL(device="metax_gpu")
+
 # pipeline = PaddleOCRVL(use_doc_orientation_classify=True) # 通过 use_doc_orientation_classify 指定是否使用文档方向分类模型
 # pipeline = PaddleOCRVL(use_doc_unwarping=True) # 通过 use_doc_unwarping 指定是否使用文本图像矫正模块
 # pipeline = PaddleOCRVL(use_layout_detection=False) # 通过 use_layout_detection 指定是否使用版面区域检测排序模块
+
 output = pipeline.predict("./paddleocr_vl_demo.png")
 for res in output:
     res.print() ## 打印预测的结构化输出
@@ -530,7 +529,15 @@ from paddleocr import PaddleOCRVL
 input_file = "./your_pdf_file.pdf"
 output_path = Path("./output")
 
+# 英伟达 GPU
 pipeline = PaddleOCRVL()
+# 昆仑芯 XPU
+# pipeline = PaddleOCRVL(device="xpu")
+# 海光 DCU
+# pipeline = PaddleOCRVL(device="dcu")
+# 沐曦 GPU
+# pipeline = PaddleOCRVL(device="metax_gpu")
+
 output = pipeline.predict(input=input_file)
 
 markdown_list = []
@@ -742,6 +749,8 @@ for item in markdown_images:
 <li><b>XPU</b>：如 <code>xpu:0</code> 表示使用第 1 块 XPU 进行推理；</li>
 <li><b>MLU</b>：如 <code>mlu:0</code> 表示使用第 1 块 MLU 进行推理；</li>
 <li><b>DCU</b>：如 <code>dcu:0</code> 表示使用第 1 块 DCU 进行推理；</li>
+<li><b>沐曦 GPU</b>：如 <code>metax_gpu:0</code> 表示使用第 1 块沐曦 GPU 进行推理；</li>
+<li><b>天数 GPU</b>：如 <code>iluvatar_gpu:0</code> 表示使用第 1 块天数 GPU 进行推理；</li>
 <li><b>None</b>：如果设置为<code>None</code>，初始化时，会优先使用本地的 GPU 0号设备，如果没有，则使用 CPU 设备。</li>
 </ul>
 </td>
@@ -1361,7 +1370,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 <details>
 <summary>1. 更改 PaddleOCR-VL 服务的端口</summary>
 
-编辑 `compose.yaml` 文件中的 `paddleocr-vl-api.ports` 来更改端口。例如，如果您需要将服务端口更换为 8111，可以进行以下修改：
+编辑 <code>compose.yaml</code> 文件中的 <code>paddleocr-vl-api.ports</code> 来更改端口。例如，如果您需要将服务端口更换为 8111，可以进行以下修改：
 
 ```diff
   paddleocr-vl-api:
@@ -1377,7 +1386,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 <details>
 <summary>2. 指定 PaddleOCR-VL 服务所使用的 GPU</summary>
 
-编辑 `compose.yaml` 文件中的 `device_ids` 来更改所使用的 GPU。例如，如果您需要使用卡 1 进行部署，可以进行以下修改：
+编辑 <code>compose.yaml</code> 文件中的 <code>device_ids</code> 来更改所使用的 GPU。例如，如果您需要使用卡 1 进行部署，可以进行以下修改：
 
 ```diff
   paddleocr-vl-api:
@@ -1409,15 +1418,15 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 <details>
 <summary>3. 调整 VLM 服务端配置</summary>
 
-若您想调整 VLM 服务端的配置，可以参考 [3.3.1 服务端参数调整](#331-服务端参数调整) 生成配置文件。
+若您想调整 VLM 服务端的配置，可以参考 <a href="#331-服务端参数调整">3.3.1 服务端参数调整</a> 生成配置文件。
 
-生成配置文件后，将以下的 `paddleocr-vlm-server.volumes` 和 `paddleocr-vlm-server.command` 字段增加到您的 `compose.yaml` 中。请将 `/path/to/your_config.yaml` 替换为您的实际配置文件路径。
+生成配置文件后，将以下的 <code>paddleocr-vlm-server.volumes</code> 和 <code>paddleocr-vlm-server.command</code> 字段增加到您的 <code>compose.yaml</code> 中。请将 <code>/path/to/your_config.yaml</code> 替换为您的实际配置文件路径。
 
 ```yaml
   paddleocr-vlm-server:
     ...
     volumes: /path/to/your_config.yaml:/home/paddleocr/vlm_server_config.yaml
-    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
+    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
     ...
 ```
 
@@ -1426,7 +1435,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 <details>
 <summary>4. 更改 VLM 推理后端</summary>
 
-修改 `.env` 文件中的 `VLM_BACKEND`，例如将 VLM 推理后端修改为 `fastdeploy`：
+修改 <code>.env</code> 文件中的 <code>VLM_BACKEND</code>，例如将 VLM 推理后端修改为 <code>fastdeploy</code>：
 
 ```diff
   API_IMAGE_TAG_SUFFIX=latest-offline
@@ -1440,7 +1449,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 <details>
 <summary>5. 调整产线相关配置（如模型路径、批处理大小、部署设备等）</summary>
 
-参考本文中 [4.4 产线配置调整说明](#44-产线配置调整说明) 小节。
+参考本文中 <a href="#44-产线配置调整说明">4.4 产线配置调整说明</a> 小节。
 
 </details>
 
@@ -2367,7 +2376,7 @@ foreach ($result as $i => $item) {
 
 ### 4.4 产线配置调整说明
 
-> [!NOTE]
+> NOTE:
 > 若您无需调整产线配置，可忽略此小节。
 
 调整服务化部署的 PaddleOCR-VL 配置只需以下三步：
