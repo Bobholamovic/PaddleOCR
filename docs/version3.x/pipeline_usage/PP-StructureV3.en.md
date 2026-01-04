@@ -2956,8 +2956,8 @@ If neither the request body nor the configuration file is set (If <code>visualiz
 <ul>
   <li><b><code>concatenatePages</code></b></li>
 </ul>
-<p>Concatenate pages from Markdown results</p>
-<p><code>POST /concatenate-markdown</code></p>
+<p>Concatenate results across multiple pages.</p>
+<p><code>POST /concatenate-pages</code></p>
 
 <ul>
   <li>The request body has the following properties:</li>
@@ -2976,7 +2976,7 @@ If neither the request body nor the configuration file is set (If <code>visualiz
     <tr>
       <td><code>pages</code></td>
       <td><code>array</code></td>
-      <td>An array of pages. Each element is a Markdown object returned by the <code>infer</code> operation.</td>
+      <td>An array of pages. Each element is a <code>prunedResult</code> object returned by the <code>infer</code> operation.</td>
       <td>Yes</td>
     </tr>
   </tbody>
@@ -2996,9 +2996,9 @@ If neither the request body nor the configuration file is set (If <code>visualiz
   </thead>
   <tbody>
     <tr>
-      <td><code>text</code></td>
-      <td><code>string</code></td>
-      <td>The concatenated Markdown text.</td>
+      <td><code>layoutParsingResult</code></td>
+      <td><code>object</code></td>
+      <td>The concatenated layout parsing results. For the included fields, please refer to the description of the <code>infer</code> operation.</td>
     </tr>
   </tbody>
 </table>

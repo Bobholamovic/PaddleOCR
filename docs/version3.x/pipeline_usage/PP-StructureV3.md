@@ -3033,8 +3033,8 @@ MKL-DNN 缓存容量。
 <ul>
 <li><b><code>concatenatePages</code></b></li>
 </ul>
-<p>对Markdown结果进行页面拼接</p>
-<p><code>POST /concatenate-markdown</code></p>
+<p>拼接多个页面的结果。</p>
+<p><code>POST /concatenate-pages</code></p>
 <ul>
 <li>请求体的属性如下：</li>
 </ul>
@@ -3051,7 +3051,7 @@ MKL-DNN 缓存容量。
 <tr>
 <td><code>pages</code></td>
 <td><code>array</code></td>
-<td>页面数组。每个元素为<code>infer</code>操作返回的Markdown对象。
+<td>页面数组。每个元素为<code>infer</code>操作返回的<code>prunedResult</code>对象。
 </td>
 <td>是</td>
 </tr>
@@ -3070,9 +3070,9 @@ MKL-DNN 缓存容量。
 </thead>
 <tbody>
 <tr>
-<td><code>text</code></td>
-<td><code>string</code></td>
-<td>拼接后的Markdown文本。</td>
+<td><code>layoutParsingResult</code></td>
+<td><code>object</code></td>
+<td>拼接后的版面解析结果。其中包含的字段请参见对<code>infer</code>操作的说明。</td>
 </tr>
 </tbody>
 </table>

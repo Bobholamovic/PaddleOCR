@@ -1712,22 +1712,12 @@ Below are the API reference and examples of multi-language service invocation:
 <td><code>object</code></td>
 <td>Key-value pairs of relative paths to Markdown images and Base64-encoded images.</td>
 </tr>
-<tr>
-<td><code>isStart</code></td>
-<td><code>boolean</code></td>
-<td>Whether the first element on the current page is the start of a paragraph.</td>
-</tr>
-<tr>
-<td><code>isEnd</code></td>
-<td><code>boolean</code></td>
-<td>Whether the last element on the current page is the end of a paragraph.</td>
-</tr>
 </tbody>
 </table>
 <ul>
   <li><b><code>concatenatePages</code></b></li>
 </ul>
-<p>Concatenate pages from Markdown results</p>
+<p>Concatenate results across multiple pages.</p>
 <p><code>POST /concatenate-pages</code></p>
 
 <ul>
@@ -1747,7 +1737,7 @@ Below are the API reference and examples of multi-language service invocation:
     <tr>
       <td><code>pages</code></td>
       <td><code>array</code></td>
-      <td>An array of pages. Each element is a Markdown object returned by the <code>infer</code> operation.</td>
+      <td>An array of pages. Each element is a <code>prunedResult</code> object returned by the <code>infer</code> operation.</td>
       <td>Yes</td>
     </tr>
   </tbody>
@@ -1767,9 +1757,9 @@ Below are the API reference and examples of multi-language service invocation:
   </thead>
   <tbody>
     <tr>
-      <td><code>text</code></td>
-      <td><code>string</code></td>
-      <td>The concatenated Markdown text.</td>
+      <td><code>layoutParsingResult</code></td>
+      <td><code>object</code></td>
+      <td>The concatenated layout parsing results. For the included fields, please refer to the description of the <code>infer</code> operation.</td>
     </tr>
   </tbody>
 </table>

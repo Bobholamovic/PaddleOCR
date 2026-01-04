@@ -158,6 +158,11 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
     def concatenate_markdown_pages(self, markdown_list):
         return self.paddlex_pipeline.concatenate_markdown_pages(markdown_list)
 
+    def concatenate_pages(self, res_list, merge_table=True, title_level=True):
+        return self.paddlex_pipeline.concatenate_pages(
+            res_list, merge_table=merge_table, title_level=title_level
+        )
+
     @classmethod
     def get_cli_subcommand_executor(cls):
         return PaddleOCRVLCLISubcommandExecutor()
