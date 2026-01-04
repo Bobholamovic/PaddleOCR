@@ -389,7 +389,7 @@ class PaddleOCRVLCLISubcommandExecutor(PipelineCLISubcommandExecutor):
         subparser.add_argument(
             "--use_polygon_points",
             type=str2bool,
-            help="Whether to use polygon bounding boxes for layout detection results.",
+            help="Whether to enable polygon detection.",
         )
         subparser.add_argument(
             "--use_seal_recognition",

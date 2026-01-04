@@ -379,7 +379,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 </tr>
 <tr>
 <td><code>use_polygon_points</code></td>
-<td>版面检测结果是否使用多点框。如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td>是否启用多边形检测能力。如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
@@ -759,7 +759,7 @@ for item in markdown_images:
 </tr>
 <tr>
 <td><code>use_polygon_points</code></td>
-<td>版面检测结果是否使用多点框。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td>是否启用多边形检测能力。<code>True</code>时返回多边形点集，<code>False</code>时仅返回矩形框。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool|None</code></td>
 <td></td>
 </tr>
@@ -888,7 +888,7 @@ MKL-DNN 缓存容量。
 </tr>
 <tr>
 <td><code>use_polygon_points</code></td>
-<td>版面检测结果是否使用多点框。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td>是否启用多边形检测能力。<code>True</code>时返回多边形点集，<code>False</code>时仅返回矩形框。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>

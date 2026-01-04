@@ -360,7 +360,7 @@ If not set, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>use_polygon_points</code></td>
-<td>Whether to use a multi-point bounding box for layout detection results. If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
+<td>Whether to enable polygon detection. If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
@@ -624,20 +624,20 @@ Expansion coefficient for the detection box of the layout area detection model.
 <li><b>large</b> when set to large, it means that among the detection boxes output by the model, for overlapping and contained boxes, only the outermost largest box is retained, and the overlapping inner boxes are deleted;</li>
 <li><b>small</b>, when set to small, it means that among the detection boxes output by the model, for overlapping and contained boxes, only the innermost contained small box is retained, and the overlapping outer boxes are deleted;</li>
 <li><b>union</b>,no filtering is performed on the boxes, and both inner and outer boxes are retained;</li></ul>
-If not set, the initialized parameter value will be used.
+If set to <code>None</code>, the initialized parameter value will be used.
 </td>
 <td><code>str|dict|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_model_name</code></td>
-<td>Name of the multimodal recognition model. If not set, the default model will be used.</td>
+<td>Name of the multimodal recognition model. If set to <code>None</code>, the default model will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_model_dir</code></td>
-<td>Directory path of the multimodal recognition model. If not set, the official model will be downloaded.</td>
+<td>Directory path of the multimodal recognition model. If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -667,74 +667,74 @@ If not set, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_name</code></td>
-<td>Name of the document orientation classification model. If not set, the initialized default value will be used.</td>
+<td>Name of the document orientation classification model. If set to <code>None</code>, the initialized default value will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_dir</code></td>
-<td>Directory path of the document orientation classification model. If not set, the official model will be downloaded.</td>
+<td>Directory path of the document orientation classification model. If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_name</code></td>
-<td>Name of the text image rectification model. If not set, the initialized default value will be used.</td>
+<td>Name of the text image rectification model. If set to <code>None</code>, the initialized default value will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_dir</code></td>
-<td>Directory path of the text image rectification model. If not set, the official model will be downloaded.</td>
+<td>Directory path of the text image rectification model. If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>Whether to load and use the document orientation classification module. If not set, the initialized default value will be used, which is initialized to<code>False</code>.</td>
+<td>Whether to load and use the document orientation classification module. If set to <code>None</code>, the initialized default value will be used, which is initialized to<code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>Whether to load and use the text image rectification module. If not set, the initialized default value will be used, which is initialized to <code>False.</td>
+<td>Whether to load and use the text image rectification module. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td>Whether to load and use the layout area detection and ranking module. If not set, the initialized default value will be used, which is initialized to <code>True</code>.</td>
+<td>Whether to load and use the layout area detection and ranking module. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>True</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
-<td>Whether to use the chart parsing function. If not set, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td>Whether to use the chart parsing function. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>format_block_content</code></td>
-<td>Controls whether to format the <code>block_content</code> content within as Markdown. If not set, the initialized default value will be used, which defaults to initialization as<code>False</code>.</td>
+<td>Controls whether to format the <code>block_content</code> content within as Markdown. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as<code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>merge_layout_blocks</code></td>
-<td>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns. If not set, the initialized default value will be used, which defaults to initialization as<code>True</code>.</td>
+<td>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as<code>True</code>.</td>
 <td><code>bool|None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>markdown_ignore_labels</code></td>
-<td>Layout labels that need to be ignored in Markdown. If not set, the initialized default value will be used, which defaults to initialization as<code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>.</td>
+<td>Layout labels that need to be ignored in Markdown. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as<code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>.</td>
 <td><code>list|None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_polygon_points</code></td>
-<td>Whether to use a multi-point bounding box for layout detection results. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td>Whether to enable polygon detection. If <code>True</code>, returns polygon points; if <code>False</code>, returns only rectangular boxes. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td></td>
 </tr>
@@ -855,7 +855,7 @@ If not set, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>use_polygon_points</code></td>
-<td>Whether to use a multi-point bounding box for layout detection results. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td>Whether to enable polygon detection. If <code>True</code>, returns polygon points; if <code>False</code>, returns only rectangular boxes. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
