@@ -52,7 +52,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-tag_suffix="${tag_suffix}-${device_type}"
+tag_suffix="latest-${device_type}"
 
 if [ "${build_for_offline}" = 'true' ]; then
     tag_suffix="${tag_suffix}-offline"
