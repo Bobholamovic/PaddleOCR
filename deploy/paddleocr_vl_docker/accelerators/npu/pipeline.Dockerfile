@@ -15,11 +15,10 @@ RUN python -m pip install paddlepaddle==3.0.0.dev20250430 -i https://www.paddlep
 
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
 ARG PADDLEX_VERSION=">=3.3.12,<3.4"
-RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" "paddlex${PADDLEX_VERSION}" \
-    && paddlex --install serving
+RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" "paddlex[serving]${PADDLEX_VERSION}"
 
-RUN groupadd -g 1000 paddleocr \
-    && useradd -m -s /bin/bash -u 1000 -g 1000 paddleocr
+RUN groupadd -g 1001 paddleocr \
+    && useradd -m -s /bin/bash -u 1001 -g 1001 paddleocr
 ENV HOME=/home/paddleocr
 WORKDIR /home/paddleocr
 

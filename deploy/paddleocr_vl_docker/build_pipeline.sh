@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
 build_for_offline='false'
 paddleocr_version='3.3.2'
-paddlex_version='3.3.13'
+paddlex_version='3.4.0'
 
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -67,9 +69,9 @@ docker build \
     --build-arg BUILD_FOR_OFFLINE="${build_for_offline}" \
     --build-arg PADDLEOCR_VERSION="==${paddleocr_version}" \
     --build-arg PADDLEX_VERSION="==${paddlex_version}" \
-    --build-arg http_proxy="${http_proxy}" \
-    --build-arg https_proxy="${https_proxy}" \
-    --build-arg no_proxy="${no_proxy}" \
+    --build-arg http_proxy="${http_proxy:-}" \
+    --build-arg https_proxy="${https_proxy:-}" \
+    --build-arg no_proxy="${no_proxy:-}" \
     --label org.opencontainers.image.version.paddleocr="${paddleocr_version}" \
     --label org.opencontainers.image.version.paddlex="${paddlex_version}" \
     --label org.opencontainers.image.version.dockerfile.sha="${dockerfile_hash}" \
