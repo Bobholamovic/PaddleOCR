@@ -131,23 +131,23 @@ docker run \
     --gpus all \
     --network host \
     --user root \
-    ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest \
+    ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-gpu \
     /bin/bash
 # Invoke PaddleOCR CLI or Python API within the container
 ```
 
-If you need to use PaddleOCR-VL in an offline environment, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest` (image size approximately 8 GB) in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-offline` (image size is approximately 10 GB). You will need to pull the image on an internet-connected machine, import it into the offline machine, and then start the container using this image on the offline machine. For example:
+If you need to use PaddleOCR-VL in an offline environment, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-gpu` (image size approximately 8 GB) in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-gpu-offline` (image size is approximately 10 GB). You will need to pull the image on an internet-connected machine, import it into the offline machine, and then start the container using this image on the offline machine. For example:
 
 ```shell
 # Execute on an internet-connected machine
-docker pull ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-offline
+docker pull ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-gpu-offline
 # Save the image to a file
-docker save ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-offline -o paddleocr-vl-latest-offline.tar
+docker save ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-gpu-offline -o paddleocr-vl-latest-gpu-offline.tar
 
 # Transfer the image file to the offline machine
 
 # Execute on the offline machine
-docker load -i paddleocr-vl-latest-offline.tar
+docker load -i paddleocr-vl-latest-gpu-offline.tar
 # After that, you can use `docker run` to start the container on the offline machine
 ```
 
@@ -1086,11 +1086,11 @@ PaddleOCR provides Docker images for quickly launching vLLM or FastDeploy infere
         --rm \
         --gpus all \
         --network host \
-        ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest \
+        ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu \
         paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm
     ```
 
-    If you wish to start the service in an environment without internet access, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest` (image size approximately 13 GB) in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-offline` (image size approximately 15 GB).
+    If you wish to start the service in an environment without internet access, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu` (image size approximately 13 GB) in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu-offline` (image size approximately 15 GB).
 
 === "Launch FastDeploy Service"
 
@@ -1100,11 +1100,11 @@ PaddleOCR provides Docker images for quickly launching vLLM or FastDeploy infere
         --rm \
         --gpus all \
         --network host \
-        ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest \
+        ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-gpu \
         paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy
     ```
 
-    If you wish to start the service in an environment without internet access, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest` (image size approximately 43 GB) in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-offline` (image size approximately 45 GB).
+    If you wish to start the service in an environment without internet access, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-gpu` (image size approximately 43 GB) in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-gpu-offline` (image size approximately 45 GB).
 
 When starting the vLLM or FastDeploy inference service, we provide a set of default parameter settings. If you have additional requirements for adjusting parameters such as GPU memory usage, you can configure more parameters yourself. Please refer to [3.3.1 Server-side Parameter Adjustment](#331-server-side-parameter-adjustment) to create a configuration file, then mount this file into the container, and specify the configuration file using `backend_config` in the command to start the service. Taking vLLM as an example:
 
@@ -1115,7 +1115,7 @@ docker run \
     --gpus all \
     --network host \
     -v vllm_config.yml:/tmp/vllm_config.yml \  
-    ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest \
+    ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu \
     paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/vllm_config.yml
 ```
 
@@ -1274,9 +1274,9 @@ Docker Compose starts two containers in sequence by reading the configurations i
 
 The meanings of each environment variable contained in the `.env` file are as follows:
 
-- `API_IMAGE_TAG_SUFFIX`: The tag suffix of the image used to start the pipeline service. The default is `latest-offline`, indicating the use of an offline GPU image.
+- `API_IMAGE_TAG_SUFFIX`: The tag suffix of the image used to start the pipeline service. The default is `latest-gpu-offline`, indicating the use of an offline GPU image.
 - `VLM_BACKEND`: The VLM inference backend, currently supporting `vllm` and `fastdeploy`. The default is `vllm`.
-- `VLM_IMAGE_TAG_SUFFIX`: The tag suffix of the image used to start the VLM inference service. The default is `latest-offline`, indicating the use of an offline GPU image.
+- `VLM_IMAGE_TAG_SUFFIX`: The tag suffix of the image used to start the VLM inference service. The default is `latest-gpu-offline`, indicating the use of an offline GPU image.
 
 You can meet custom requirements by modifying `.env` and `compose.yaml`, for example:
 
@@ -1351,10 +1351,10 @@ After generating the configuration file, add the following <code>paddleocr-vlm-s
 Modify <code>VLM_BACKEND</code> in the <code>.env</code> file, for example, to change the VLM inference backend to <code>fastdeploy</code>:
 
 ```diff
-  API_IMAGE_TAG_SUFFIX=latest-offline
+  API_IMAGE_TAG_SUFFIX=latest-gpu-offline
 - VLM_BACKEND=vllm
 + VLM_BACKEND=fastdeploy
-  VLM_IMAGE_TAG_SUFFIX=latest-offline
+  VLM_IMAGE_TAG_SUFFIX=latest-gpu-offline
 ```
 
 </details>
@@ -2375,7 +2375,7 @@ services:
   paddleocr-vl-api:
     ...
     volumes:
-      - pipeline_config_vllm.yaml:/home/paddleocr/pipeline_config.yaml
+      - pipeline_config_vllm.yaml:/home/paddleocr/pipeline_config_vllm.yaml
 ...
 ```
 

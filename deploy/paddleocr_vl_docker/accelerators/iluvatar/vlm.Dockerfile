@@ -3,12 +3,12 @@
 ARG BACKEND
 
 
-FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-fastdeploy-metax-gpu:2.3.0 AS base-fastdeploy
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-ixuca:paddle-ocr-vl-1107 AS base-fastdeploy
+
+RUN python -m pip install fastdeploy_iluvatar_gpu==2.4.0.dev0 -i https://www.paddlepaddle.org.cn/packages/stable/ixuca/
 
 
 FROM base-${BACKEND}
-
-ARG BACKEND
 
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
 ARG PADDLEX_VERSION=">=3.3.13,<3.4"
@@ -37,5 +37,6 @@ RUN if [ "${BUILD_FOR_OFFLINE}" = 'true' ]; then \
         && rm -f PaddleOCR-VL_infer.tar; \
     fi
 
+ARG BACKEND
 ENV BACKEND=${BACKEND}
 CMD ["/bin/bash", "-c", "paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8080 --backend ${BACKEND}"]

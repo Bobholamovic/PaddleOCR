@@ -1,6 +1,6 @@
 # TODO: Allow regular users
 
-FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-xpu:ubuntu20-x86_64-gcc84-py310
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-npu:cann800-ubuntu20-npu-910b-base-x86_64-gcc84
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -10,7 +10,8 @@ ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors/safetensors-0.6.2.dev0-cp38-abi3-linux_x86_64.whl
 
-RUN python -m pip install https://paddle-model-ecology.bj.bcebos.com/paddlex/PaddleX3.0/deploy/hardware/whl/paddlepaddle_xpu-0.0.0-cp310-cp310-linux_x86_64.whl
+RUN python -m pip install paddlepaddle==3.0.0.dev20250430 -i https://www.paddlepaddle.org.cn/packages/nightly/cpu \
+    && python -m pip install paddle-custom-npu -i https://www.paddlepaddle.org.cn/packages/nightly/npu
 
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
 ARG PADDLEX_VERSION=">=3.3.12,<3.4"
@@ -50,4 +51,4 @@ COPY --chown=paddleocr:paddleocr pipeline_config_fastdeploy.yaml /home/paddleocr
 
 EXPOSE 8080
 
-CMD ["paddlex", "--serve", "--pipeline", "/home/paddleocr/pipeline_config_vllm.yaml", "--device", "xpu"]
+CMD ["paddlex", "--serve", "--pipeline", "/home/paddleocr/pipeline_config_vllm.yaml", "--device", "npu"]
