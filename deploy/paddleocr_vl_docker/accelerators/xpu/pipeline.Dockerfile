@@ -8,8 +8,6 @@ ENV PIP_NO_CACHE_DIR=0
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-RUN python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors/safetensors-0.6.2.dev0-cp38-abi3-linux_x86_64.whl
-
 RUN python -m pip install https://paddle-model-ecology.bj.bcebos.com/paddlex/PaddleX3.0/deploy/hardware/whl/paddlepaddle_xpu-0.0.0-cp310-cp310-linux_x86_64.whl
 
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"

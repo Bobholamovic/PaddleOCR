@@ -10,8 +10,6 @@ RUN apt-get update \
     && apt-get install -y libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors/safetensors-0.6.2.dev0-cp38-abi3-linux_x86_64.whl
-
 RUN python -m pip install paddlepaddle-gpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu129/
 
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"

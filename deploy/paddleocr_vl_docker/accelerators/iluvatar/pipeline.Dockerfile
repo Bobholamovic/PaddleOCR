@@ -8,8 +8,6 @@ ENV PIP_NO_CACHE_DIR=0
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-RUN python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors/safetensors-0.6.2.dev0-cp38-abi3-linux_x86_64.whl
-
 RUN python -m pip install paddlepaddle==3.3.0.dev20251219 -i https://www.paddlepaddle.org.cn/packages/nightly/cpu/ \
     && python -m pip install paddle-iluvatar-gpu==3.0.0.dev20251223 -i https://www.paddlepaddle.org.cn/packages/nightly/ixuca/
 
