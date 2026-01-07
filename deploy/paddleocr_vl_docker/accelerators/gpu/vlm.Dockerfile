@@ -1,4 +1,4 @@
-ARG BACKEND
+ARG BACKEND=vllm
 
 
 FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-genai-vllm-server:latest AS base-vllm

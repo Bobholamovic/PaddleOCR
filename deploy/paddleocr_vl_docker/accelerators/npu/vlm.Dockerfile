@@ -1,6 +1,6 @@
 # TODO: Allow regular users
 
-ARG BACKEND
+ARG BACKEND=vllm
 
 
 FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-vllm-npu:0.12.0rc1 AS base-vllm

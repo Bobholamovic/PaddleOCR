@@ -1,6 +1,6 @@
 # TODO: Allow regular users
 
-ARG BACKEND
+ARG BACKEND=vllm
 
 
 FROM image.sourcefind.cn:5000/dcu/admin/base/vllm:0.9.2-ubuntu22.04-dtk25.04.2-py3.10 AS base-vllm

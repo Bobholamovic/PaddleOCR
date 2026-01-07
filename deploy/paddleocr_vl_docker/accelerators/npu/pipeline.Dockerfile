@@ -1,6 +1,15 @@
 # TODO: Allow regular users
 
-FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-npu:cann800-ubuntu20-npu-910b-base-x86_64-gcc84
+ARG TARGETARCH
+
+
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-npu:cann800-ubuntu20-npu-910b-base-x86_64-gcc84 AS base-amd64
+
+
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-npu:cann800-ubuntu20-npu-910b-base-aarch64-gcc84 AS base-arm64
+
+
+FROM base-${TARGETARCH} AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 

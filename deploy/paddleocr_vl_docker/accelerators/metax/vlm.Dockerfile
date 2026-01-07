@@ -1,6 +1,6 @@
 # TODO: Allow regular users
 
-ARG BACKEND
+ARG BACKEND=fastdeploy
 
 
 FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-fastdeploy-metax:2.3.0 AS base-fastdeploy

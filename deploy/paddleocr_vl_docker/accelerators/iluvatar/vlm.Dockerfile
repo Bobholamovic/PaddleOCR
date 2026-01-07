@@ -1,6 +1,6 @@
 # TODO: Allow regular users
 
-ARG BACKEND
+ARG BACKEND=fastdeploy
 
 
 FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-ixuca:paddle-ocr-vl-1107 AS base-fastdeploy
