@@ -8,6 +8,10 @@ FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-vllm-npu:0.12.0rc
 
 FROM base-${BACKEND}
 
+RUN apt-get update \
+    && apt-get install -y libgl1 \
+    && rm -rf /var/lib/apt/lists/*
+
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
 ARG PADDLEX_VERSION=">=3.3.12,<3.4"
 RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" "paddlex[serving]${PADDLEX_VERSION}"
