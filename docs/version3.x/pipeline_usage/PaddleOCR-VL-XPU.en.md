@@ -75,7 +75,7 @@ docker run \
     --privileged \
     --shm-size 64g \
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu \
-    paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy
+    paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy
 ```
 
 If you wish to start the service in an environment without internet access, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu` in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu-offline`.
@@ -92,7 +92,7 @@ docker run \
     --shm-size 64G \
     -v fastdeploy_config.yml:/tmp/fastdeploy_config.yml \  
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-xpu \
-    paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/fastdeploy_config.yml
+    paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/fastdeploy_config.yml
 ```
 
 ### 3.2 Client Usage Method
@@ -190,7 +190,7 @@ After generating the configuration file, add the following <code>paddleocr-vlm-s
   paddleocr-vlm-server:
     ...
     volumes: /path/to/your_config.yaml:/home/paddleocr/vlm_server_config.yaml
-    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy --backend_config /home/paddleocr/vlm_server_config.yaml
+    command: paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy --backend_config /home/paddleocr/vlm_server_config.yaml
     ...
 ```
 

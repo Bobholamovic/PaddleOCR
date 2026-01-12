@@ -110,9 +110,6 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
 | 海光 DCU        | [PaddleOCR-VL DCU 环境配置教程](./PaddleOCR-VL-DCU.md) |
 | 沐曦 GPU        | [PaddleOCR-VL 沐曦 GPU 环境配置教程](./PaddleOCR-VL-MetaX-GPU.md) |
 
-> TIP:
-> 例如您使用的是 RTX 50 系 GPU，满足 PaddlePaddle 和 vLLM 推理方式的设备要求，请参考 [PaddleOCR-VL NVIDIA Blackwell 架构 GPU 环境配置教程](./PaddleOCR-VL-NVIDIA-Blackwell.md) 完成环境配置后再进行 PaddleOCR-VL 的使用。
-
 ## 1. 环境准备
 
 此步骤主要介绍如何搭建 PaddleOCR-VL 的运行环境，有以下两种方式，任选一种即可：
@@ -479,7 +476,7 @@ MKL-DNN 缓存容量。
 
 运行结果参数说明可以参考[2.2 Python脚本方式集成](#22-python脚本方式集成)中的结果解释。
 
-<b>注：</b>由于 PaddleOCR-VL 的默认模型较大，推理速度可能较慢，建议实际推理使用[3. 使用推理加速框架提升 VLM 推理性能](#3-使用推理加速框架提升-vlm-推理性能) 方式进行快速推理。
+<b>注：</b>由于 PaddleOCR-VL 的默认模型较大，推理速度可能较慢，建议实际推理使用 [3. 使用推理加速框架提升 VLM 推理性能](#3-使用推理加速框架提升-vlm-推理性能) 方式进行快速推理。
 
 ### 2.2 Python脚本方式集成
 
@@ -1125,7 +1122,7 @@ PaddleOCR 提供了 Docker 镜像，用于快速启动 vLLM 或 FastDeploy 推�
         --gpus all \
         --network host \
         ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu \
-        paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm
+        paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm
     ```
 
     如果您希望在无法连接互联网的环境中启动服务，请将上述命令中的 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu`（镜像大小约为 13 GB）更换为离线版本镜像 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu-offline`（镜像大小约为 15 GB）。
@@ -1139,7 +1136,7 @@ PaddleOCR 提供了 Docker 镜像，用于快速启动 vLLM 或 FastDeploy 推�
         --gpus all \
         --network host \
         ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-gpu \
-        paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy
+        paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy
     ```
 
     如果您希望在无法连接互联网的环境中启动服务，请将上述命令中的 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-gpu`（镜像大小约为 43 GB）更换为离线版本镜像 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-gpu-offline`（镜像大小约为 45 GB）。
@@ -1154,7 +1151,7 @@ docker run \
     --network host \
     -v vllm_config.yml:/tmp/vllm_config.yml \  
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu \
-    paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/vllm_config.yml
+    paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/vllm_config.yml
 ```
 
 #### 3.1.2 方法二：通过 PaddleOCR CLI 安装和使用
@@ -1188,7 +1185,7 @@ paddleocr install_genai_server_deps <推理加速框架名称>
 安装完成后，可通过 `paddleocr genai_server` 命令启动服务：
 
 ```shell
-paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --port 8118
+paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --backend vllm --port 8118
 ```
 
 该命令支持的参数如下：
@@ -1246,13 +1243,13 @@ PaddleOCR VLM 推理服务支持通过配置文件进行调参。以下示例展
 2. 启动服务时指定配置文件路径，例如使用 `paddleocr genai_server` 命令：
 
    ```shell
-   paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --backend_config vllm_config.yaml
+   paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --backend vllm --backend_config vllm_config.yaml
    ```
 
 如果使用支持进程替换（process substitution）的 shell（如 Bash），也可以无需创建配置文件，直接在启动服务时传入配置项：
 
 ```bash
-paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --backend_config <(echo -e 'gpu-memory-utilization: 0.3\nmax-num-seqs: 128')
+paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --backend vllm --backend_config <(echo -e 'gpu-memory-utilization: 0.3\nmax-num-seqs: 128')
 ```
 
 #### 3.3.2 客户端参数调整
@@ -1377,7 +1374,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
   paddleocr-vlm-server:
     ...
     volumes: /path/to/your_config.yaml:/home/paddleocr/vlm_server_config.yaml
-    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
+    command: paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
     ...
 ```
 
@@ -2429,6 +2426,6 @@ services:
 
 ## 5. 模型微调
 
-若您发现 PaddleOCR-VL 在特定业务场景中的精度表现未达预期，我们推荐使用 [ERNIEKit 套件](https://github.com/PaddlePaddle/ERNIE/tree/release/v1.4) 对 PaddleOCR-VL-0.9B 模型进行有监督微调（SFT）。具体操作步骤可参考 [ERNIEKit 官方文档](https://github.com/PaddlePaddle/ERNIE/blob/release/v1.4/docs/paddleocr_vl_sft_zh.md)。
+若您发现 PaddleOCR-VL 在特定业务场景中的精度表现未达预期，我们推荐使用 [ERNIEKit 套件](https://github.com/PaddlePaddle/ERNIE/tree/release/v1.4) 对视觉语言模型（例如 PaddleOCR-VL-0.9B）进行有监督微调（SFT）。具体操作步骤可参考 [ERNIEKit 官方文档](https://github.com/PaddlePaddle/ERNIE/blob/release/v1.4/docs/paddleocr_vl_sft_zh.md)。
 
 > 目前暂不支持对版面检测排序模型进行微调。

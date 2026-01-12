@@ -5,7 +5,7 @@ set -euo pipefail
 device_type='gpu'
 backend='vllm'
 build_for_offline='false'
-paddleocr_version='3.3.2'
+paddleocr_version='3.4.0'
 paddlex_version='3.4.0'
 platform='linux/amd64'
 action='load'
@@ -19,7 +19,7 @@ Options:
   --device-type <type>      Device type (gpu|sm120|dcu|xpu|metax|iluvatar|npu) [default: gpu]
   --backend <backend>       Backend type (vllm|fastdeploy) [default: vllm]
   --offline                 Build offline version
-  --ppocr-version <ver>     PaddleOCR version [default: 3.3.2]
+  --ppocr-version <ver>     PaddleOCR version [default: 3.4.0]
   --paddlex-version <ver>   PaddleX version [default: 3.4.0]
   --platform <platform>     Build platform [default: linux/amd64]
   --action <action>         Post-build action: load|push|tar|none [default: load]

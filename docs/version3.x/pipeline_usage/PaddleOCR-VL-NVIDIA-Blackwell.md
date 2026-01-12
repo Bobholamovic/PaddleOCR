@@ -94,7 +94,7 @@ docker run \
     --gpus all \
     --network host \
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-sm120 \
-    paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm
+    paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm
 ```
 
 如果您希望在无法连接互联网的环境中启动服务，请将上述命令中的 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-sm120`更换为离线版本镜像 `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-sm120-offline`。
@@ -109,7 +109,7 @@ docker run \
     --network host \
     -v vllm_config.yml:/tmp/vllm_config.yml \  
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-sm120 \
-    paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/vllm_config.yml
+    paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/vllm_config.yml
 ```
 
 #### 3.1.2 方法二：通过 PaddleOCR CLI 安装和使用
@@ -142,7 +142,7 @@ paddleocr install_genai_server_deps <推理加速框架名称>
 安装完成后，可通过 `paddleocr genai_server` 命令启动服务：
 
 ```shell
-paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --port 8118
+paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --backend vllm --port 8118
 ```
 
 该命令支持的参数如下：
@@ -267,7 +267,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
   paddleocr-vlm-server:
     ...
     volumes: /path/to/your_config.yaml:/home/paddleocr/vlm_server_config.yaml
-    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
+    command: paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
     ...
 ```
 

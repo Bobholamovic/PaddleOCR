@@ -26,8 +26,8 @@ ENV PYTHONDONTWRITEBYTECODE=1
 RUN python -m pip install paddlepaddle==3.2.0 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/ \
     && python -m pip install paddle-custom-npu==3.2.0 -i https://www.paddlepaddle.org.cn/packages/stable/npu/
 
-ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
-ARG PADDLEX_VERSION=">=3.3.12,<3.4"
+ARG PADDLEOCR_VERSION=">=3.4.0,<3.5"
+ARG PADDLEX_VERSION=">=3.4.0,<3.5"
 RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" "paddlex[serving]${PADDLEX_VERSION}"
 
 RUN python -m pip install numpy==1.26.4 opencv-contrib-python==3.4.18.65
@@ -86,17 +86,17 @@ RUN if [ "${BUILD_FOR_OFFLINE}" = 'true' ]; then \
         && cd "${HOME}/.paddlex/official_models" \
         && wget https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/UVDoc_infer.tar \
             https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-LCNet_x1_0_doc_ori_infer.tar \
-            https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocLayoutV2_infer.tar \
-            https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PaddleOCR-VL_infer.tar \
+            https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PP-DocLayoutV3_infer.tar \
+            https://paddle-model-ecology.bj.bcebos.com/paddlex/official_inference_model/paddle3.0.0/PaddleOCR-VL-1.5_infer.tar \
         && tar -xf UVDoc_infer.tar \
         && mv UVDoc_infer UVDoc \
         && tar -xf PP-LCNet_x1_0_doc_ori_infer.tar \
         && mv PP-LCNet_x1_0_doc_ori_infer PP-LCNet_x1_0_doc_ori \
-        && tar -xf PP-DocLayoutV2_infer.tar \
-        && mv PP-DocLayoutV2_infer PP-DocLayoutV2 \
-        && tar -xf PaddleOCR-VL_infer.tar \
-        && mv PaddleOCR-VL_infer PaddleOCR-VL \
-        && rm -f UVDoc_infer.tar PP-LCNet_x1_0_doc_ori_infer.tar PP-DocLayoutV2_infer.tar PaddleOCR-VL_infer.tar \
+        && tar -xf PP-DocLayoutV3_infer.tar \
+        && mv PP-DocLayoutV3_infer PP-DocLayoutV3 \
+        && tar -xf PaddleOCR-VL-1.5_infer.tar \
+        && mv PaddleOCR-VL-1.5_infer PaddleOCR-VL-1.5 \
+        && rm -f UVDoc_infer.tar PP-LCNet_x1_0_doc_ori_infer.tar PP-DocLayoutV3_infer.tar PaddleOCR-VL-1.5_infer.tar \
         && mkdir -p "${HOME}/.paddlex/fonts" \
         && wget -P "${HOME}/.paddlex/fonts" https://paddle-model-ecology.bj.bcebos.com/paddlex/PaddleX3.0/fonts/PingFang-SC-Regular.ttf; \
     fi

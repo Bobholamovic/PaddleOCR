@@ -110,9 +110,6 @@ Since different hardware requires different dependencies, if your hardware meets
 | HYGON DCU      | [PaddleOCR-VL DCU Environment Configuration Tutorial](./PaddleOCR-VL-DCU.en.md)                                              |
 | MetaX GPU      | [PaddleOCR-VL MetaX GPU Environment Configuration Tutorial](./PaddleOCR-VL-MetaX-GPU.en.md)                                              |
 
-> TIP:
-> For example, if you are using an RTX 50 series GPU that meets the device requirements for both PaddlePaddle and vLLM inference methods, please refer to the [PaddleOCR-VL NVIDIA Blackwell Architecture GPU Environment Configuration Tutorial](./PaddleOCR-VL-NVIDIA-Blackwell.en.md) to complete the environment configuration before using PaddleOCR-VL.
-
 ## 1. Environment Preparation
 
 This section explains how to set up the runtime environment for PaddleOCR-VL. Choose one of the following two methods:
@@ -1087,7 +1084,7 @@ PaddleOCR provides Docker images for quickly launching vLLM or FastDeploy infere
         --gpus all \
         --network host \
         ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu \
-        paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm
+        paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm
     ```
 
     If you wish to start the service in an environment without internet access, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu` (image size approximately 13 GB) in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu-offline` (image size approximately 15 GB).
@@ -1101,7 +1098,7 @@ PaddleOCR provides Docker images for quickly launching vLLM or FastDeploy infere
         --gpus all \
         --network host \
         ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-gpu \
-        paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy
+        paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy
     ```
 
     If you wish to start the service in an environment without internet access, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-gpu` (image size approximately 43 GB) in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-fastdeploy-server:latest-gpu-offline` (image size approximately 45 GB).
@@ -1116,7 +1113,7 @@ docker run \
     --network host \
     -v vllm_config.yml:/tmp/vllm_config.yml \  
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-gpu \
-    paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/vllm_config.yml
+    paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/vllm_config.yml
 ```
 
 #### 3.1.2 Method 2: Installation and Usage via PaddleOCR CLI
@@ -1150,7 +1147,7 @@ The vLLM and SGLang installed via `paddleocr install_genai_server_deps` are both
 After installation, you can launch the service using the `paddleocr genai_server` command:
 
 ```shell
-paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --port 8118
+paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --backend vllm --port 8118
 ```
 
 The parameters supported by this command are as follows:
@@ -1208,13 +1205,13 @@ The PaddleOCR VLM inference service supports parameter tuning through configurat
 2. Specify the configuration file path when starting the service, for example, using the `paddleocr genai_server` command:
 
    ```shell
-   paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --backend_config vllm_config.yaml
+   paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --backend vllm --backend_config vllm_config.yaml
    ```
 
 If using a shell that supports process substitution (like Bash), you can also pass configuration items directly without creating a configuration file:
 
 ```bash
-paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --backend_config <(echo -e 'gpu-memory-utilization: 0.3\nmax-num-seqs: 128')
+paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --backend vllm --backend_config <(echo -e 'gpu-memory-utilization: 0.3\nmax-num-seqs: 128')
 ```
 
 #### 3.3.2 Client-Side Parameter Adjustment
@@ -1339,7 +1336,7 @@ After generating the configuration file, add the following <code>paddleocr-vlm-s
   paddleocr-vlm-server:
     ...
     volumes: /path/to/your_config.yaml:/home/paddleocr/vlm_server_config.yaml
-    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
+    command: paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
     ...
 ```
 
@@ -2387,6 +2384,6 @@ When starting the service, specify the `--pipeline` parameter as the path to you
 
 ## 5. Model Fine-Tuning
 
-If you find that PaddleOCR-VL does not meet accuracy expectations in specific business scenarios, we recommend using the [ERNIEKit suite](https://github.com/PaddlePaddle/ERNIE/tree/release/v1.4) to perform supervised fine-tuning (SFT) on the PaddleOCR-VL-0.9B model. For detailed instructions, refer to the [ERNIEKit Official Documentation](https://github.com/PaddlePaddle/ERNIE/blob/release/v1.4/docs/paddleocr_vl_sft.md).
+If you find that PaddleOCR-VL does not meet accuracy expectations in specific business scenarios, we recommend using the [ERNIEKit suite](https://github.com/PaddlePaddle/ERNIE/tree/release/v1.4) to perform supervised fine-tuning (SFT) on the VLM (e.g. PaddleOCR-VL-0.9B). For detailed instructions, refer to the [ERNIEKit Official Documentation](https://github.com/PaddlePaddle/ERNIE/blob/release/v1.4/docs/paddleocr_vl_sft.md).
 
 > Currently, fine-tuning of layout detection and ranking models is not supported.

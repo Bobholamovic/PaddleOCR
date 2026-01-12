@@ -94,7 +94,7 @@ docker run \
     --gpus all \
     --network host \
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-sm120 \
-    paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm
+    paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm
 ```
 
 If you wish to start the service in an offline environment, replace `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-sm120` in the above command with the offline version image `ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-sm120-offline`.
@@ -109,7 +109,7 @@ docker run \
     --network host \
     -v vllm_config.yml:/tmp/vllm_config.yml \
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-genai-vllm-server:latest-sm120 \
-    paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/vllm_config.yml
+    paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /tmp/vllm_config.yml
 ```
 
 #### 3.1.2 Method 2: Installation and Usage via PaddleOCR CLI
@@ -141,7 +141,7 @@ Currently supported framework names are `vllm` and `sglang`, corresponding to vL
 After installation, you can start the service using the `paddleocr genai_server` command:
 
 ```shell
-paddleocr genai_server --model_name PaddleOCR-VL-0.9B --backend vllm --port 8118
+paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --backend vllm --port 8118
 ```
 
 The parameters supported by this command are as follows:
@@ -268,7 +268,7 @@ After generating the configuration file, add the following <code>paddleocr-vlm-s
   paddleocr-vlm-server:
     ...
     volumes: /path/to/your_config.yaml:/home/paddleocr/vlm_server_config.yaml
-    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
+    command: paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
     ...
 ```
 
