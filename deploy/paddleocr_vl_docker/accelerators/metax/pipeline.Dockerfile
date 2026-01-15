@@ -8,6 +8,17 @@ ENV PIP_NO_CACHE_DIR=0
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        fontconfig \
+        fonts-dejavu-core \
+        fonts-liberation \
+        fonts-noto-cjk \
+        fonts-wqy-microhei \
+        fonts-freefont-ttf \
+    && fc-cache -fv \
+    && rm -rf /var/lib/apt/lists/*
+
 ARG PADDLEOCR_VERSION=">=3.3.2,<3.4"
 ARG PADDLEX_VERSION=">=3.3.12,<3.4"
 RUN python -m pip install "paddleocr[doc-parser]${PADDLEOCR_VERSION}" "paddlex[serving]${PADDLEX_VERSION}"
