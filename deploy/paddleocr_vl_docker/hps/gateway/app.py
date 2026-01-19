@@ -5,8 +5,10 @@
 # 2. Timeout control
 # 3. Seperate infer and non-infer operations
 # 4. Fix FastAPI encoding bug
+# 5. Add exception handlers for a standardized error response
 
 import logging
+from typing import Optional
 
 import fastapi
 from fastapi.responses import JSONResponse
@@ -35,9 +37,13 @@ def _configure_logger(logger: logging.Logger):
 _configure_logger(logger)
 
 
-def _create_aistudio_output_without_result(error_code: str, error_msg: str) -> dict:
+def _create_aistudio_output_without_result(
+    error_code: str, error_msg: str, *, log_id: Optional[str] = None
+) -> dict:
     resp = AIStudioNoResultResponse(
-        logId=generate_log_id(), errorCode=error_code, errorMsg=error_msg
+        logId=log_id if log_id is not None else generate_log_id(),
+        errorCode=error_code,
+        errorMsg=error_msg,
     )
     return resp.model_dump()
 
@@ -45,7 +51,7 @@ def _create_aistudio_output_without_result(error_code: str, error_msg: str) -> d
 def _add_primary_operations(app: fastapi.FastAPI) -> None:
     def _create_handler(model_name: str):
         def _handler(request: dict):
-            request_log_id = generate_log_id()
+            request_log_id = request.get("logId", generate_log_id())
             logger.info(
                 "Gateway server starts processing %r request %s",
                 model_name,
@@ -79,7 +85,9 @@ def _add_primary_operations(app: fastapi.FastAPI) -> None:
                     is_timedout = True
                     status_code = 504
                     output = _create_aistudio_output_without_result(
-                        504, "Gateway timeout"
+                        504,
+                        "Gateway timeout",
+                        log_id=request_log_id,
                     )
                     output = output.model_dump()
                 else:
@@ -91,7 +99,9 @@ def _add_primary_operations(app: fastapi.FastAPI) -> None:
                     )
                     status_code = 500
                     output = _create_aistudio_output_without_result(
-                        500, "Internal server error"
+                        500,
+                        "Internal server error",
+                        log_id=request_log_id,
                     )
                     output = output.model_dump()
             except Exception as e:
@@ -103,13 +113,17 @@ def _add_primary_operations(app: fastapi.FastAPI) -> None:
                 )
                 status_code = 500
                 output = _create_aistudio_output_without_result(
-                    500, "Internal server error"
+                    500,
+                    "Internal server error",
+                    log_id=request_log_id,
                 )
                 output = output.model_dump()
                 return JSONResponse(status_code=500, content=output)
             if output["errorCode"] != 0:
                 output = _create_aistudio_output_without_result(
-                    output["errorCode"], output["errorMsg"]
+                    output["errorCode"],
+                    output["errorMsg"],
+                    log_id=request_log_id,
                 )
                 output = output.model_dump()
             else:
@@ -136,11 +150,6 @@ app = fastapi.FastAPI()
     operation_id="checkHealth",
 )
 def check_health():
-    if not triton_client.is_server_ready():
-        output = _create_aistudio_output_without_result(
-            503, "The Triton server is not ready."
-        )
-        return JSONResponse(status_code=503, content=output.model_dump())
     return _create_aistudio_output_without_result(0, "Healthy")
 
 
