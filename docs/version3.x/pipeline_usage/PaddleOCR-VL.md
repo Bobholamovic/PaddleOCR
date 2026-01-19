@@ -16,22 +16,22 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
 
 1. **希望快速体验 PaddleOCR-VL**：
     
-    如果您希望快速体验 PaddleOCR-VL 的推理效果，请阅读 [1. 环境准备](#1-环境准备) 和 [2. 快速开始](#2-快速开始)。
+    如果您希望快速体验 PaddleOCR-VL 的推理效果，请阅读 [1. 环境准备](#1-环境准备) 和 [2. 快速开始](#2-快速开始)，或其他硬件文档中的对应章节。
 
 2. **希望将 PaddleOCR-VL 用于生产环境**：
     
-    快速体验虽然可以让您感受到 PaddleOCR-VL 的效果，但在推理速度、显存占用等方面不是最佳状态。如果您希望将 PaddleOCR-VL 应用于生产环境，并且对推理性能有更高的要求，请阅读 [3. 使用推理加速框架提升 VLM 推理性能](#3-使用推理加速框架提升-vlm-推理性能) 。
+    快速体验虽然可以让您感受到 PaddleOCR-VL 的效果，但在推理速度、显存占用等方面不是最佳状态。如果您希望将 PaddleOCR-VL 应用于生产环境，并且对推理性能有更高的要求，请阅读 [3. 使用推理加速框架提升 VLM 推理性能](#3-使用推理加速框架提升-vlm-推理性能) 或其他硬件文档中的对应章节。
 
 3. **希望将 PaddleOCR-VL 部署为 API 服务**：
 
     如果您想将 PaddleOCR-VL 部署为一个网络服务（API），这样其他设备或应用程序无需配置环境，仅通过一个特定的网址就可以来访问和调用它，我们提供两种方式：
 
-    - 使用 Docker Compose 部署（一键启动，推荐使用）：请阅读 [4.1 方法一：使用 Docker Compose 部署](#41-方法一使用-docker-compose-部署推荐使用) 和 [4.3 客户端调用方式](#43-客户端调用方式)。
-    - 进行手动部署：请阅读 [1. 环境准备](#1-环境准备)、 [4.2 方法二：手动部署](#42-方法二手动部署) 和 [4.3 客户端调用方式](#43-客户端调用方式)。
+    - 使用 Docker Compose 部署（一键启动，推荐使用）：请阅读 [4.1 方法一：使用 Docker Compose 部署](#41-方法一使用-docker-compose-部署推荐使用) 和 [4.3 客户端调用方式](#43-客户端调用方式)，或其他硬件文档中的对应章节。
+    - 进行手动部署：请阅读 [1. 环境准备](#1-环境准备)、 [4.2 方法二：手动部署](#42-方法二手动部署) 和 [4.3 客户端调用方式](#43-客户端调用方式)，或其他硬件文档中的对应章节。
 
 4. **希望对 PaddleOCR-VL 进行微调以适配特定业务**：
 
-    如果您发现 PaddleOCR-VL 在特定业务场景中的精度表现未达预期，请阅读 [5. 模型微调](#5-模型微调)。
+    如果您发现 PaddleOCR-VL 在特定业务场景中的精度表现未达预期，请阅读 [5. 模型微调](#5-模型微调) 或其他硬件文档中的对应章节。
 
 ## PaddleOCR-VL 对推理设备的支持情况
 
@@ -46,6 +46,7 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
     <th>海光 DCU</th>
     <th>沐曦 GPU</th>
     <th>天数 GPU</th>
+    <th>昇腾 NPU</th>
     <th>x64 CPU</th>
   </tr>
 </thead>
@@ -55,7 +56,8 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
     <td>✅</td>
     <td>✅</td>
     <td>✅</td>
-    <td>🚧</td>
+    <td>✅</td>
+    <td>✅</td>
     <td>🚧</td>
     <td>✅</td>
   </tr>
@@ -66,11 +68,13 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
     <td>✅</td>
     <td>🚧</td>
     <td>🚧</td>
+    <td>✅</td>
     <td>❌</td>
   </tr>
   <tr style="text-align: center;">
     <td>SGLang</td>
     <td>✅</td>
+    <td>🚧</td>
     <td>🚧</td>
     <td>🚧</td>
     <td>🚧</td>
@@ -82,7 +86,8 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
     <td>✅</td>
     <td>✅</td>
     <td>🚧</td>
-    <td>🚧</td>
+    <td>✅</td>
+    <td>✅</td>
     <td>🚧</td>
     <td>❌</td>
   </tr>
@@ -108,6 +113,9 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
 | 英伟达 GPU      | - NVIDIA Blackwell 架构 GPU（如RTX 50 系）参考 [PaddleOCR-VL NVIDIA Blackwell 架构 GPU 环境配置教程](./PaddleOCR-VL-NVIDIA-Blackwell.md) <br/> - 其他 NVIDIA GPU 参考本教程 |
 | 昆仑芯 XPU      | [PaddleOCR-VL XPU 环境配置教程](./PaddleOCR-VL-XPU.md) |
 | 海光 DCU        | [PaddleOCR-VL DCU 环境配置教程](./PaddleOCR-VL-DCU.md) |
+| 沐曦 GPU        | [PaddleOCR-VL 沐曦 GPU 环境配置教程](./PaddleOCR-VL-MetaX-GPU.md) |
+| 天数 GPU        | [PaddleOCR-VL 天数 GPU 环境配置教程](./PaddleOCR-VL-Iluvatar-GPU.md) |
+| 昇腾 NPU        | [PaddleOCR-VL 昇腾 NPU 环境配置教程](./PaddleOCR-VL-NPU.md) |
 
 > TIP:
 > 例如您使用的是 RTX 50 系 GPU，满足 PaddlePaddle 和 vLLM 推理方式的设备要求，请参考 [PaddleOCR-VL NVIDIA Blackwell 架构 GPU 环境配置教程](./PaddleOCR-VL-NVIDIA-Blackwell.md) 完成环境配置后再进行 PaddleOCR-VL 的使用。
@@ -169,14 +177,10 @@ source .venv_paddleocr/bin/activate
 # 以下命令安装 CUDA 12.6 版本的 PaddlePaddle，对于其他 CUDA 版本以及 CPU 版本，请参考 https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/develop/install/pip/linux-pip.html
 python -m pip install paddlepaddle-gpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
 python -m pip install -U "paddleocr[doc-parser]"
-# 对于 Linux 系统，请直接复制并执行以下命令，无需修改链接中的 cuda 版本：
-python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors/safetensors-0.6.2.dev0-cp38-abi3-linux_x86_64.whl
-# 对于Windows 系统，请直接复制并执行以下命令：
-python -m pip install https://xly-devops.cdn.bcebos.com/safetensors-nightly/safetensors-0.6.2.dev0-cp38-abi3-win_amd64.whl
 ```
 
 > IMPORTANT:
-> **请注意安装 3.2.1 及以上版本的飞桨框架，同时安装特殊版本的 safetensors。** 对于 macOS 用户，请使用 Docker 进行环境搭建。
+> **请注意安装 3.2.1 及以上版本的飞桨框架。** 对于 macOS 用户，请使用 Docker 进行环境搭建。
 
 ## 2. 快速开始
 
@@ -192,7 +196,17 @@ PaddleOCR-VL 支持 CLI 命令行方式和 Python API 两种使用方式，其�
 一行命令即可快速体验 PaddleOCR-VL 效果：
 
 ```shell
+# 英伟达 GPU
 paddleocr doc_parser -i https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/paddleocr_vl_demo.png
+
+# 昆仑芯 XPU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device xpu
+
+# 海光 DCU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device dcu
+
+# 沐曦 GPU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device metax_gpu
 
 # 通过 --use_doc_orientation_classify 指定是否使用文档方向分类模型
 paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_doc_orientation_classify True
@@ -203,7 +217,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_doc_unwarping True
 # 通过 --use_layout_detection 指定是否使用版面区域检测排序模块
 paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 ```
-
+<!-- Luxorion-12 修改：表格参数修改-->
 <details><summary><b>命令行支持更多参数设置，点击展开以查看命令行参数的详细说明</b></summary>
 <table>
 <thead>
@@ -216,47 +230,57 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <tbody>
 <tr>
 <td><code>input</code></td>
-<td>待预测数据，必填。
-如图像文件或者PDF文件的本地路径：<code>/root/data/img.jpg</code>；<b>如URL链接</b>，如图像文件或PDF文件的网络URL：<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/demo_paper.png">示例</a>；<b>如本地目录</b>，该目录下需包含待预测图像，如本地路径：<code>/root/data/</code>(当前不支持目录中包含PDF文件的预测，PDF文件需要指定到具体文件路径)。
+<td><b>含义：</b>待预测数据，必填。<br/>
+<b>说明：</b>如图像文件或者PDF文件的本地路径：<code>/root/data/img.jpg</code>；<br/>
+<b>如URL链接</b>，如图像文件或PDF文件的网络URL：<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/demo_paper.png">示例</a>；<br/>
+<b>如本地目录</b>，该目录下需包含待预测图像，如本地路径：<code>/root/data/</code>(当前不支持目录中包含PDF文件的预测，PDF文件需要指定到具体文件路径)。
 </td>
 <td><code>str</code></td>
 </tr>
 <tr>
 <td><code>save_path</code></td>
-<td>指定推理结果文件保存的路径。如果不设置，推理结果将不会保存到本地。</td>
+<td><b>含义：</b>指定推理结果文件保存的路径。<br/>
+<b>说明：</b>如果不设置，推理结果将不会保存到本地。</td>
 <td><code>str</code></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_name</code></td>
-<td>版面区域检测排序模型名称。如果不设置，将会使用默认模型。</td>
+<td><b>含义：</b>版面区域检测排序模型名称。<br/>
+<b>说明：</b>如果不设置，将会使用默认模型。</td>
 <td><code>str</code></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_dir</code></td>
-<td>版面区域检测排序模型的目录路径。如果不设置，将会下载官方模型。</td>
+<td><b>含义：</b>版面区域检测排序模型的目录路径。<br/>
+<b>说明：</b>如果不设置，将会下载官方模型。</td>
 <td><code>str</code></td>
 </tr>
 <tr>
 <td><code>layout_threshold</code></td>
-<td>版面模型得分阈值。<code>0-1</code> 之间的任意浮点数。如果不设置，将使用初始化的默认值。
+<td><b>含义：</b>版面模型得分阈值。<br/>
+<b>说明：</b><code>0-1</code> 之间的任意浮点数。<br/>
+如果不设置，将使用初始化的默认值。
 </td>
 <td><code>float</code></td>
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>版面检测是否使用后处理NMS。如果不设置，将使用初始化的默认值。</td>
+<td><b>含义：</b>版面检测是否使用后处理NMS。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值。</td>
 <td><code>bool</code></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
-<td>版面区域检测模型检测框的扩张系数。
-任意大于 <code>0</code>  浮点数。如果不设置，将使用初始化的默认值
+<td><b>含义：</b>版面区域检测模型检测框的扩张系数。<br/>
+<b>说明：</b>任意大于 <code>0</code>  浮点数。<br/>
+如果不设置，将使用初始化的默认值
 </td>
 <td><code>float</code></td>
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code></td>
-<td>版面检测中模型输出的检测框的合并处理模式。
+<td><b>含义：</b>版面检测中模型输出的检测框的合并处理模式。<br/>
+<b>说明：</b>
 <ul>
 <li><b>large</b>，设置为large时，表示在模型输出的检测框中，对于互相重叠包含的检测框，只保留外部最大的框，删除重叠的内部框；</li>
 <li><b>small</b>，设置为small，表示在模型输出的检测框中，对于互相重叠包含的检测框，只保留内部被包含的小框，删除重叠的外部框；</li>
@@ -267,31 +291,33 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 </tr>
 <tr>
 <td><code>vl_rec_model_name</code></td>
-<td>多模态识别模型名称。如果不设置，将会使用默认模型。</td>
+<td><b>含义：</b>多模态识别模型名称。<br/>
+<b>说明：</b>如果不设置，将会使用默认模型。</td>
 <td><code>str</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_model_dir</code></td>
-<td>多模态识别模型目录路径。如果不设置，将会下载官方模型。</td>
+<td><b>含义：</b>多模态识别模型目录路径。<br/>
+<b>说明：</b>如果不设置，将会下载官方模型。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>vl_rec_backend</code></td>
-<td>多模态识别模型使用的推理后端。</td>
+<td><b>含义：</b>多模态识别模型使用的推理后端。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>vl_rec_server_url</code></td>
-<td>如果多模态识别模型使用推理服务，该参数用于指定服务器URL。</td>
+<td><b>含义：</b>如果多模态识别模型使用推理服务，该参数用于指定服务器URL。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>vl_rec_max_concurrency</code></td>
-<td>如果多模态识别模型使用推理服务，该参数用于指定最大并发请求数。</td>
-<td><code>str</code></td>
+<td><b>含义：</b>如果多模态识别模型使用推理服务，该参数用于指定最大并发请求数。</td>
+<td><code>int</code></td>
 <td></td>
 </tr>
 <tr>
@@ -308,103 +334,117 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_name</code></td>
-<td>文档方向分类模型的名称。如果不设置，将使用初始化的默认值。</td>
+<td><b>含义：</b>文档方向分类模型的名称。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_dir</code></td>
-<td>文档方向分类模型的目录路径。如果不设置，将会下载官方模型。</td>
+<td><b>含义：</b>文档方向分类模型的目录路径。<br/>
+<b>说明：</b>如果不设置，将会下载官方模型。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_name</code></td>
-<td>文本图像矫正模型的名称。如果不设置，将使用初始化的默认值。</td>
+<td><b>含义：</b>文本图像矫正模型的名称。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_dir</code></td>
-<td>文本图像矫正模型的目录路径。如果不设置，将会下载官方模型。</td>
+<td><b>含义：</b>文本图像矫正模型的目录路径。<br/>
+<b>说明：</b>如果不设置，将会下载官方模型。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>是否加载并使用文档方向分类模块。如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><b>含义：</b>是否加载并使用文档方向分类模块。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>是否加载并使用文本图像矫正模块。如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><b>含义：</b>是否加载并使用文本图像矫正模块。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td>是否加载并使用版面区域检测排序模块。如果不设置，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
+<td><b>含义：</b>是否加载并使用版面区域检测排序模块。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
-<td>是否使用图表解析功能。如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><b>含义：</b>是否使用图表解析功能。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>format_block_content</code></td>
-<td>控制是否将 <code>block_content</code> 中的内容格式化为Markdown格式。如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><b>含义：</b>控制是否将 <code>block_content</code> 中的内容格式化为Markdown格式。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_queues</code></td>
-<td>用于控制是否启用内部队列。当设置为 <code>True</code> 时，数据加载（如将 PDF 页面渲染为图像）、版面检测模型处理以及 VLM 推理将分别在独立线程中异步执行，通过队列传递数据，从而提升效率。对于页数较多的 PDF 文档，或是包含大量图像或 PDF 文件的目录，这种方式尤其高效。</td>
+<td><b>含义：</b>用于控制是否启用内部队列。<br/>
+<b>说明：</b>
+当设置为 <code>True</code> 时，数据加载（如将 PDF 页面渲染为图像）、版面检测模型处理以及 VLM 推理将分别在独立线程中异步执行，通过队列传递数据，从而提升效率。对于页数较多的 PDF 文档，或是包含大量图像或 PDF 文件的目录，这种方式尤其高效。</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>prompt_label</code></td>
-<td>VL模型的 prompt 类型设置，当且仅当 <code>use_layout_detection=False</code> 时生效。</td>
+<td><b>含义：</b>VL模型的 prompt 类型设置。<br/>
+<b>说明：</b>当且仅当 <code>use_layout_detection=False</code> 时生效。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>repetition_penalty</code></td>
-<td>VL模型采样使用的重复惩罚参数。</td>
+<td><b>含义：</b>VL模型采样使用的重复惩罚参数。</td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>temperature</code></td>
-<td>VL模型采样使用的温度参数。</td>
+<td><b>含义：</b>VL模型采样使用的温度参数。</td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>top_p</code></td>
-<td>VL模型采样使用的top-p参数。</td>
+<td><b>含义：</b>VL模型采样使用的top-p参数。</td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>min_pixels</code></td>
-<td>VL模型预处理图像时允许的最小像素数。</td>
+<td><b>含义：</b>VL模型预处理图像时允许的最小像素数。</td>
 <td><code>int</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>max_pixels</code></td>
-<td>VL模型预处理图像时允许的最大像素数。</td>
+<td><b>含义：</b>VL模型预处理图像时允许的最大像素数。</td>
 <td><code>int</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>用于推理的设备。支持指定具体卡号：
+<td><b>含义：</b>用于推理的设备。<br/>
+<b>说明：</b>
+支持指定具体卡号：
 <ul>
 <li><b>CPU</b>：如 <code>cpu</code> 表示使用 CPU 进行推理；</li>
 <li><b>GPU</b>：如 <code>gpu:0</code> 表示使用第 1 块 GPU 进行推理；</li>
@@ -412,6 +452,8 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <li><b>XPU</b>：如 <code>xpu:0</code> 表示使用第 1 块 XPU 进行推理；</li>
 <li><b>MLU</b>：如 <code>mlu:0</code> 表示使用第 1 块 MLU 进行推理；</li>
 <li><b>DCU</b>：如 <code>dcu:0</code> 表示使用第 1 块 DCU 进行推理；</li>
+<li><b>沐曦 GPU</b>：如 <code>metax_gpu:0</code> 表示使用第 1 块沐曦 GPU 进行推理；</li>
+<li><b>天数 GPU</b>：如 <code>iluvatar_gpu:0</code> 表示使用第 1 块天数 GPU 进行推理；</li>
 </ul>如果不设置，将使用初始化的默认值，初始化时，会优先使用本地的 GPU 0号设备，如果没有，则使用 CPU 设备。
 </td>
 <td><code>str</code></td>
@@ -419,42 +461,46 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 </tr>
 <tr>
 <td><code>enable_hpi</code></td>
-<td>是否启用高性能推理。</td>
+<td><b>含义：</b>是否启用高性能推理。</td>
 <td><code>bool</code></td>
 </tr>
 <tr>
 <td><code>use_tensorrt</code></td>
-<td>是否启用 Paddle Inference 的 TensorRT 子图引擎。如果模型不支持通过 TensorRT 加速，即使设置了此标志，也不会使用加速。<br/>
+<td><b>含义：</b>是否启用 Paddle Inference 的 TensorRT 子图引擎。<br/>
+<b>说明：</b>
+如果模型不支持通过 TensorRT 加速，即使设置了此标志，也不会使用加速。<br/>
 对于 CUDA 11.8 版本的飞桨，兼容的 TensorRT 版本为 8.x（x>=6），建议安装 TensorRT 8.6.1.6。<br/>
 </td>
 <td><code>bool</code></td>
 </tr>
 <tr>
 <td><code>precision</code></td>
-<td>计算精度，如 fp32、fp16。</td>
+<td><b>含义：</b>计算精度，如 fp32、fp16。</td>
 <td><code>str</code></td>
 </tr>
 <tr>
 <td><code>enable_mkldnn</code></td>
-<td>是否启用 MKL-DNN 加速推理。如果 MKL-DNN 不可用或模型不支持通过 MKL-DNN 加速，即使设置了此标志，也不会使用加速。
+<td><b>含义：</b>是否启用 MKL-DNN 加速推理。<br/>
+<b>说明：</b>
+如果 MKL-DNN 不可用或模型不支持通过 MKL-DNN 加速，即使设置了此标志，也不会使用加速。
 </td>
 <td><code>bool</code></td>
 </tr>
 <tr>
 <td><code>mkldnn_cache_capacity</code></td>
 <td>
-MKL-DNN 缓存容量。
+<b>含义：</b>MKL-DNN 缓存容量。
 </td>
 <td><code>int</code></td>
 </tr>
 <tr>
 <td><code>cpu_threads</code></td>
-<td>在 CPU 上进行推理时使用的线程数。</td>
+<td><b>含义：</b>在 CPU 上进行推理时使用的线程数。</td>
 <td><code>int</code></td>
 </tr>
 <tr>
 <td><code>paddlex_config</code></td>
-<td>PaddleX产线配置文件路径。</td>
+<td><b>含义：</b>PaddleX产线配置文件路径。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
@@ -481,10 +527,19 @@ MKL-DNN 缓存容量。
 ```python
 from paddleocr import PaddleOCRVL
 
+# 英伟达 GPU
 pipeline = PaddleOCRVL()
+# 昆仑芯 XPU
+# pipeline = PaddleOCRVL(device="xpu")
+# 海光 DCU
+# pipeline = PaddleOCRVL(device="dcu")
+# 沐曦 GPU
+# pipeline = PaddleOCRVL(device="metax_gpu")
+
 # pipeline = PaddleOCRVL(use_doc_orientation_classify=True) # 通过 use_doc_orientation_classify 指定是否使用文档方向分类模型
 # pipeline = PaddleOCRVL(use_doc_unwarping=True) # 通过 use_doc_unwarping 指定是否使用文本图像矫正模块
 # pipeline = PaddleOCRVL(use_layout_detection=False) # 通过 use_layout_detection 指定是否使用版面区域检测排序模块
+
 output = pipeline.predict("./paddleocr_vl_demo.png")
 for res in output:
     res.print() ## 打印预测的结构化输出
@@ -501,7 +556,15 @@ from paddleocr import PaddleOCRVL
 input_file = "./your_pdf_file.pdf"
 output_path = Path("./output")
 
+# 英伟达 GPU
 pipeline = PaddleOCRVL()
+# 昆仑芯 XPU
+# pipeline = PaddleOCRVL(device="xpu")
+# 海光 DCU
+# pipeline = PaddleOCRVL(device="dcu")
+# 沐曦 GPU
+# pipeline = PaddleOCRVL(device="metax_gpu")
+
 output = pipeline.predict(input=input_file)
 
 markdown_list = []
@@ -533,7 +596,7 @@ for item in markdown_images:
 - 在示例代码中，`use_doc_orientation_classify`、`use_doc_unwarping` 参数默认均设置为 `False`，分别表示关闭文档方向分类、文本图像矫正功能，如果需要使用这些功能，可以手动设置为 `True`。
 
 在上述 Python 脚本中，执行了如下几个步骤：
-
+<!-- Luxorion-12 修改：表格参数说明-->
 <details><summary>（1）实例化对象，具体参数说明如下：</summary>
 
 <table>
@@ -548,19 +611,22 @@ for item in markdown_images:
 <tbody>
 <tr>
 <td><code>layout_detection_model_name</code></td>
-<td>版面区域检测排序模型名称。如果设置为<code>None</code>，将会使用默认模型。</td>
+<td><b>含义：</b>版面区域检测排序模型名称。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将会使用默认模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_dir</code></td>
-<td>版面区域检测排序模型的目录路径。如果设置为<code>None</code>，将会下载官方模型。</td>
+<td><b>含义：</b>版面区域检测排序模型的目录路径。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将会下载官方模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_threshold</code></td>
-<td>版面模型得分阈值。
+<td><b>含义：</b>版面模型得分阈值。<br/>
+<b>说明：</b>
 <ul>
 <li><b>float</b>：<code>0-1</code> 之间的任意浮点数；</li>
 <li><b>dict</b>： <code>{0:0.1}</code> key为类别ID，value为该类别的阈值；</li>
@@ -572,13 +638,15 @@ for item in markdown_images:
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>版面检测是否使用后处理NMS。如果设置为<code>None</code>，将使用初始化的默认值。</td>
+<td><b>含义：</b>版面检测是否使用后处理NMS。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
-<td>版面区域检测模型检测框的扩张系数。
+<td><b>含义：</b>版面区域检测模型检测框的扩张系数。<br/>
+<b>说明：</b>
 <ul>
 <li><b>float</b>：任意大于 <code>0</code>  浮点数；</li>
 <li><b>Tuple[float,float]</b>：在横纵两个方向各自的扩张系数；</li>
@@ -591,7 +659,8 @@ for item in markdown_images:
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code></td>
-<td>版面区域检测的重叠框过滤方式。
+<td><b>含义：</b>版面区域检测的重叠框过滤方式。<br/>
+<b>说明：</b>
 <ul>
 <li><b>str</b>：<code>large</code>，<code>small</code>，<code>union</code>，分别表示重叠框过滤时选择保留大框，小框还是同时保留；</li>
 <li><b>dict</b>： dict的key为<b>int</b>类型，代表<code>cls_id</code>，value为<b>str</b>类型，如<code>{0: "large", 2: "small"}</code>，表示对第0类别检测框使用large模式，对第2类别检测框使用small模式；</li>
@@ -603,32 +672,34 @@ for item in markdown_images:
 </tr>
 <tr>
 <td><code>vl_rec_model_name</code></td>
-<td>多模态识别模型名称。如果设置为<code>None</code>，将会使用默认模型。</td>
+<td><b>含义：</b>多模态识别模型名称。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将会使用默认模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_model_dir</code></td>
-<td>多模态识别模型目录路径。如果设置为<code>None</code>，将会下载官方模型。</td>
+<td><b>含义：</b>多模态识别模型目录路径。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将会下载官方模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_backend</code></td>
-<td>多模态识别模型使用的推理后端。</td>
+<td><b>含义：</b>多模态识别模型使用的推理后端。</td>
 <td><code>int|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_server_url</code></td>
-<td>如果多模态识别模型使用推理服务，该参数用于指定服务器URL。</td>
+<td><b>含义：</b>如果多模态识别模型使用推理服务，该参数用于指定服务器URL。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_max_concurrency</code></td>
-<td>如果多模态识别模型使用推理服务，该参数用于指定最大并发请求数。</td>
-<td><code>str|None</code></td>
+<td><b>含义：</b>如果多模态识别模型使用推理服务，该参数用于指定最大并发请求数。</td>
+<td><code>int|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
@@ -645,61 +716,71 @@ for item in markdown_images:
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_name</code></td>
-<td>文档方向分类模型的名称。如果设置为<code>None</code>，将会使用默认模型。</td>
+<td><b>含义：</b>文档方向分类模型的名称。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将会使用默认模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_dir</code></td>
-<td>文档方向分类模型的目录路径。如果设置为<code>None</code>，将会下载官方模型。</td>
+<td><b>含义：</b>文档方向分类模型的目录路径。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将会下载官方模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_name</code></td>
-<td>文本图像矫正模型的名称。如果设置为<code>None</code>，将会使用默认模型。</td>
+<td><b>含义：</b>文本图像矫正模型的名称。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将会使用默认模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_dir</code></td>
-<td>文本图像矫正模型的目录路径。如果设置为<code>None</code>，将会下载官方模型。</td>
+<td><b>含义：</b>文本图像矫正模型的目录路径。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将会下载官方模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>是否加载并使用文档方向分类模块。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><b>含义：</b>是否加载并使用文档方向分类模块。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>是否加载并使用文本图像矫正模块。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><b>含义：</b>是否加载并使用文本图像矫正模块。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td>是否加载并使用版面区域检测排序模块。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
+<td><b>含义：</b>是否加载并使用版面区域检测排序模块。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
-<td>是否加载并使用图表解析模块。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><b>含义：</b>是否加载并使用图表解析模块。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>format_block_content</code></td>
-<td>控制是否将 <code>block_content</code> 中的内容格式化为Markdown格式。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><b>含义：</b>控制是否将 <code>block_content</code> 中的内容格式化为Markdown格式。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>用于推理的设备。支持指定具体卡号：
+<td><b>含义：</b>用于推理的设备。<br/>
+<b>说明：</b>支持指定具体卡号：
 <ul>
 <li><b>CPU</b>：如 <code>cpu</code> 表示使用 CPU 进行推理；</li>
 <li><b>GPU</b>：如 <code>gpu:0</code> 表示使用第 1 块 GPU 进行推理；</li>
@@ -707,6 +788,8 @@ for item in markdown_images:
 <li><b>XPU</b>：如 <code>xpu:0</code> 表示使用第 1 块 XPU 进行推理；</li>
 <li><b>MLU</b>：如 <code>mlu:0</code> 表示使用第 1 块 MLU 进行推理；</li>
 <li><b>DCU</b>：如 <code>dcu:0</code> 表示使用第 1 块 DCU 进行推理；</li>
+<li><b>沐曦 GPU</b>：如 <code>metax_gpu:0</code> 表示使用第 1 块沐曦 GPU 进行推理；</li>
+<li><b>天数 GPU</b>：如 <code>iluvatar_gpu:0</code> 表示使用第 1 块天数 GPU 进行推理；</li>
 <li><b>None</b>：如果设置为<code>None</code>，初始化时，会优先使用本地的 GPU 0号设备，如果没有，则使用 CPU 设备。</li>
 </ul>
 </td>
@@ -715,13 +798,15 @@ for item in markdown_images:
 </tr>
 <tr>
 <td><code>enable_hpi</code></td>
-<td>是否启用高性能推理。</td>
+<td><b>含义：</b>是否启用高性能推理。</td>
 <td><code>bool</code></td>
 <td><code>False</code></td>
 </tr>
 <tr>
 <td><code>use_tensorrt</code></td>
-<td>是否启用 Paddle Inference 的 TensorRT 子图引擎。如果模型不支持通过 TensorRT 加速，即使设置了此标志，也不会使用加速。<br/>
+<td><b>含义：</b>是否启用 Paddle Inference 的 TensorRT 子图引擎。<br/>
+<b>说明：</b>
+如果模型不支持通过 TensorRT 加速，即使设置了此标志，也不会使用加速。<br/>
 对于 CUDA 11.8 版本的飞桨，兼容的 TensorRT 版本为 8.x（x>=6），建议安装 TensorRT 8.6.1.6。<br/>
 </td>
 <td><code>bool</code></td>
@@ -729,13 +814,15 @@ for item in markdown_images:
 </tr>
 <tr>
 <td><code>precision</code></td>
-<td>计算精度，如 fp32、fp16。</td>
+<td><b>含义：</b>计算精度，如 fp32、fp16。</td>
 <td><code>str</code></td>
 <td><code>"fp32"</code></td>
 </tr>
 <tr>
 <td><code>enable_mkldnn</code></td>
-<td>是否启用 MKL-DNN 加速推理。如果 MKL-DNN 不可用或模型不支持通过 MKL-DNN 加速，即使设置了此标志，也不会使用加速。
+<td><b>含义：</b>是否启用 MKL-DNN 加速推理。<br/>
+<b>说明：</b>
+如果 MKL-DNN 不可用或模型不支持通过 MKL-DNN 加速，即使设置了此标志，也不会使用加速。
 </td>
 <td><code>bool</code></td>
 <td><code>True</code></td>
@@ -743,20 +830,20 @@ for item in markdown_images:
 <tr>
 <td><code>mkldnn_cache_capacity</code></td>
 <td>
-MKL-DNN 缓存容量。
+<b>含义：</b>MKL-DNN 缓存容量。
 </td>
 <td><code>int</code></td>
 <td><code>10</code></td>
 </tr>
 <tr>
 <td><code>cpu_threads</code></td>
-<td>在 CPU 上进行推理时使用的线程数。</td>
+<td><b>含义：</b>在 CPU 上进行推理时使用的线程数。</td>
 <td><code>int</code></td>
 <td><code>8</code></td>
 </tr>
 <tr>
 <td><code>paddlex_config</code></td>
-<td>PaddleX产线配置文件路径。</td>
+<td><b>含义：</b>PaddleX产线配置文件路径。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -778,7 +865,8 @@ MKL-DNN 缓存容量。
 </thead>
 <tr>
 <td><code>input</code></td>
-<td>待预测数据，支持多种输入类型，必填。
+<td><b>含义：</b>待预测数据，支持多种输入类型，必填。<br/>
+<b>说明：</b>
 <ul>
 <li><b>Python Var</b>：如 <code>numpy.ndarray</code> 表示的图像数据</li>
 <li><b>str</b>：如图像文件或者PDF文件的本地路径：<code>/root/data/img.jpg</code>；<b>如URL链接</b>，如图像文件或PDF文件的网络URL：<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/demo_paper.png">示例</a>；<b>如本地目录</b>，该目录下需包含待预测图像，如本地路径：<code>/root/data/</code>(当前不支持目录中包含PDF文件的预测，PDF文件需要指定到具体文件路径)</li>
@@ -790,97 +878,119 @@ MKL-DNN 缓存容量。
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>是否在推理时使用文档方向分类模块。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td><b>含义：</b>是否在推理时使用文档方向分类模块。<br/>
+<b>说明：</b>
+设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>是否在推理时使用文本图像矫正模块。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td><b>含义：</b>是否在推理时使用文本图像矫正模块。<br/>
+<b>说明：</b>
+设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td>是否在推理时使用版面区域检测排序模块。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td><b>含义：</b>是否在推理时使用版面区域检测排序模块。<br/>
+<b>说明：</b>
+设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
-<td>是否在推理时使用图表解析模块。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td><b>含义：</b>是否在推理时使用图表解析模块。<br/>
+<b>说明：</b>
+设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_threshold</code></td>
-<td>参数含义与实例化参数基本相同。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td><b>含义：</b>参数含义与实例化参数基本相同。<br/>
+<b>说明：</b>
+设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>float|dict|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>参数含义与实例化参数基本相同。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td><b>含义：</b>参数含义与实例化参数基本相同。<br/>
+<b>说明：</b>
+设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
-<td>参数含义与实例化参数基本相同。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td><b>含义：</b>参数含义与实例化参数基本相同。<br/>
+<b>说明：</b>
+设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>float|Tuple[float,float]|dict|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code></td>
-<td>参数含义与实例化参数基本相同。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td><b>含义：</b>参数含义与实例化参数基本相同。<br/>
+<b>说明：</b>
+设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>str|dict|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_queues</code></td>
-<td>用于控制是否启用内部队列。当设置为 <code>True</code> 时，数据加载（如将 PDF 页面渲染为图像）、版面检测模型处理以及 VLM 推理将分别在独立线程中异步执行，通过队列传递数据，从而提升效率。对于页数较多的 PDF 文档，或是包含大量图像或 PDF 文件的目录，这种方式尤其高效。</td>
+<td><b>含义：</b>用于控制是否启用内部队列。<br/>
+<b>说明：</b>
+当设置为 <code>True</code> 时，数据加载（如将 PDF 页面渲染为图像）、版面检测模型处理以及 VLM 推理将分别在独立线程中异步执行，通过队列传递数据，从而提升效率。对于页数较多的 PDF 文档，或是包含大量图像或 PDF 文件的目录，这种方式尤其高效。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>prompt_label</code></td>
-<td>VL模型的 prompt 类型设置，当且仅当 <code>use_layout_detection=False</code> 时生效。可填写参数为 <code>ocr</code>、<code>formula</code>、<code>table</code> 和 <code>chart</code>。</td>
+<b>含义：</b>VL模型的 prompt 类型设置。<br/>
+<b>说明：</b>
+当且仅当 <code>use_layout_detection=False</code> 时生效。可填写参数为 <code>ocr</code>、<code>formula</code>、<code>table</code> 和 <code>chart</code>。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>format_block_content</code></td>
-<td>参数含义与实例化参数基本相同。设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
+<td><b>含义：</b>参数含义与实例化参数基本相同。<br/>
+<b>说明：</b>
+设置为<code>None</code>表示使用实例化参数，否则该参数优先级更高。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>repetition_penalty</code></td>
-<td>VL模型采样使用的重复惩罚参数。</td>
+<td><b>含义：</b>VL模型采样使用的重复惩罚参数。</td>
 <td><code>float|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>temperature</code></td>
-<td>VL模型采样使用的温度参数。</td>
+<td><b>含义：</b>VL模型采样使用的温度参数。</td>
 <td><code>float|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>top_p</code></td>
-<td>VL模型采样使用的top-p参数。</td>
+<td><b>含义：</b>VL模型采样使用的top-p参数。</td>
 <td><code>float|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>min_pixels</code></td>
-<td>VL模型预处理图像时允许的最小像素数。</td>
+<td><b>含义：</b>VL模型预处理图像时允许的最小像素数。</td>
 <td><code>int|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>max_pixels</code></td>
-<td>VL模型预处理图像时允许的最大像素数。</td>
+<td><b>含义：</b>VL模型预处理图像时允许的最大像素数。</td>
 <td><code>int|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -987,61 +1097,83 @@ MKL-DNN 缓存容量。
 </tr>
 </table>
 
-- 调用`print()` 方法会将结果打印到终端，打印到终端的内容解释如下：
-    - `input_path`: `(str)` 待预测图像或者PDF的输入路径
+<ul>
+  <li>调用<code>print()</code> 方法会将结果打印到终端，打印到终端的内容解释如下：
+    <ol start="1" type="1">
+      <li><code>input_path</code>: <code>(str)</code> 待预测图像的输入路径</li>
+      <li><code>page_index</code>: <code>(Union[int, None])</code> 如果输入是PDF文件，则表示当前是PDF的第几页，否则为 <code>None</code></li>
+      <li><code>model_settings</code>: <code>(Dict[str, bool])</code> 配置产线所需的模型参数
+        <ol >
+          <li><code>use_doc_preprocessor</code>: <code>(bool)</code> 控制是否启用文档预处理子产线</li>
+          <li><code>use_layout_detection</code>: <code>(bool)</code> 控制是否启用版面检测模块</li>
+          <li><code>use_chart_recognition</code>: <code>(bool)</code> 控制是否开启图表识别功能</li>
+          <li><code>format_block_content</code>: <code>(bool)</code> 控制是否在<code>JSON</code>中保存格式化后的markdown内容</li>
+        </ol>
+      </li>
+      <li><code>doc_preprocessor_res</code>: <code>(Dict[str, Union[str, Dict[str, bool], int]])</code> 文档预处理子产线的输出结果。仅当<code>use_doc_preprocessor=True</code>时存在
+        <ol>
+          <li><code>input_path</code>: <code>(str)</code> 文档预处理子接受的图像路径，当输入为<code>numpy.ndarray</code>时，保存为<code>None</code>,此处为<code>None</code></li>
+          <li><code>page_index</code>: <code> None</code> 此处的输入为<code>numpy.ndarray</code>时，所以值为<code>None</code></li>
+          <li><code>model_settings</code>: <code>(Dict[str, bool])</code> 文档预处理子的模型配置参数
+            <ul>
+              <li><code>use_doc_orientation_classify</code>: <code>(bool)</code> 控制是否启用文档方向分类</li>
+              <li><code>use_doc_unwarping</code>: <code>(bool)</code> 控制是否启用文本图像扭曲矫正子模块</li>
+            </ul>
+          </li>
+          <li><code>angle</code>: <code>(int)</code> 文档图像方向分类子模块的预测结果，启用时返回实际角度值</li>
+        </ol>
+      </li>
+      <li><code>parsing_res_list</code>: <code>(List[Dict])</code> 解析结果的列表，每个元素为一个字典，列表顺序为解析后的阅读顺序。</li>
+        <ol>
+          <li><code>block_bbox</code>: <code>(np.ndarray)</code> 版面区域的边界框。</li>
+          <li><code>block_label</code>: <code>(str)</code> 版面区域的标签，例如<code>text</code>, <code>table</code>等</li>
+          <li><code>block_content</code>: <code>(str)</code> 内容为版面区域内的内容。</li>
+          <li><code>block_id</code>: <code>(int)</code> 版面区域的索引，用于显示版面排序结果。</li>
+          <li><code>block_order</code>: <code>(int)</code> 版面区域的顺序，用于显示版面阅读顺序,对于非排序部分，默认值为 <code>None</code>。</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>调用<code>save_to_json()</code> 方法会将上述内容保存到指定的<code>save_path</code>中，如果指定为目录，则保存的路径为<code>save_path/{your_img_basename}_res.json</code>，如果指定为文件，则直接保存到该文件中。由于json文件不支持保存numpy数组，因此会将其中的<code>numpy.array</code>类型转换为列表形式。json中的字段内容如下：</li>
+    <ol start="1" type="1">
+      <li><code>input_path</code>: <code>(str)</code> 待预测图像的输入路径</li>
+      <li><code>page_index</code>: <code>(Union[int, None])</code> 如果输入是PDF文件，则表示当前是PDF的第几页，否则为 <code>None</code></li>
+      <li><code>model_settings</code>: <code>(Dict[str, bool])</code> 配置产线所需的模型参数
+        <ol >
+          <li><code>use_doc_preprocessor</code>: <code>(bool)</code> 控制是否启用文档预处理子产线</li>
+          <li><code>use_layout_detection</code>: <code>(bool)</code> 控制是否启用版面检测模块</li>
+          <li><code>use_chart_recognition</code>: <code>(bool)</code> 控制是否开启图表识别功能</li>
+          <li><code>format_block_content</code>: <code>(bool)</code> 控制是否在<code>JSON</code>中保存格式化后的markdown内容</li>
+        </ol>
+      </li>
+      <li><code>doc_preprocessor_res</code>: <code>(Dict[str, Union[str, Dict[str, bool], int]])</code> 文档预处理子产线的输出结果。仅当<code>use_doc_preprocessor=True</code>时存在
+        <ol>
+          <li><code>input_path</code>: <code>(str)</code> 文档预处理子接受的图像路径，当输入为<code>numpy.ndarray</code>时，保存为<code>None</code>,此处为<code>None</code></li>
+          <li><code>page_index</code>: <code> None</code> 此处的输入为<code>numpy.ndarray</code>时，所以值为<code>None</code></li>
+          <li><code>model_settings</code>: <code>(Dict[str, bool])</code> 文档预处理子的模型配置参数
+            <ul>
+              <li><code>use_doc_orientation_classify</code>: <code>(bool)</code> 控制是否启用文档方向分类</li>
+              <li><code>use_doc_unwarping</code>: <code>(bool)</code> 控制是否启用文本图像扭曲矫正子模块</li>
+            </ul>
+          </li>
+          <li><code>angle</code>: <code>(int)</code> 文档图像方向分类子模块的预测结果，启用时返回实际角度值</li>
+        </ol>
+      </li>
+      <li><code>parsing_res_list</code>: <code>(List[Dict])</code> 解析结果的列表，每个元素为一个字典，列表顺序为解析后的阅读顺序。</li>
+        <ol>
+          <li><code>block_bbox</code>: <code>(np.ndarray)</code> 版面区域的边界框。</li>
+          <li><code>block_label</code>: <code>(str)</code> 版面区域的标签，例如<code>text</code>, <code>table</code>等</li>
+          <li><code>block_content</code>: <code>(str)</code> 内容为版面区域内的内容。</li>
+          <li><code>block_id</code>: <code>(int)</code> 版面区域的索引，用于显示版面排序结果。</li>
+          <li><code>block_order</code>: <code>(int)</code> 版面区域的顺序，用于显示版面阅读顺序,对于非排序部分，默认值为 <code>None</code>。</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+<li>调用<code>save_to_img()</code> 方法会将可视化结果保存到指定的<code>save_path</code>中，如果指定为目录，则会将版面区域检测可视化图像、全局OCR可视化图像、版面阅读顺序可视化图像等内容保存，如果指定为文件，则直接保存到该文件中。</li>
+<li>调用<code>save_to_markdown()</code> 方法会将转化后的 Markdown 文件保存到指定的<code>save_path</code>中，保存的文件路径为<code>save_path/{your_img_basename}.md</code>，如果输入是 PDF 文件，建议直接指定目录，否责多个 markdown 文件会被覆盖。</li>
 
-    - `page_index`: `(Union[int, None])` 如果输入是PDF文件，则表示当前是PDF的第几页，否则为 `None`
-
-    - `model_settings`: `(Dict[str, bool])` 配置 PaddleOCR-VL 所需的模型参数
-
-        - `use_doc_preprocessor`: `(bool)` 控制是否启用文档预处理子产线 
-        - `use_layout_detection`: `(bool)` 控制是否启用版面检测模块
-        - `use_chart_recognition`: `(bool)` 控制是否开启图表识别功能
-        - `format_block_content`: `(bool)` 控制是否在`JSON`中保存格式化后的markdown内容
-
-    - `doc_preprocessor_res`: `(Dict[str, Union[List[float], str]])` 文档预处理结果dict，仅当`use_doc_preprocessor=True`时存在
-        - `input_path`: `(str)` 文档预处理子接受的图像路径，当输入为`numpy.ndarray`时，保存为`None`，此处为`None`
-        - `page_index`: `None`，此处的输入为`numpy.ndarray`，所以值为`None`
-        - `model_settings`: `(Dict[str, bool])` 文档预处理子的模型配置参数
-          - `use_doc_orientation_classify`: `(bool)` 控制是否启用文档图像方向分类子模块
-          - `use_doc_unwarping`: `(bool)` 控制是否启用文本图像扭曲矫正子模块
-        - `angle`: `(int)` 文档图像方向分类子模块的预测结果，启用时返回实际角度值
-
-    - `parsing_res_list`: `(List[Dict])` 解析结果的列表，每个元素为一个字典，列表顺序为解析后的阅读顺序。
-        - `block_bbox`: `(np.ndarray)` 版面区域的边界框。
-        - `block_label`: `(str)` 版面区域的标签，例如`text`, `table`等。
-        - `block_content`: `(str)` 内容为版面区域内的内容。
-        - `block_id`: `(int)` 版面区域的索引，用于显示版面排序结果。
-        - `block_order` `(int)` 版面区域的顺序，用于显示版面阅读顺序,对于非排序部分，默认值为 `None`。
-
-- 调用`save_to_json()` 方法会将上述内容保存到指定的 `save_path` 中，如果指定为目录，则保存的路径为`save_path/{your_img_basename}_res.json`，如果指定为文件，则直接保存到该文件中。由于 json 文件不支持保存numpy数组，因此会将其中的 `numpy.array` 类型转换为列表形式。json中的字段内容如下：
-    - `input_path`: `(str)` 待预测图像或者PDF的输入路径
-
-    - `page_index`: `(Union[int, None])` 如果输入是PDF文件，则表示当前是PDF的第几页，否则为 `None`
-
-    - `model_settings`: `(Dict[str, bool])` 配置 PaddleOCR-VL 所需的模型参数
-
-        - `use_doc_preprocessor`: `(bool)` 控制是否启用文档预处理子产线 
-        - `use_layout_detection`: `(bool)` 控制是否启用版面检测模块
-        - `use_chart_recognition`: `(bool)` 控制是否开启图表识别功能
-        - `format_block_content`: `(bool)` 控制是否在`JSON`中保存格式化后的markdown内容
-
-    - `doc_preprocessor_res`: `(Dict[str, Union[List[float], str]])` 文档预处理结果dict，仅当`use_doc_preprocessor=True`时存在
-        - `input_path`: `(str)` 文档预处理子接受的图像路径，当输入为`numpy.ndarray`时，保存为`None`，此处为`None`
-        - `page_index`: `None`，此处的输入为`numpy.ndarray`，所以值为`None`
-        - `model_settings`: `(Dict[str, bool])` 文档预处理子的模型配置参数
-          - `use_doc_orientation_classify`: `(bool)` 控制是否启用文档图像方向分类子模块
-          - `use_doc_unwarping`: `(bool)` 控制是否启用文本图像扭曲矫正子模块
-        - `angle`: `(int)` 文档图像方向分类子模块的预测结果，启用时返回实际角度值
-
-    - `parsing_res_list`: `(List[Dict])` 解析结果的列表，每个元素为一个字典，列表顺序为解析后的阅读顺序。
-        - `block_bbox`: `(np.ndarray)` 版面区域的边界框。
-        - `block_label`: `(str)` 版面区域的标签，例如`text`, `table`等。
-        - `block_content`: `(str)` 内容为版面区域内的内容。
-        - `block_id`: `(int)` 版面区域的索引，用于显示版面排序结果。
-        - `block_order` `(int)` 版面区域的顺序，用于显示版面阅读顺序,对于非排序部分，默认值为 `None`。
-- 调用`save_to_img()` 方法会将可视化结果保存到指定的 `save_path` 中，如果指定为目录，则会将版面区域检测可视化图像、全局OCR可视化图像、版面阅读顺序可视化图像等内容保存，如果指定为文件，则直接保存到该文件中。
-- 调用`save_to_markdown()` 方法会将转化后的 Markdown 文件保存到指定的 `save_path` 中，保存的文件路径为`save_path/{your_img_basename}.md`，如果输入是 PDF 文件，建议直接指定目录，否责多个 markdown 文件会被覆盖。
+</ul>
 
 此外，也支持通过属性获取带结果的可视化图像和预测结果，具体如下：
 <table>
@@ -1073,9 +1205,10 @@ MKL-DNN 缓存容量。
 </tbody>
 </table>
 
-- `json` 属性获取的预测结果为dict类型的数据，相关内容与调用 `save_to_json()` 方法保存的内容一致。
-- `img` 属性返回的预测结果是一个dict类型的数据。其中，键分别为 `layout_det_res` 和 `layout_order_res`，对应的值是 `Image.Image` 对象：分别用于显示版面区域检测和版面阅读顺序结果的可视化图像。如果没有使用可选模块，则dict中只包含 `layout_det_res`。
-- `markdown` 属性返回的预测结果是一个dict类型的数据。其中，键分别为 `markdown_texts` 和`markdown_images`，对应的值分别是 markdown 文本，在 Markdown 中显示的图像（`Image.Image` 对象）。
+<ul>
+  <li><code>json</code> 属性获取的预测结果为dict类型的数据，相关内容与调用 <code>save_to_json()</code> 方法保存的内容一致。</li>
+  <li><code>img</code> 属性返回的预测结果是一个dict类型的数据。其中，键分别为 <code>ocr_res_img</code> 和 <code>preprocessed_img</code>，对应的值是两个 <code>Image.Image</code> 对象：一个用于显示 OCR 结果的可视化图像，另一个用于展示图像预处理的可视化图像。如果没有使用图像预处理子模块，则dict中只包含 <code>ocr_res_img</code>。</li>
+</ul>
 
 </details>
 
@@ -1338,7 +1471,7 @@ PaddleOCR 会将来自单张或多张输入图像中的子图分组并对服务�
 
 ### 4.1 方法一：使用 Docker Compose 部署（推荐使用）
 
-您可以分别从 [此处](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/compose.yaml) 和 [此处](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/.env) 获取 Compose 文件与环境变量配置文件并下载到本地，然后在刚刚下载的文件所在目录下执行以下命令启动服务器，默认监听 **8080** 端口：
+您可以分别从 [此处](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/accelerators/gpu/compose.yaml) 和 [此处](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/accelerators/gpu/.env) 获取 Compose 文件与环境变量配置文件并下载到本地，然后在刚刚下载的文件所在目录下执行以下命令启动服务器，默认监听 **8080** 端口：
 
 ```shell
 # 必须在 compose.yaml 和 .env 文件所在的目录中执行
