@@ -49,6 +49,11 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         use_layout_detection=None,
         use_chart_recognition=None,
         format_block_content=None,
+        merge_layout_blocks=None,
+        markdown_ignore_labels=None,
+        use_queues=None,
+        use_seal_recognition=None,
+        use_ocr_for_image_block=None,
         **kwargs,
     ):
         if vl_rec_backend is not None and vl_rec_backend not in _SUPPORTED_VL_BACKENDS:
@@ -75,10 +80,13 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         use_doc_unwarping=None,
         use_layout_detection=None,
         use_chart_recognition=None,
+        use_seal_recognition=None,
+        use_ocr_for_image_block=None,
         layout_threshold=None,
         layout_nms=None,
         layout_unclip_ratio=None,
         layout_merge_bboxes_mode=None,
+        layout_shape_mode="auto",
         use_queues=None,
         prompt_label=None,
         format_block_content=None,
@@ -87,6 +95,10 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         top_p=None,
         min_pixels=None,
         max_pixels=None,
+        max_new_tokens=None,
+        merge_layout_blocks=None,
+        markdown_ignore_labels=None,
+        vlm_extra_args=None,
         **kwargs,
     ):
         return self.paddlex_pipeline.predict(
@@ -95,10 +107,13 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
             use_doc_unwarping=use_doc_unwarping,
             use_layout_detection=use_layout_detection,
             use_chart_recognition=use_chart_recognition,
+            use_seal_recognition=use_seal_recognition,
+            use_ocr_for_image_block=use_ocr_for_image_block,
             layout_threshold=layout_threshold,
             layout_nms=layout_nms,
             layout_unclip_ratio=layout_unclip_ratio,
             layout_merge_bboxes_mode=layout_merge_bboxes_mode,
+            layout_shape_mode=layout_shape_mode,
             use_queues=use_queues,
             prompt_label=prompt_label,
             format_block_content=format_block_content,
@@ -107,6 +122,10 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
             top_p=top_p,
             min_pixels=min_pixels,
             max_pixels=max_pixels,
+            max_new_tokens=max_new_tokens,
+            merge_layout_blocks=merge_layout_blocks,
+            markdown_ignore_labels=markdown_ignore_labels,
+            vlm_extra_args=vlm_extra_args,
             **kwargs,
         )
 
@@ -118,10 +137,13 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         use_doc_unwarping=None,
         use_layout_detection=None,
         use_chart_recognition=None,
+        use_seal_recognition=None,
+        use_ocr_for_image_block=None,
         layout_threshold=None,
         layout_nms=None,
         layout_unclip_ratio=None,
         layout_merge_bboxes_mode=None,
+        layout_shape_mode="auto",
         use_queues=None,
         prompt_label=None,
         format_block_content=None,
@@ -130,6 +152,10 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         top_p=None,
         min_pixels=None,
         max_pixels=None,
+        max_new_tokens=None,
+        merge_layout_blocks=None,
+        markdown_ignore_labels=None,
+        vlm_extra_args=None,
         **kwargs,
     ):
         return list(
@@ -139,10 +165,13 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
                 use_doc_unwarping=use_doc_unwarping,
                 use_layout_detection=use_layout_detection,
                 use_chart_recognition=use_chart_recognition,
+                use_seal_recognition=use_seal_recognition,
+                use_ocr_for_image_block=use_ocr_for_image_block,
                 layout_threshold=layout_threshold,
                 layout_nms=layout_nms,
                 layout_unclip_ratio=layout_unclip_ratio,
                 layout_merge_bboxes_mode=layout_merge_bboxes_mode,
+                layout_shape_mode=layout_shape_mode,
                 use_queues=use_queues,
                 prompt_label=prompt_label,
                 format_block_content=format_block_content,
@@ -151,6 +180,10 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
                 top_p=top_p,
                 min_pixels=min_pixels,
                 max_pixels=max_pixels,
+                max_new_tokens=max_new_tokens,
+                merge_layout_blocks=merge_layout_blocks,
+                markdown_ignore_labels=markdown_ignore_labels,
+                vlm_extra_args=vlm_extra_args,
                 **kwargs,
             )
         )
@@ -180,6 +213,9 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
             "use_layout_detection": self._params["use_layout_detection"],
             "use_chart_recognition": self._params["use_chart_recognition"],
             "format_block_content": self._params["format_block_content"],
+            "merge_layout_blocks": self._params["merge_layout_blocks"],
+            "markdown_ignore_labels": self._params["markdown_ignore_labels"],
+            "use_queues": self._params["use_queues"],
             "SubModules.LayoutDetection.model_name": self._params[
                 "layout_detection_model_name"
             ],
@@ -220,6 +256,8 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
             "SubPipelines.DocPreprocessor.SubModules.DocUnwarping.model_dir": self._params[
                 "doc_unwarping_model_dir"
             ],
+            "use_seal_recognition": self._params["use_seal_recognition"],
+            "use_ocr_for_image_block": self._params["use_ocr_for_image_block"],
         }
         return create_config_from_structure(STRUCTURE)
 
@@ -342,9 +380,38 @@ class PaddleOCRVLCLISubcommandExecutor(PipelineCLISubcommandExecutor):
             help="Whether to format block content to Markdown.",
         )
         subparser.add_argument(
+            "--merge_layout_blocks",
+            type=str2bool,
+            help="Whether to merge layout blocks.",
+        )
+        subparser.add_argument(
+            "--markdown_ignore_labels",
+            type=str,
+            nargs="+",
+            help="List of layout labels to ignore in Markdown output.",
+        )
+
+        subparser.add_argument(
             "--use_queues",
             type=str2bool,
             help="Whether to use queues for asynchronous processing.",
+        )
+        subparser.add_argument(
+            "--use_seal_recognition",
+            type=str2bool,
+            help="Whether to use seal recognition.",
+        )
+        subparser.add_argument(
+            "--use_ocr_for_image_block",
+            type=str2bool,
+            help="Whether to use OCR for image blocks.",
+        )
+
+        subparser.add_argument(
+            "--layout_shape_mode",
+            type=str,
+            default="auto",
+            help="Mode for layout shape.",
         )
         subparser.add_argument(
             "--prompt_label",
@@ -376,6 +443,11 @@ class PaddleOCRVLCLISubcommandExecutor(PipelineCLISubcommandExecutor):
             type=int,
             help="Maximum pixels for image preprocessing for the VLM.",
         )
+        subparser.add_argument(
+            "--max_new_tokens",
+            type=int,
+            help="Maximum number of tokens generated by the VLM.",
+        )
 
     def execute_with_args(self, args):
         params = get_subcommand_args(args)
@@ -383,12 +455,13 @@ class PaddleOCRVLCLISubcommandExecutor(PipelineCLISubcommandExecutor):
             PaddleOCRVL,
             params,
             predict_param_names={
-                "use_queues",
+                "layout_shape_mode",
                 "prompt_label",
                 "repetition_penalty",
                 "temperature",
                 "top_p",
                 "min_pixels",
                 "max_pixels",
+                "max_new_tokens",
             },
         )

@@ -16,22 +16,22 @@ For some inference hardware, you may need to refer to other environment configur
 
 1. **Want to quickly experience PaddleOCR-VL**:
 
-    If you wish to quickly experience the inference effects of PaddleOCR-VL, please read [1. Environment Preparation](#1-environment-preparation) and [2. Quick Start](#2-quick-start).
+    If you wish to quickly experience the inference effects of PaddleOCR-VL, please read [1. Environment Preparation](#1-environment-preparation) and [2. Quick Start](#2-quick-start), or the corresponding chapters in documentation for other hardware.
 
 2. **Want to use PaddleOCR-VL in a production environment**:
 
-    Although the quick experience allows you to feel the effects of PaddleOCR-VL, it may not be optimal in terms of inference speed and GPU memory usage. If you wish to apply PaddleOCR-VL in a production environment and have higher requirements for inference performance, please read [3. Enhancing VLM Inference Performance Using Inference Acceleration Frameworks](#3-enhancing-vlm-inference-performance-using-inference-acceleration-frameworks).
+    Although the quick experience allows you to feel the effects of PaddleOCR-VL, it may not be optimal in terms of inference speed and GPU memory usage. If you wish to apply PaddleOCR-VL in a production environment and have higher requirements for inference performance, please read [3. Enhancing VLM Inference Performance Using Inference Acceleration Frameworks](#3-enhancing-vlm-inference-performance-using-inference-acceleration-frameworks) or the corresponding chapter in documentation for other hardware.
 
 3. **Want to deploy PaddleOCR-VL as an API service**:
 
     If you want to deploy PaddleOCR-VL as a web service (API) so that other devices or applications can access and call it through a specific URL without configuring the environment, we offer two methods:
 
-    - Deployment using Docker Compose (one-click start, recommended): Please read [4.1 Method 1: Deploy Using Docker Compose](#41-method-1-deploy-using-docker-compose-recommended) and [4.3 Client-Side Invocation](#43-client-side-invocation).
-    - Manual deployment: Please read [1. Environment Preparation](#1-environment-preparation), [4.2 Method 2: Manual Deployment](#42-method-2-manual-deployment), and [4.3 Client-Side Invocation](#43-client-side-invocation).
+    - Deployment using Docker Compose (one-click start, recommended): Please read [4.1 Method 1: Deploy Using Docker Compose](#41-method-1-deploy-using-docker-compose-recommended) and [4.3 Client-Side Invocation](#43-client-side-invocation), or the corresponding chapters in documentation for other hardware.
+    - Manual deployment: Please read [1. Environment Preparation](#1-environment-preparation), [4.2 Method 2: Manual Deployment](#42-method-2-manual-deployment), and [4.3 Client-Side Invocation](#43-client-side-invocation), or the corresponding chapters in documentation for other hardware.
 
 4. **Want to fine-tune PaddleOCR-VL to adapt to specific business needs**:
 
-    If you find that the accuracy performance of PaddleOCR-VL in specific business scenarios does not meet expectations, please read [5. Model Fine-tuning](#5-model-fine-tuning).
+    If you find that the accuracy performance of PaddleOCR-VL in specific business scenarios does not meet expectations, please read [5. Model Fine-tuning](#5-model-fine-tuning) or the corresponding chapter in documentation for other hardware.
 
 ## Inference Device Support for PaddleOCR-VL
 
@@ -108,6 +108,7 @@ Since different hardware requires different dependencies, if your hardware meets
 | NVIDIA GPU     | - NVIDIA Blackwell architecture GPU (e.g., RTX 50 series) refer to [PaddleOCR-VL NVIDIA Blackwell Architecture GPU Environment Configuration Tutorial](./PaddleOCR-VL-NVIDIA-Blackwell.en.md) <br/> - Other NVIDIA GPUs refer to this tutorial |
 | KUNLUNXIN XPU  | [PaddleOCR-VL XPU Environment Configuration Tutorial](./PaddleOCR-VL-XPU.en.md)                                              |
 | HYGON DCU      | [PaddleOCR-VL DCU Environment Configuration Tutorial](./PaddleOCR-VL-DCU.en.md)                                              |
+| MetaX GPU      | [PaddleOCR-VL MetaX GPU Environment Configuration Tutorial](./PaddleOCR-VL-MetaX-GPU.en.md)                                              |
 
 > TIP:
 > For example, if you are using an RTX 50 series GPU that meets the device requirements for both PaddlePaddle and vLLM inference methods, please refer to the [PaddleOCR-VL NVIDIA Blackwell Architecture GPU Environment Configuration Tutorial](./PaddleOCR-VL-NVIDIA-Blackwell.en.md) to complete the environment configuration before using PaddleOCR-VL.
@@ -199,6 +200,9 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --device xpu
 # HYGON DCU
 paddleocr doc_parser -i ./paddleocr_vl_demo.png --device dcu
 
+# MetaX GPU
+paddleocr doc_parser -i ./paddleocr_vl_demo.png --device metax_gpu
+
 # Use --use_doc_orientation_classify to enable document orientation classification
 paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_doc_orientation_classify True
 
@@ -216,6 +220,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <th>Parameter</th>
 <th>Description</th>
 <th>Type</th>
+<th>Default</th>
 </tr>
 </thead>
 <tbody>
@@ -224,36 +229,43 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <td>Data to be predicted, required.
 For example, the local path of an image file or PDF file: <code>/root/data/img.jpg</code>;<b>Such as a URL link</b>, for example, the network URL of an image file or PDF file:<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/demo_paper.png">Example</a>;<b>Such as a local directory</b>, which should contain the images to be predicted, for example, the local path: <code>/root/data/</code>(Currently, prediction for directories containing PDF files is not supported. PDF files need to be specified with a specific file path).</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>save_path</code></td>
 <td>Specify the path where the inference result file will be saved. If not set, the inference results will not be saved locally.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_name</code></td>
 <td>Name of the layout area detection and ranking model. If not set, the default model of the pipeline will be used.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_dir</code></td>
 <td>Directory path of the layout area detection and ranking model. If not set, the official model will be downloaded.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>layout_threshold</code></td>
 <td>Score threshold for the layout model. Any value between  <code>0-1</code>. If not set, the default value is used, which is  <code>0.5</code>.
-</td>
+<td><code>float</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
 <td>Whether to use post-processing NMS for layout detection. If not set, the initialized default value will be used.</td>
 <td><code>bool</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
 <td>Expansion coefficient for the detection boxes of the layout area detection model.Any floating-point number greater than <code>0</code>. If not set, the initialized default value will be used.</td>
 <td><code>float</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code></td>
@@ -265,75 +277,91 @@ For example, the local path of an image file or PDF file: <code>/root/data/img.j
 If not set, the initialized parameter value will be used.
 </td>
 <td><code>str</code></td>
+<td></td>
+</tr>
 <tr>
 <td><code>vl_rec_model_name</code></td>
 <td>Name of the multimodal recognition model. If not set, the default model will be used.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>vl_rec_model_dir</code></td>
 <td>Directory path of the multimodal recognition model. If not set, the official model will be downloaded.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>vl_rec_backend</code></td>
 <td>Inference backend used by the multimodal recognition model.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>vl_rec_server_url</code></td>
 <td>If the multimodal recognition model uses an inference service, this parameter is used to specify the server URL.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>vl_rec_max_concurrency</code></td>
 <td>If the multimodal recognition model uses an inference service, this parameter is used to specify the maximum number of concurrent requests.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>vl_rec_api_key</code></td>
 <td>If the multimodal recognition model uses an inference service, this parameter is used to specify the API key of the service.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_name</code></td>
 <td>Name of the document orientation classification model. If not set, the initialized default value will be used.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_dir</code></td>
 <td>Directory path of the document orientation classification model. If not set, the official model will be downloaded.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_name</code></td>
 <td>Name of the text image rectification model. If not set, the initialized default value will be used.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_dir</code></td>
 <td>Directory path of the text image rectification model. If not set, the official model will be downloaded.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
 <td>Whether to load and use the document orientation classification module. If not set, the initialized default value will be used, which is initialized to<code>False</code>.</td>
 <td><code>bool</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
 <td>Whether to load and use the text image rectification module. If not set, the initialized default value will be used, which is initialized to <code>False.</td>
 <td><code>bool</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
 <td>Whether to load and use the layout area detection and ranking module. If not set, the initialized default value will be used, which is initialized to <code>True</code>.</td>
 <td><code>bool</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
 <td>Whether to use the chart parsing function. If not set, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>format_block_content</code></td>
@@ -342,8 +370,65 @@ If not set, the initialized parameter value will be used.
 <td></td>
 </tr>
 <tr>
+<td><code>merge_layout_blocks</code></td>
+<td>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns. If not set, the initialized default value will be used, which defaults to initialization as<code>True</code>.</td>
+<td><code>bool</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>markdown_ignore_labels</code></td>
+<td>Layout labels that need to be ignored in Markdown. If not set, the initialized default value will be used, which defaults to initialization as<code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>.</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>use_seal_recognition</code></td>
+<td>Whether to use the seal recognition function. If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
+<td><code>bool</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>use_ocr_for_image_block</code></td>
+<td>Whether to perform OCR on text within image blocks. If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
+<td><code>bool</code></td>
+<td></td>
+</tr>
+<tr>
+  <td><code>layout_shape_mode</code></td>
+  <td>
+    Specifies the geometric representation mode for layout detection results. It defines how the boundaries of detected regions (e.g., text blocks, images, tables) are calculated and displayed.
+    Value descriptions:
+    <ul>
+      <li>
+        <b>rect (rectangle)</b>:
+        Outputs an axis-aligned bounding box (including x1, y1, x2, y2).
+        Suitable for standard horizontally aligned layouts.
+      </li>
+      <li>
+        <b>quad (quadrilateral)</b>:
+        Outputs an arbitrary quadrilateral composed of four vertices.
+        Suitable for regions with skew or perspective distortion.
+      </li>
+      <li>
+        <b>poly (polygon)</b>:
+        Outputs a closed contour composed of multiple coordinate points.
+        Suitable for irregularly shaped or curved layout elements,
+        offering the highest precision.
+      </li>
+      <li>
+        <b>auto (automatic)</b>:
+        The system automatically selects the most appropriate shape
+        representation based on the complexity and confidence of the
+        detected targets.
+      </li>
+    </ul>
+  </td>
+  <td><code>str</code></td>
+  <td>"auto"</td>
+</tr>
+<tr>
 <td><code>use_queues</code></td>
-<td>Used to control whether to enable internal queues. When set to <code>True</code>, data loading (such as rendering PDF pages as images), layout detection model processing, and VLM inference will be executed asynchronously in separate threads, with data passed through queues, thereby improving efficiency. This approach is particularly efficient for PDF documents with a large number of pages or directories containing a large number of images or PDF files.</td>
+<td>Used to control whether to enable internal queues. When set to <code>True</code>, data loading (such as rendering PDF pages as images), layout detection model processing, and VLM inference will be executed asynchronously in separate threads, with data passed through queues, thereby improving efficiency. This approach is particularly efficient for PDF documents with a large number of pages or directories containing a large number of images or PDF files. If not set, the initialized default value will be used, which defaults to initialization as <code>True</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
@@ -392,6 +477,8 @@ If not set, the initialized parameter value will be used.
 <li><b>XPU</b>: For example,<code>xpu:0</code> indicates using the first XPU for inference;</li>
 <li><b>MLU</b>: For example,<code>mlu:0</code> indicates using the first MLU for inference;</li>
 <li><b>DCU</b>: For example,<code>dcu:0</code> indicates using the first DCU for inference;</li>
+<li><b>MetaX GPU</b>: For example,<code>metax_gpu:0</code> indicates using the first MetaX GPU for inference;</li>
+<li><b>Iluvatar GPU</b>: For example,<code>iluvatar_gpu:0</code> indicates using the first Iluvatar GPU for inference;</li>
 </ul>If not set, the initialized default value will be used. During initialization, the local GPU device 0 will be used preferentially. If it is not available, the CPU device will be used.</td>
 <td><code>str</code></td>
 <td></td>
@@ -400,32 +487,38 @@ If not set, the initialized parameter value will be used.
 <td><code>enable_hpi</code></td>
 <td>Whether to enable high-performance inference.</td>
 <td><code>bool</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>use_tensorrt</code></td>
 <td>Whether to enable the TensorRT subgraph engine of Paddle Inference. If the model does not support acceleration via TensorRT, acceleration will not be used even if this flag is set.<br/>For PaddlePaddle version with CUDA 11.8, the compatible TensorRT version is 8.x (x&amp;gt;=6). It is recommended to install TensorRT 8.6.1.6.<br/>
 </td>
 <td><code>bool</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>precision</code></td>
 <td>Computational precision, such as fp32, fp16.</td>
 <td><code>str</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>enable_mkldnn</code></td>
 <td>Whether to enable MKL-DNN accelerated inference. If MKL-DNN is not available or the model does not support acceleration via MKL-DNN, acceleration will not be used even if this flag is set.</td>
 <td><code>bool</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>mkldnn_cache_capacity</code></td>
 <td>MKL-DNN cache capacity.</td>
 <td><code>int</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>cpu_threads</code></td>
 <td>The number of threads used for inference on the CPU.</td>
 <td><code>int</code></td>
+<td></td>
 </tr>
 <tr>
 <td><code>paddlex_config</code></td>
@@ -463,9 +556,13 @@ pipeline = PaddleOCRVL()
 # pipeline = PaddleOCRVL(device="xpu")
 # HYGON DCU
 # pipeline = PaddleOCRVL(device="dcu")
+# MetaX GPU
+# pipeline = PaddleOCRVL(device="metax_gpu")
+
 # pipeline = PaddleOCRVL(use_doc_orientation_classify=True) # Use use_doc_orientation_classify to enable/disable document orientation classification model
 # pipeline = PaddleOCRVL(use_doc_unwarping=True) # Use use_doc_unwarping to enable/disable document unwarping module
 # pipeline = PaddleOCRVL(use_layout_detection=False) # Use use_layout_detection to enable/disable layout detection module
+
 output = pipeline.predict("./paddleocr_vl_demo.png")
 for res in output:
     res.print() ## Print the structured prediction output
@@ -488,6 +585,8 @@ pipeline = PaddleOCRVL()
 # pipeline = PaddleOCRVL(device="xpu")
 # HYGON DCU
 # pipeline = PaddleOCRVL(device="dcu")
+# MetaX GPU
+# pipeline = PaddleOCRVL(device="metax_gpu")
 
 output = pipeline.predict(input=input_file)
 
@@ -581,20 +680,20 @@ Expansion coefficient for the detection box of the layout area detection model.
 <li><b>large</b> when set to large, it means that among the detection boxes output by the model, for overlapping and contained boxes, only the outermost largest box is retained, and the overlapping inner boxes are deleted;</li>
 <li><b>small</b>, when set to small, it means that among the detection boxes output by the model, for overlapping and contained boxes, only the innermost contained small box is retained, and the overlapping outer boxes are deleted;</li>
 <li><b>union</b>,no filtering is performed on the boxes, and both inner and outer boxes are retained;</li></ul>
-If not set, the initialized parameter value will be used.
+If set to <code>None</code>, the initialized parameter value will be used.
 </td>
 <td><code>str|dict|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_model_name</code></td>
-<td>Name of the multimodal recognition model. If not set, the default model will be used.</td>
+<td>Name of the multimodal recognition model. If set to <code>None</code>, the default model will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_model_dir</code></td>
-<td>Directory path of the multimodal recognition model. If not set, the official model will be downloaded.</td>
+<td>Directory path of the multimodal recognition model. If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -624,57 +723,87 @@ If not set, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_name</code></td>
-<td>Name of the document orientation classification model. If not set, the initialized default value will be used.</td>
+<td>Name of the document orientation classification model. If set to <code>None</code>, the initialized default value will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_dir</code></td>
-<td>Directory path of the document orientation classification model. If not set, the official model will be downloaded.</td>
+<td>Directory path of the document orientation classification model. If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_name</code></td>
-<td>Name of the text image rectification model. If not set, the initialized default value will be used.</td>
+<td>Name of the text image rectification model. If set to <code>None</code>, the initialized default value will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_dir</code></td>
-<td>Directory path of the text image rectification model. If not set, the official model will be downloaded.</td>
+<td>Directory path of the text image rectification model. If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>Whether to load and use the document orientation classification module. If not set, the initialized default value will be used, which is initialized to<code>False</code>.</td>
+<td>Whether to load and use the document orientation classification module. If set to <code>None</code>, the initialized default value will be used, which is initialized to<code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>Whether to load and use the text image rectification module. If not set, the initialized default value will be used, which is initialized to <code>False.</td>
+<td>Whether to load and use the text image rectification module. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td>Whether to load and use the layout area detection and ranking module. If not set, the initialized default value will be used, which is initialized to <code>True</code>.</td>
+<td>Whether to load and use the layout area detection and ranking module. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>True</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
-<td>Whether to use the chart parsing function. If not set, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td>Whether to use the chart parsing function. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>format_block_content</code></td>
-<td>Controls whether to format the <code>block_content</code> content within as Markdown. If not set, the initialized default value will be used, which defaults to initialization as<code>False</code>.</td>
+<td>Controls whether to format the <code>block_content</code> content within as Markdown. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as<code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>merge_layout_blocks</code></td>
+<td>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as<code>True</code>.</td>
+<td><code>bool|None</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>markdown_ignore_labels</code></td>
+<td>Layout labels that need to be ignored in Markdown. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as <code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>.</td>
+<td><code>list|None</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>use_queues</code></td>
+<td>Used to control whether to enable internal queues. When set to <code>True</code>, data loading (such as rendering PDF pages as images), layout detection model processing, and VLM inference will be executed asynchronously in separate threads, with data passed through queues, thereby improving efficiency. This approach is particularly efficient for PDF documents with many pages or directories containing a large number of images or PDF files. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as <code>True</code>.</td>
+<td><code>bool|None</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>use_seal_recognition</code></td>
+<td>Whether to use the seal recognition function. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td><code>bool|None</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>use_ocr_for_image_block</code></td>
+<td>Whether to perform OCR on text within image blocks. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td><code>bool|None</code></td>
 <td></td>
 </tr>
 <tr>
@@ -686,6 +815,8 @@ If not set, the initialized parameter value will be used.
 <li><b>XPU</b>: For example,<code>xpu:0</code> indicates using the first XPU for inference;</li>
 <li><b>MLU</b>: For example,<code>mlu:0</code> indicates using the first MLU for inference;</li>
 <li><b>DCU</b>: For example,<code>dcu:0</code> indicates using the first DCU for inference;</li>
+<li><b>MetaX GPU</b>: For example,<code>metax_gpu:0</code> indicates using the first MetaX GPU for inference;</li>
+<li><b>Iluvatar GPU</b>: For example,<code>iluvatar_gpu:0</code> indicates using the first Iluvatar GPU for inference;</li>
 </ul>If not set, the initialized default value will be used. During initialization, the local GPU device 0 will be used preferentially. If it is not available, the CPU device will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
@@ -780,7 +911,19 @@ If not set, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
-<td>Whether to use the chart parsing module during inference. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td>Whether to use the chart parsing function. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><code>bool|None</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>use_seal_recognition</code></td>
+<td>Whether to use the seal recognition function. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><code>bool|None</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>use_ocr_for_image_block</code></td>
+<td>Whether to perform OCR on text within image blocks. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -809,8 +952,41 @@ If not set, the initialized parameter value will be used.
 <td><code>None</code></td>
 </tr>
 <tr>
+  <td><code>layout_shape_mode</code></td>
+  <td>
+    Specifies the geometric representation mode for layout detection results. It defines how the boundaries of detected regions (e.g., text blocks, images, tables) are calculated and displayed.
+    Value descriptions:
+    <ul>
+      <li>
+        <b>rect (rectangle)</b>:
+        Outputs an axis-aligned bounding box (including x1, y1, x2, y2).
+        Suitable for standard horizontally aligned layouts.
+      </li>
+      <li>
+        <b>quad (quadrilateral)</b>:
+        Outputs an arbitrary quadrilateral composed of four vertices.
+        Suitable for regions with skew or perspective distortion.
+      </li>
+      <li>
+        <b>poly (polygon)</b>:
+        Outputs a closed contour composed of multiple coordinate points.
+        Suitable for irregularly shaped or curved layout elements,
+        offering the highest precision.
+      </li>
+      <li>
+        <b>auto (automatic)</b>:
+        The system automatically selects the most appropriate shape
+        representation based on the complexity and confidence of the
+        detected targets.
+      </li>
+    </ul>
+  </td>
+  <td><code>str</code></td>
+  <td>"auto"</td>
+</tr>
+<tr>
 <td><code>use_queues</code></td>
-<td>Used to control whether to enable internal queues. When set to <code>True</code>, data loading (such as rendering PDF pages as images), layout detection model processing, and VLM inference will be executed asynchronously in separate threads, with data passed through queues, thereby improving efficiency. This approach is particularly efficient for PDF documents with many pages or directories containing a large number of images or PDF files.</td>
+<td>The parameter meaning is basically the same as the instantiation parameter. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -854,6 +1030,44 @@ If not set, the initialized parameter value will be used.
 <td><code>max_pixels</code></td>
 <td>The maximum number of pixels allowed when the VL model preprocesses images.</td>
 <td><code>int|None</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>max_new_tokens</code></td>
+<td>The maximum number of tokens generated by the VL model.</td>
+<td><code>int|None</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>merge_layout_blocks</code></td>
+<td>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns.</td>
+<td><code>bool|None</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>markdown_ignore_labels</code></td>
+<td>Layout labels that need to be ignored in Markdown.</td>
+<td><code>list|None</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>vlm_extra_args</code></td>
+<td>Additional configuration parameters for the VLM. The currently supported custom parameters are as follows:
+<ul>
+  <li><code>ocr_min_pixels</code>: Minimum resolution for OCR</li>
+  <li><code>ocr_max_pixels</code>: Maximum resolution for OCR</li>
+  <li><code>table_min_pixels</code>: Minimum resolution for tables</li>
+  <li><code>table_max_pixels</code>: Maximum resolution for tables</li>
+  <li><code>chart_min_pixels</code>: Minimum resolution for charts</li>
+  <li><code>chart_max_pixels</code>: Maximum resolution for charts</li>
+  <li><code>formula_min_pixels</code>: Minimum resolution for formulas</li>
+  <li><code>formula_max_pixels</code>: Maximum resolution for formulas</li>
+  <li><code>spotting_min_pixels</code>: Minimum resolution for grounding</li>
+  <li><code>spotting_max_pixels</code>: Maximum resolution for grounding</li>
+  <li><code>seal_min_pixels</code>: Minimum resolution for seals</li>
+  <li><code>seal_max_pixels</code>: Maximum resolution for seals</li>
+</ul></td>
+<td><code>dict|None</code></td>
 <td><code>None</code></td>
 </tr>
 </table>
@@ -964,11 +1178,18 @@ If not set, the initialized parameter value will be used.
 
     - `page_index`: `(Union[int, None])` If the input is a PDF file, it indicates the current page number of the PDF; otherwise, it is `None`.
 
+    - `page_count`: `(Union[int, None])` If the input is a PDF file, it indicates the total number of pages in the PDF; otherwise, it is `None`.
+
+    - `width`: `(int)` The width of the original input image.
+
+    - `height`: `(int)` The height of the original input image.
+
     - `model_settings`: `(Dict[str, bool])` Model parameters required for configuring PaddleOCR-VL.
         - `use_doc_preprocessor`: `(bool)` Controls whether to enable the document preprocessing sub-pipeline.
         - `use_layout_detection`: `(bool)` Controls whether to enable the layout detection module.
         - `use_chart_recognition`: `(bool)` Controls whether to enable the chart recognition function.
         - `format_block_content`: `(bool)` Controls whether to save the formatted markdown content in `JSON`.
+        - `markdown_ignore_labels`: `(List[str])` Labels of layout regions that need to be ignored in Markdown
 
     - `doc_preprocessor_res`: `(Dict[str, Union[List[float], str]])` A dictionary of document preprocessing results, which exists only when `use_doc_preprocessor=True`.
         - `input_path`: `(str)` The image path accepted by the document preprocessing sub-pipeline. When the input is a `numpy.ndarray`, it is saved as `None`; here, it is `None`.
@@ -1544,6 +1765,18 @@ Below are the API reference and examples of multi-language service invocation:
 <td>No</td>
 </tr>
 <tr>
+<td><code>useSealRecognition</code></td>
+<td><code>boolean</code>|<code>null</code></td>
+<td>Please refer to the description of the <code>use_seal_recognition</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>useOcrForImageBlock</code></td>
+<td><code>boolean</code>|<code>null</code></td>
+<td>Please refer to the description of the <code>use_ocr_for_image_block</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
+<td>No</td>
+</tr>
+<tr>
 <td><code>layoutThreshold</code></td>
 <td><code>number</code>|<code>object</code>|<code>null</code></td>
 <td>Please refer to the description of the <code>layout_threshold</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
@@ -1565,6 +1798,12 @@ Below are the API reference and examples of multi-language service invocation:
 <td><code>layoutMergeBboxesMode</code></td>
 <td><code>string</code>|<code>object</code>|<code>null</code></td>
 <td>Please refer to the description of the <code>layout_merge_bboxes_mode</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>layoutShapeMode</code></td>
+<td><code>string</code></td>
+<td>Please refer to the description of the <code>layout_shape_mode</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
 <td>No</td>
 </tr>
 <tr>
@@ -1607,6 +1846,30 @@ Below are the API reference and examples of multi-language service invocation:
 <td><code>maxPixels</code></td>
 <td><code>number</code>|<code>null</code></td>
 <td>Please refer to the description of the <code>max_pixels</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>maxNewTokens</code></td>
+<td><code>number</code>|<code>null</code></td>
+<td>Please refer to the description of the <code>max_new_tokens</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>mergeLayoutBlocks</code></td>
+<td><code>boolean</code>|<code>null</code></td>
+<td>Please refer to the description of the <code>merge_layout_blocks</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>markdownIgnoreLabels</code></td>
+<td><code>array</code>|<code>null</code></td>
+<td>Please refer to the description of the <code>markdown_ignore_labels</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>vlmExtraArgs</code></td>
+<td><code>object</code>|<code>null</code></td>
+<td>Please refer to the description of the <code>vlm_extra_args</code> parameter in the <code>predict</code> method of the PaddleOCR-VL object.</td>
 <td>No</td>
 </tr>
 <tr>
