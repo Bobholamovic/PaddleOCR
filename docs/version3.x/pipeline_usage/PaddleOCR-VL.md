@@ -340,12 +340,6 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <td></td>
 </tr>
 <tr>
-<td><code>vl_rec_api_model_name</code></td>
-<td>如果多模态识别模型使用推理服务，该参数用于指定服务的模型名称。</td>
-<td><code>str</code></td>
-<td></td>
-</tr>
-<tr>
 <td><code>vl_rec_api_key</code></td>
 <td><b>含义：</b>如果多模态识别模型使用推理服务，该参数用于指定服务的 API key。</td>
 <td><code>str</code></td>
@@ -784,12 +778,6 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 <tr>
 <td><code>vl_rec_api_model_name</code></td>
 <td><b>含义：</b>如果多模态识别模型使用推理服务，该参数用于指定服务的模型名称。</td>
-<td><code>str|None</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>vl_rec_api_model_name</code></td>
-<td>如果多模态识别模型使用推理服务，该参数用于指定服务的模型名称。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -1587,7 +1575,7 @@ paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url http://localhost:8000/v1 \
-    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL'
+    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL-1.5'
 ```
 
 硅基流动平台：
@@ -1597,7 +1585,7 @@ paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url https://api.siliconflow.cn/v1 \
-    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL' \
+    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL-1.5' \
     --vl_rec_api_key xxxxxx
 ```
 
@@ -1608,7 +1596,7 @@ paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url https://api.novita.ai/openai \
-    --vl_rec_api_model_name 'paddlepaddle/paddleocr-vl' \
+    --vl_rec_api_model_name 'paddlepaddle/paddleocr-vl-1.5' \
     --vl_rec_api_key xxxxxx
 ```
 
@@ -1628,7 +1616,7 @@ pipeline = PaddleOCRVL(vl_rec_backend="vllm-server", vl_rec_server_url="http://l
 pipeline = PaddleOCRVL(
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="http://localhost:8000/v1",
-    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL",
+    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL-1.5",
 )
 ```
 
@@ -1638,7 +1626,7 @@ pipeline = PaddleOCRVL(
 pipeline = PaddleOCRVL(
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="https://api.siliconflow.cn/v1",
-    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL",
+    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL-1.5",
     vl_rec_api_key="xxxxxx",
 )
 ```
@@ -1649,7 +1637,7 @@ Novita AI 平台：
 pipeline = PaddleOCRVL(
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="https://api.novita.ai/openai",
-    vl_rec_api_model_name="paddlepaddle/paddleocr-vl",
+    vl_rec_api_model_name="paddlepaddle/paddleocr-vl-1.5",
     vl_rec_api_key="xxxxxx",
 )
 ```

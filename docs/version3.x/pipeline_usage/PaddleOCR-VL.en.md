@@ -339,11 +339,6 @@ If not set, the official model will be downloaded.</td>
 <td></td>
 </tr>
 <tr>
-<td><code>vl_rec_api_model_name</code></td>
-<td>If the multimodal recognition model uses an inference service, this parameter is used to specify the model name of the service.</td>
-<td><code>str</code></td>
-</tr>
-<tr>
 <td><code>vl_rec_api_key</code></td>
 <td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the API key of the service.</td>
 <td><code>str</code></td>
@@ -804,12 +799,6 @@ If set to <code>None</code>, the initialized parameter value will be used.
 <tr>
 <td><code>vl_rec_api_model_name</code></td>
 <td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the model name of the service.</td>
-<td><code>str|None</code></td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>vl_rec_api_model_name</code></td>
-<td>If the multimodal recognition model uses an inference service, this parameter is used to specify the model name of the service.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -1541,7 +1530,7 @@ paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url http://localhost:8000/v1 \
-    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL'
+    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL-1.5'
 ```
 
 SiliconFlow platform:
@@ -1551,7 +1540,7 @@ paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url https://api.siliconflow.cn/v1 \
-    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL' \
+    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL-1.5' \
     --vl_rec_api_key xxxxxx
 ```
 
@@ -1562,7 +1551,7 @@ paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url https://api.novita.ai/openai \
-    --vl_rec_api_model_name 'paddlepaddle/paddleocr-vl' \
+    --vl_rec_api_model_name 'paddlepaddle/paddleocr-vl-1.5' \
     --vl_rec_api_key xxxxxx
 ```
 
@@ -1582,7 +1571,7 @@ Using a service started with the default parameters of `vllm serve`:
 pipeline = PaddleOCRVL(
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="http://localhost:8000/v1",
-    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL",
+    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL-1.5",
 )
 ```
 
@@ -1592,7 +1581,7 @@ SiliconFlow platform:
 pipeline = PaddleOCRVL(
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="https://api.siliconflow.cn/v1",
-    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL",
+    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL-1.5",
     vl_rec_api_key="xxxxxx",
 )
 ```
@@ -1603,7 +1592,7 @@ Novita AI platform:
 pipeline = PaddleOCRVL(
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="https://api.novita.ai/openai",
-    vl_rec_api_model_name="paddlepaddle/paddleocr-vl",
+    vl_rec_api_model_name="paddlepaddle/paddleocr-vl-1.5",
     vl_rec_api_key="xxxxxx",
 )
 ```
