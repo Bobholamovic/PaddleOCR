@@ -3,13 +3,12 @@
 ARG BACKEND=fastdeploy
 
 
-FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/fastdeploy-xpu:2.3.0 AS base-fastdeploy
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-ixuca:paddle-ocr-vl-1107 AS base-fastdeploy
+
+RUN python -m pip install fastdeploy_iluvatar_gpu==2.4.0.dev0 -i https://www.paddlepaddle.org.cn/packages/stable/ixuca/
 
 
 FROM base-${BACKEND}
-
-RUN python -m pip install https://paddle-model-ecology.bj.bcebos.com/paddlex/PaddleX3.0/deploy/hardware/whl/fastdeploy_xpu-2.3.0.dev0-py3-none-any.whl \
-    && python -m pip install https://paddle-model-ecology.bj.bcebos.com/paddlex/PaddleX3.0/deploy/hardware/whl/paddlepaddle_xpu-0.0.0-cp310-cp310-linux_x86_64.whl
 
 ARG PADDLEOCR_VERSION=">=3.4.0,<3.5"
 ARG PADDLEX_VERSION=">=3.4.0,<3.5"
@@ -21,6 +20,11 @@ ENV HOME=/home/paddleocr
 WORKDIR /home/paddleocr
 
 USER paddleocr
+
+# TODO: Set these env vars only in FastDeploy image
+ENV PADDLE_XCCL_BACKEND=iluvatar_gpu
+ENV FD_SAMPLING_CLASS=rejection
+ENV LD_PRELOAD=/usr/local/corex/lib64/libcuda.so.1
 
 ARG BUILD_FOR_OFFLINE=false
 RUN if [ "${BUILD_FOR_OFFLINE}" = 'true' ]; then \

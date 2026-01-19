@@ -1,15 +1,16 @@
 # TODO: Allow regular users
 
-ARG BACKEND=fastdeploy
+ARG BACKEND=vllm
 
 
-FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/fastdeploy-xpu:2.3.0 AS base-fastdeploy
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-vllm-npu:0.12.0rc1 AS base-vllm
 
 
 FROM base-${BACKEND}
 
-RUN python -m pip install https://paddle-model-ecology.bj.bcebos.com/paddlex/PaddleX3.0/deploy/hardware/whl/fastdeploy_xpu-2.3.0.dev0-py3-none-any.whl \
-    && python -m pip install https://paddle-model-ecology.bj.bcebos.com/paddlex/PaddleX3.0/deploy/hardware/whl/paddlepaddle_xpu-0.0.0-cp310-cp310-linux_x86_64.whl
+RUN apt-get update \
+    && apt-get install -y libgl1 \
+    && rm -rf /var/lib/apt/lists/*
 
 ARG PADDLEOCR_VERSION=">=3.4.0,<3.5"
 ARG PADDLEX_VERSION=">=3.4.0,<3.5"

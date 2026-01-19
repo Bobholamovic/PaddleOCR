@@ -1,6 +1,6 @@
 # TODO: Allow regular users
 
-FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddle-dcu:dtk24.04.1-kylinv10-gcc82
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-ixuca:3.3.0
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -8,7 +8,8 @@ ENV PIP_NO_CACHE_DIR=0
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-RUN python -m pip install paddlepaddle-dcu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/dcu/
+RUN python -m pip install paddlepaddle==3.3.0.dev20251219 -i https://www.paddlepaddle.org.cn/packages/nightly/cpu/ \
+    && python -m pip install paddle-iluvatar-gpu==3.0.0.dev20251223 -i https://www.paddlepaddle.org.cn/packages/nightly/ixuca/
 
 ARG PADDLEOCR_VERSION=">=3.4.0,<3.5"
 ARG PADDLEX_VERSION=">=3.4.0,<3.5"
@@ -21,18 +22,9 @@ WORKDIR /home/paddleocr
 
 USER paddleocr
 
-ENV HYHAL_PATH=/opt/hyhal
-ENV DTKROOT=/opt/
-ENV AMDGPU_TARGETS="gfx906;gfx926;gfx928"
-ENV ROCM_PATH=/opt/dtk-24.04.1
-ENV HIP_PATH=/opt/dtk-24.04.1/hip
-ENV MIOPEN_FIND_MODE=3
-
-ENV PATH="${ROCM_PATH}/bin:${ROCM_PATH}/llvm/bin:${ROCM_PATH}/hip/bin:${ROCM_PATH}/hip/bin/hipify:${HYHAL_PATH}/bin:${PATH}"
-ENV LD_LIBRARY_PATH="${ROCM_PATH}/lib:${ROCM_PATH}/lib64:${HYHAL_PATH}/lib:${HYHAL_PATH}/lib64:${LD_LIBRARY_PATH}"
-ENV LD_LIBRARY_PATH="${ROCM_PATH}/hip/lib:${ROCM_PATH}/llvm/lib:${LD_LIBRARY_PATH}"
-ENV C_INCLUDE_PATH="${ROCM_PATH}/include:${HYHAL_PATH}/include:${ROCM_PATH}/llvm/include"
-ENV CPLUS_INCLUDE_PATH="${ROCM_PATH}/include:${HYHAL_PATH}/include:${ROCM_PATH}/llvm/include"
+ENV PADDLE_XCCL_BACKEND=iluvatar_gpu
+ENV FD_SAMPLING_CLASS=rejection
+ENV LD_PRELOAD=/usr/local/corex/lib64/libcuda.so.1
 
 ARG BUILD_FOR_OFFLINE=false
 RUN if [ "${BUILD_FOR_OFFLINE}" = 'true' ]; then \
@@ -60,4 +52,4 @@ COPY --chown=paddleocr:paddleocr pipeline_config_fastdeploy.yaml /home/paddleocr
 
 EXPOSE 8080
 
-CMD ["paddlex", "--serve", "--pipeline", "/home/paddleocr/pipeline_config_vllm.yaml", "--device", "dcu"]
+CMD ["paddlex", "--serve", "--pipeline", "/home/paddleocr/pipeline_config_vllm.yaml", "--device", "iluvatar_gpu"]
