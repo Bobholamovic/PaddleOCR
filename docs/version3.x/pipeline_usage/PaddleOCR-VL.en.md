@@ -226,50 +226,64 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <tbody>
 <tr>
 <td><code>input</code></td>
-<td>Data to be predicted, required.
+<td><b>Meaning:</b>Data to be predicted, required. <br/>
+<b>Description:</b> 
 For example, the local path of an image file or PDF file: <code>/root/data/img.jpg</code>;<b>Such as a URL link</b>, for example, the network URL of an image file or PDF file:<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/demo_paper.png">Example</a>;<b>Such as a local directory</b>, which should contain the images to be predicted, for example, the local path: <code>/root/data/</code>(Currently, prediction for directories containing PDF files is not supported. PDF files need to be specified with a specific file path).</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>save_path</code></td>
-<td>Specify the path where the inference result file will be saved. If not set, the inference results will not be saved locally.</td>
+<td><b>Meaning:</b>Specify the path where the inference result file will be saved. <br/>
+<b>Description:</b> 
+If not set, the inference results will not be saved locally.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_name</code></td>
-<td>Name of the layout area detection and ranking model. If not set, the default model of the pipeline will be used.</td>
+<td><b>Meaning:</b>Name of the layout area detection and ranking model.<br/>
+<b>Description:</b>
+ If not set, the default model of the production line will be used.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_dir</code></td>
-<td>Directory path of the layout area detection and ranking model. If not set, the official model will be downloaded.</td>
+<td><b>Meaning:</b>Directory path of the layout area detection and ranking model.<br/> 
+<b>Description:</b> 
+If not set, the official model will be downloaded.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_threshold</code></td>
-<td>Score threshold for the layout model. Any value between  <code>0-1</code>. If not set, the default value is used, which is  <code>0.5</code>.
+<td><b>Meaning:</b>Score threshold for the layout model. <br/>
+<b>Description:</b> 
+Any value between  <code>0-1</code>. If not set, the default value is used, which is  <code>0.5</code>.
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>Whether to use post-processing NMS for layout detection. If not set, the initialized default value will be used.</td>
+<td><b>Meaning:</b>Whether to use post-processing NMS for layout detection. <br/>
+<b>Description:</b> 
+If not set, the initialized default value will be used.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
-<td>Expansion coefficient for the detection boxes of the layout area detection model.Any floating-point number greater than <code>0</code>. If not set, the initialized default value will be used.</td>
+<td><b>Meaning:</b>Expansion coefficient for the detection boxes of the layout area detection model. <br/>
+<b>Description:</b> 
+Any floating-point number greater than <code>0</code>. If not set, the initialized default value will be used.</td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code></td>
-<td>Merging mode for the detection boxes output by the model in layout detection.
+<td><b>Meaning:</b>Merging mode for the detection boxes output by the model in layout detection. <br/>
+<b>Description:</b> 
 <ul>
 <li><b>large</b> when set to large, it means that among the detection boxes output by the model, for overlapping and contained boxes, only the outermost largest box is retained, and the overlapping inner boxes are deleted;</li>
 <li><b>small</b>, when set to small, it means that among the detection boxes output by the model, for overlapping and contained boxes, only the innermost contained small box is retained, and the overlapping outer boxes are deleted;</li>
@@ -281,123 +295,155 @@ If not set, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>vl_rec_model_name</code></td>
-<td>Name of the multimodal recognition model. If not set, the default model will be used.</td>
+<td><b>Meaning:</b>Name of the multimodal recognition model. <br/>
+<b>Description:</b> 
+If not set, the default model will be used.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>vl_rec_model_dir</code></td>
-<td>Directory path of the multimodal recognition model. If not set, the official model will be downloaded.</td>
+<td><b>Meaning:</b>Directory path of the multimodal recognition model. <br/>
+<b>Description:</b> 
+If not set, the official model will be downloaded.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>vl_rec_backend</code></td>
-<td>Inference backend used by the multimodal recognition model.</td>
+<td><b>Meaning:</b>Inference backend used by the multimodal recognition model.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>vl_rec_server_url</code></td>
-<td>If the multimodal recognition model uses an inference service, this parameter is used to specify the server URL.</td>
+<td><b>Description:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the server URL.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>vl_rec_max_concurrency</code></td>
-<td>If the multimodal recognition model uses an inference service, this parameter is used to specify the maximum number of concurrent requests.</td>
+<td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the maximum number of concurrent requests.</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>vl_rec_api_model_name</code></td>
+<td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the model name of the service.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>vl_rec_api_key</code></td>
-<td>If the multimodal recognition model uses an inference service, this parameter is used to specify the API key of the service.</td>
+<td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the API key of the service.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_name</code></td>
-<td>Name of the document orientation classification model. If not set, the initialized default value will be used.</td>
+<td><b>Meaning:</b>Name of the document orientation classification model.<br/>
+<b>Description:</b>
+If not set, the initialized default value will be used.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_dir</code></td>
-<td>Directory path of the document orientation classification model. If not set, the official model will be downloaded.</td>
+<td><b>Meaning:</b>Directory path of the document orientation classification model. <br/>
+<b>Description:</b>
+If not set, the official model will be downloaded.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_name</code></td>
-<td>Name of the text image rectification model. If not set, the initialized default value will be used.</td>
+<td><b>Meaning:</b>Name of the text image rectification model. <br/>
+<b>Description:</b>
+If not set, the initialized default value will be used.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_dir</code></td>
-<td>Directory path of the text image rectification model. If not set, the official model will be downloaded.</td>
+<td><b>Meaning:</b>Directory path of the text image rectification model. <br/>
+<b>Description:</b>
+If not set, the official model will be downloaded.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>Whether to load and use the document orientation classification module. If not set, the initialized default value will be used, which is initialized to<code>False</code>.</td>
+<td><b>Meaning:</b>Whether to load and use the document orientation classification module. <br/>
+<b>Description:</b>
+If not set, the initialized default value will be used, which is initialized to<code>False</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>Whether to load and use the text image rectification module. If not set, the initialized default value will be used, which is initialized to <code>False.</td>
+<td><b>Meaning:</b>Whether to load and use the text image rectification module. <br/>
+<b>Description:</b>
+If not set, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td>Whether to load and use the layout area detection and ranking module. If not set, the initialized default value will be used, which is initialized to <code>True</code>.</td>
+<td><b>Meaning:</b>Whether to load and use the layout area detection and ranking module. <br/>
+<b>Description:</b>
+If not set, the initialized default value will be used, which is initialized to <code>True</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
-<td>Whether to use the chart parsing function. If not set, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td><b>Meaning:</b>Whether to use the chart parsing function. <br/>
+<b>Description:</b>
+If not set, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>format_block_content</code></td>
-<td>Controls whether to format the <code>block_content</code> content within as Markdown. If not set, the initialized default value will be used, which defaults to initialization as<code>False</code>.</td>
+<td><b>Meaning:</b>Controls whether to format the <code>block_content</code> content within as Markdown. <br/>
+<b>Description:</b>
+If not set, the initialized default value will be used, which defaults to initialization as<code>False</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>merge_layout_blocks</code></td>
-<td>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns. If not set, the initialized default value will be used, which defaults to initialization as<code>True</code>.</td>
+<td><b>Meaning:</b>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns.<br/>
+<b>Description:</b> If not set, the initialized default value will be used, which defaults to initialization as<code>True</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>markdown_ignore_labels</code></td>
-<td>Layout labels that need to be ignored in Markdown. If not set, the initialized default value will be used, which defaults to initialization as<code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>.</td>
+<td><b>Meaning:</b>Layout labels that need to be ignored in Markdown.<br/>
+<b>Description:</b> If not set, the initialized default value will be used, which defaults to initialization as<code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_seal_recognition</code></td>
-<td>Whether to use the seal recognition function. If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
+<td><b>Meaning:</b>Whether to use the seal recognition function.<br/>
+<b>Description:</b> If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_ocr_for_image_block</code></td>
-<td>Whether to perform OCR on text within image blocks. If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
+<td><b>Meaning:</b>Whether to perform OCR on text within image blocks.<br/>
+<b>Description:</b> If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
   <td><code>layout_shape_mode</code></td>
   <td>
-    Specifies the geometric representation mode for layout detection results. It defines how the boundaries of detected regions (e.g., text blocks, images, tables) are calculated and displayed.
-    Value descriptions:
+    <b>Meaning:</b>Specifies the geometric representation mode for layout detection results. It defines how the boundaries of detected regions (e.g., text blocks, images, tables) are calculated and displayed.<br/>
+    <b>Description:</b> Value descriptions:
     <ul>
       <li>
         <b>rect (rectangle)</b>:
@@ -428,49 +474,52 @@ If not set, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>use_queues</code></td>
-<td>Used to control whether to enable internal queues. When set to <code>True</code>, data loading (such as rendering PDF pages as images), layout detection model processing, and VLM inference will be executed asynchronously in separate threads, with data passed through queues, thereby improving efficiency. This approach is particularly efficient for PDF documents with a large number of pages or directories containing a large number of images or PDF files. If not set, the initialized default value will be used, which defaults to initialization as <code>True</code>.</td>
+<td><b>Meaning:</b>Used to control whether to enable internal queues.<br/>
+<b>Description:</b> When set to <code>True</code>, data loading (such as rendering PDF pages as images), layout detection model processing, and VLM inference will be executed asynchronously in separate threads, with data passed through queues, thereby improving efficiency. This approach is particularly efficient for PDF documents with a large number of pages or directories containing a large number of images or PDF files. If not set, the initialized default value will be used, which defaults to initialization as <code>True</code>.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>prompt_label</code></td>
-<td>The prompt type setting for the VL model, which takes effect if and only if <code>use_layout_detection=False</code>.</td>
+<td><b>Meaning:</b>The prompt type setting for the VL model, which takes effect if and only if <code>use_layout_detection=False</code>.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>repetition_penalty</code></td>
-<td>The repetition penalty parameter used in VL model sampling.</td>
+<td><b>Meaning:</b>The repetition penalty parameter used in VL model sampling.</td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>temperature</code></td>
-<td>The temperature parameter used in VL model sampling.</td>
+<td><b>Meaning:</b>The temperature parameter used in VL model sampling.</td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>top_p</code></td>
-<td>The top-p parameter used in VL model sampling.</td>
+<td><b>Meaning:</b>The top-p parameter used in VL model sampling.</td>
 <td><code>float</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>min_pixels</code></td>
-<td>The minimum number of pixels allowed when the VL model preprocesses images.</td>
+<td><b>Meaning:</b>The minimum number of pixels allowed when the VL model preprocesses images.</td>
 <td><code>int</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>max_pixels</code></td>
-<td>The maximum number of pixels allowed when the VL model preprocesses images.</td>
+<td><b>Meaning:</b>The maximum number of pixels allowed when the VL model preprocesses images.</td>
 <td><code>int</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>The device used for inference. Supports specifying specific card numbers:<ul>
+<td><b>Meaning:</b>The device used for inference. <br/>
+<b>Description:</b>
+Supports specifying specific card numbers:<ul>
 <li><b>CPU</b>: For example,<code>cpu</code> indicates using the CPU for inference;</li>
 <li><b>GPU</b>: For example,<code>gpu:0</code> indicates using the first GPU for inference;</li>
 <li><b>NPU</b>: For example,<code>npu:0</code> indicates using the first NPU for inference;</li>
@@ -485,44 +534,47 @@ If not set, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>enable_hpi</code></td>
-<td>Whether to enable high-performance inference.</td>
+<td><b>Meaning:</b>Whether to enable high-performance inference.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_tensorrt</code></td>
-<td>Whether to enable the TensorRT subgraph engine of Paddle Inference. If the model does not support acceleration via TensorRT, acceleration will not be used even if this flag is set.<br/>For PaddlePaddle version with CUDA 11.8, the compatible TensorRT version is 8.x (x&amp;gt;=6). It is recommended to install TensorRT 8.6.1.6.<br/>
+<td><b>Meaning:</b>Whether to enable the TensorRT subgraph engine of Paddle Inference. 
+If the model does not support acceleration via TensorRT, acceleration will not be used even if this flag is set.<br/>For PaddlePaddle version with CUDA 11.8, the compatible TensorRT version is 8.x (x&amp;gt;=6). It is recommended to install TensorRT 8.6.1.6.<br/>
 </td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>precision</code></td>
-<td>Computational precision, such as fp32, fp16.</td>
+<td><b>Meaning:</b>Computational precision, such as fp32, fp16.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>enable_mkldnn</code></td>
-<td>Whether to enable MKL-DNN accelerated inference. If MKL-DNN is not available or the model does not support acceleration via MKL-DNN, acceleration will not be used even if this flag is set.</td>
+<td><b>Meaning:</b>Whether to enable MKL-DNN accelerated inference. <br/>
+<b>Description:</b>
+If MKL-DNN is not available or the model does not support acceleration via MKL-DNN, acceleration will not be used even if this flag is set.</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>mkldnn_cache_capacity</code></td>
-<td>MKL-DNN cache capacity.</td>
+<td><b>Meaning:</b>MKL-DNN cache capacity.</td>
 <td><code>int</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>cpu_threads</code></td>
-<td>The number of threads used for inference on the CPU.</td>
+<td><b>Meaning:</b>The number of threads used for inference on the CPU.</td>
 <td><code>int</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>paddlex_config</code></td>
-<td>The file path for PaddleX pipeline configuration.</td>
+<td><b>Meaning:</b>The file path for PaddleX production line configuration.</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
@@ -633,19 +685,24 @@ The above Python script performs the following steps:
 <tbody>
 <tr>
 <td><code>layout_detection_model_name</code></td>
-<td>Name of the layout area detection and ranking model. If set to <code>None</code>, the default model of the pipeline will be used.</td>
+<td><b>Meaning:</b>Name of the layout area detection and ranking model. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the default model of the production line will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_dir</code></td>
-<td>Directory path of the layout area detection and ranking model. If set to <code>None</code>, the official model will be downloaded.</td>
+<td><b>Meaning:</b>Directory path of the layout area detection and ranking model. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_threshold</code></td>
-<td>Score threshold for the layout model.
+<td><b>Meaning:</b>Score threshold for the layout model. <br/>
+<b>Description:</b>
 <ul>
 <li><b>float</b>: Any floating-point number between <code>0-1</code>;</li>
 <li><b>dict</b>: <code>{0:0.1}</code> The key is the class ID, and the value is the threshold for that class;</li>
@@ -656,14 +713,17 @@ The above Python script performs the following steps:
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>Whether to use post-processing NMS for layout detection. If set to <code>None</code>, the parameter value initialized by the pipeline will be used.</td>
+<td><b>Meaning:</b>Whether to use post-processing NMS for layout detection. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the parameter value initialized by the production line will be used.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
 <td>
-Expansion coefficient for the detection box of the layout area detection model.
+<b>Meaning:</b>Expansion coefficient for the detection box of the layout area detection model. <br/>
+<b>Description:</b>
 <ul>
 <li><b>float</b>: Any floating-point number greater than <code>0</code></li>
 <li><b>Tuple[float,float]</b>: The respective expansion coefficients in the horizontal and vertical directions;</li>
@@ -675,7 +735,8 @@ Expansion coefficient for the detection box of the layout area detection model.
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code><ul>
-<td>Merging mode for the detection boxes output by the model in layout detection.
+<td><b>Meaning:</b>Merging mode for the detection boxes output by the model in layout detection. <br/>
+<b>Description:</b>
 <ul>
 <li><b>large</b> when set to large, it means that among the detection boxes output by the model, for overlapping and contained boxes, only the outermost largest box is retained, and the overlapping inner boxes are deleted;</li>
 <li><b>small</b>, when set to small, it means that among the detection boxes output by the model, for overlapping and contained boxes, only the innermost contained small box is retained, and the overlapping outer boxes are deleted;</li>
@@ -687,128 +748,161 @@ If set to <code>None</code>, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>vl_rec_model_name</code></td>
-<td>Name of the multimodal recognition model. If set to <code>None</code>, the default model will be used.</td>
+<td><b>Meaning:</b>Name of the multimodal recognition model.<br/>
+<b>Description:</b> If set to <code>None</code>, the default model will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_model_dir</code></td>
-<td>Directory path of the multimodal recognition model. If set to <code>None</code>, the official model will be downloaded.</td>
+<td><b>Meaning:</b>Directory path of the multimodal recognition model.<br/>
+<b>Description:</b> If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_backend</code></td>
-<td>Inference backend used by the multimodal recognition model.</td>
+<td><b>Meaning:</b>Inference backend used by the multimodal recognition model.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_server_url</code></td>
-<td>If the multimodal recognition model uses an inference service, this parameter is used to specify the server URL.</td>
+<td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the server URL.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_max_concurrency</code></td>
-<td>If the multimodal recognition model uses an inference service, this parameter is used to specify the maximum number of concurrent requests.</td>
+<td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the maximum number of concurrent requests.</td>
+<td><code>str|None</code></td>
+<td><code>None</code></td>
+</tr>
+<tr>
+<td><code>vl_rec_api_model_name</code></td>
+<td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the model name of the service.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>vl_rec_api_key</code></td>
-<td>If the multimodal recognition model uses an inference service, this parameter is used to specify the API key of the service.</td>
+<td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the API key of the service.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_name</code></td>
-<td>Name of the document orientation classification model. If set to <code>None</code>, the initialized default value will be used.</td>
+<td><b>Meaning:</b>Name of the document orientation classification model. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the initialized default value will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_orientation_classify_model_dir</code></td>
-<td>Directory path of the document orientation classification model. If set to <code>None</code>, the official model will be downloaded.</td>
+<td><b>Meaning:</b>Directory path of the document orientation classification model. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_name</code></td>
-<td>Name of the text image rectification model. If set to <code>None</code>, the initialized default value will be used.</td>
+<td><b>Meaning:</b>Name of the text image rectification model. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the initialized default value will be used.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>doc_unwarping_model_dir</code></td>
-<td>Directory path of the text image rectification model. If set to <code>None</code>, the official model will be downloaded.</td>
+<td><b>Meaning:</b>Directory path of the text image rectification model. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the official model will be downloaded.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>Whether to load and use the document orientation classification module. If set to <code>None</code>, the initialized default value will be used, which is initialized to<code>False</code>.</td>
+<td><b>Meaning:</b>Whether to load and use the document orientation classification module. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the initialized default value will be used, which is initialized to<code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>Whether to load and use the text image rectification module. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False.</td>
+<td><b>Meaning:</b>Whether to load and use the text image rectification module. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td>Whether to load and use the layout area detection and ranking module. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>True</code>.</td>
+<td><b>Meaning:</b>Whether to load and use the layout area detection and ranking module. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>True</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
-<td>Whether to use the chart parsing function. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td><b>Meaning:</b>Whether to use the chart parsing function. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>format_block_content</code></td>
-<td>Controls whether to format the <code>block_content</code> content within as Markdown. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as<code>False</code>.</td>
+<td><b>Meaning:</b>Controls whether to format the <code>block_content</code> content within as Markdown. <br/>
+<b>Description:</b>
+If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as<code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>merge_layout_blocks</code></td>
-<td>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as<code>True</code>.</td>
+<td><b>Meaning:</b>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns.<br/>
+<b>Description:</b> If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as<code>True</code>.</td>
 <td><code>bool|None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>markdown_ignore_labels</code></td>
-<td>Layout labels that need to be ignored in Markdown. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as <code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>.</td>
+<td><b>Meaning:</b>Layout labels that need to be ignored in Markdown.<br/>
+<b>Description:</b> If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as <code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>.</td>
 <td><code>list|None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_queues</code></td>
-<td>Used to control whether to enable internal queues. When set to <code>True</code>, data loading (such as rendering PDF pages as images), layout detection model processing, and VLM inference will be executed asynchronously in separate threads, with data passed through queues, thereby improving efficiency. This approach is particularly efficient for PDF documents with many pages or directories containing a large number of images or PDF files. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as <code>True</code>.</td>
+<td><b>Meaning:</b>Used to control whether to enable internal queues.<br/>
+<b>Description:</b> When set to <code>True</code>, data loading (such as rendering PDF pages as images), layout detection model processing, and VLM inference will be executed asynchronously in separate threads, with data passed through queues, thereby improving efficiency. This approach is particularly efficient for PDF documents with many pages or directories containing a large number of images or PDF files. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as <code>True</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_seal_recognition</code></td>
-<td>Whether to use the seal recognition function. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td><b>Meaning:</b>Whether to use the seal recognition function.<br/>
+<b>Description:</b> If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>use_ocr_for_image_block</code></td>
-<td>Whether to perform OCR on text within image blocks. If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td><b>Meaning:</b>Whether to perform OCR on text within image blocks.<br/>
+<b>Description:</b> If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
 <td><code>bool|None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>device</code></td>
-<td>The device used for inference. Supports specifying specific card numbers:<ul>
+<td><b>Meaning:</b>The device used for inference.<br/>
+<b>Description:</b> 
+Supports specifying specific card numbers:<ul>
 <li><b>CPU</b>: For example,<code>cpu</code> indicates using the CPU for inference;</li>
 <li><b>GPU</b>: For example,<code>gpu:0</code> indicates using the first GPU for inference;</li>
 <li><b>NPU</b>: For example,<code>npu:0</code> indicates using the first NPU for inference;</li>
@@ -823,44 +917,48 @@ If set to <code>None</code>, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>enable_hpi</code></td>
-<td>Whether to enable high-performance inference.</td>
+<td><b>Meaning:</b>Whether to enable high-performance inference.</td>
 <td><code>bool</code></td>
 <td><code>False</code></td>
 </tr>
 <tr>
 <td><code>use_tensorrt</code></td>
-<td>Whether to enable the TensorRT subgraph engine of Paddle Inference. If the model does not support acceleration via TensorRT, acceleration will not be used even if this flag is set.<br/>For PaddlePaddle version with CUDA 11.8, the compatible TensorRT version is 8.x (x&amp;gt;=6). It is recommended to install TensorRT 8.6.1.6.<br/>
+<td><b>Meaning:</b>Whether to enable the TensorRT subgraph engine of Paddle Inference.<br/>
+<b>Description:</b> 
+If the model does not support acceleration via TensorRT, acceleration will not be used even if this flag is set.<br/>For PaddlePaddle version with CUDA 11.8, the compatible TensorRT version is 8.x (x&amp;gt;=6). It is recommended to install TensorRT 8.6.1.6.<br/>
 </td>
 <td><code>bool</code></td>
 <td><code>False</code></td>
 </tr>
 <tr>
 <td><code>precision</code></td>
-<td>Computational precision, such as fp32, fp16.</td>
+<td><b>Meaning:</b>Computational precision, such as fp32, fp16.</td>
 <td><code>str</code></td>
 <td><code>"fp32"</code></td>
 </tr>
 <tr>
 <td><code>enable_mkldnn</code></td>
-<td>Whether to enable MKL-DNN accelerated inference. If MKL-DNN is not available or the model does not support acceleration via MKL-DNN, acceleration will not be used even if this flag is set.</td>
+<td><b>Meaning:</b>Whether to enable MKL-DNN accelerated inference.<br/> 
+<b>Description:</b> 
+If MKL-DNN is not available or the model does not support acceleration via MKL-DNN, acceleration will not be used even if this flag is set.</td>
 <td><code>bool</code></td>
 <td><code>True</code></td>
 </tr>
 <tr>
 <td><code>mkldnn_cache_capacity</code></td>
-<td>MKL-DNN cache capacity.</td>
+<td><b>Meaning:</b>MKL-DNN cache capacity.</td>
 <td><code>int</code></td>
 <td><code>10</code></td>
 </tr>
 <tr>
 <td><code>cpu_threads</code></td>
-<td>The number of threads used for inference on the CPU.</td>
+<td><b>Meaning:</b>The number of threads used for inference on the CPU.</td>
 <td><code>int</code></td>
 <td><code>8</code></td>
 </tr>
 <tr>
 <td><code>paddlex_config</code></td>
-<td>The file path for PaddleX pipeline configuration.</td>
+<td><b>Meaning:</b>The file path for PaddleX pipeline configuration.</td>
 <td><code>str</code></td>
 <td><code>None</code></td>
 <td></td>
@@ -882,7 +980,9 @@ If set to <code>None</code>, the initialized parameter value will be used.
 <tr>
 <tr>
 <td><code>input</code></td>
-<td>Data to be predicted, supporting multiple input types. Required.<ul>
+<td><b>Meaning:</b>Data to be predicted, supporting multiple input types. Required.<br/>
+<b>Description:</b> 
+<ul>
 <li><b>Python Var</b>: such as <code>numpy.ndarray</code> representing image data</li>
 <li><b>str</b>: such as the local path of an image file or PDF file: <code>/root/data/img.jpg</code>;<b>such as a URL link</b>, such as the network URL of an image file or PDF file:<a href="https://paddle-model-ecology.bj.bcebos.com/paddlex/imgs/demo_image/demo_paper.png">Example</a>;<b>such as a local directory</b>, which should contain the images to be predicted, such as the local path: <code>/root/data/</code>(Currently, prediction for directories containing PDF files is not supported. PDF files need to be specified with a specific file path)</li>
 <li><b>list</b>: List elements should be of the aforementioned data types, such as <code>[numpy.ndarray, numpy.ndarray]</code>, <code>["/root/data/img1.jpg", "/root/data/img2.jpg"]</code>, <code>["/root/data1", "/root/data2"].</code></li>
@@ -893,69 +993,83 @@ If set to <code>None</code>, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>use_doc_orientation_classify</code></td>
-<td>Whether to use the document orientation classification module during inference. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>Whether to use the document orientation classification module during inference. <br/>
+<b>Description:</b> 
+Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_doc_unwarping</code></td>
-<td>Whether to use the text image rectification module during inference. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>Whether to use the text image rectification module during inference. <br/>
+<b>Description:</b> 
+Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td>Whether to use the layout region detection and sorting module during inference. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>Whether to use the layout region detection and sorting module during inference.<br/>
+<b>Description:</b> 
+Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_chart_recognition</code></td>
-<td>Whether to use the chart parsing function. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>Whether to use the chart parsing function. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_seal_recognition</code></td>
-<td>Whether to use the seal recognition function. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>Whether to use the seal recognition function. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>use_ocr_for_image_block</code></td>
-<td>Whether to perform OCR on text within image blocks. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>Whether to perform OCR on text within image blocks. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_threshold</code></td>
-<td>The parameter meaning is basically the same as the instantiation parameter. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>The parameter meaning is basically the same as the instantiation parameter. <br/>
+<b>Description:</b> 
+Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>float|dict|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td>The parameter meaning is basically the same as the instantiation parameter. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>The parameter meaning is basically the same as the instantiation parameter. <br/>
+<b>Description:</b> 
+Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_unclip_ratio</code></td>
-<td>The parameter meaning is basically the same as the instantiation parameter. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>The parameter meaning is basically the same as the instantiation parameter. <br/>
+<b>Description:</b> 
+Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>float|Tuple[float,float]|dict|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code></td>
-<td>The parameter meaning is basically the same as the instantiation parameter. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>The parameter meaning is basically the same as the instantiation parameter. <br/>
+<b>Description:</b> 
+Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>str|dict|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
   <td><code>layout_shape_mode</code></td>
   <td>
-    Specifies the geometric representation mode for layout detection results. It defines how the boundaries of detected regions (e.g., text blocks, images, tables) are calculated and displayed.
-    Value descriptions:
+    <b>Meaning:</b>Specifies the geometric representation mode for layout detection results. It defines how the boundaries of detected regions (e.g., text blocks, images, tables) are calculated and displayed.<br/>
+    <b>Description:</b> Value descriptions:
     <ul>
       <li>
         <b>rect (rectangle)</b>:
@@ -986,73 +1100,76 @@ If set to <code>None</code>, the initialized parameter value will be used.
 </tr>
 <tr>
 <td><code>use_queues</code></td>
-<td>The parameter meaning is basically the same as the instantiation parameter. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>The parameter meaning is basically the same as the instantiation parameter.<br/>
+<b>Description:</b> Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>prompt_label</code></td>
-<td>The prompt type setting for the VL model, which takes effect only when <code>use_layout_detection=False</code>. The fillable parameters are <code>ocr</code>、<code>formula</code>、<code>table</code> and <code>chart</code>.</td>
+<td><b>Meaning:</b>The prompt type setting for the VL model, which takes effect only when <code>use_layout_detection=False</code>.</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>format_block_content</code></td>
-<td>The parameter meaning is basically the same as the instantiation parameter. Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
+<td><b>Meaning:</b>The parameter meaning is basically the same as the instantiation parameter. <br/>
+<b>Description:</b> 
+Setting it to <code>None</code> means using the instantiation parameter; otherwise, this parameter takes precedence.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>repetition_penalty</code></td>
-<td>The repetition penalty parameter used for VL model sampling.</td>
+<td><b>Meaning:</b>The repetition penalty parameter used for VL model sampling.</td>
 <td><code>float|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>temperature</code></td>
-<td>Temperature parameter used for VL model sampling.</td>
+<td><b>Meaning:</b>Temperature parameter used for VL model sampling.</td>
 <td><code>float|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>top_p</code></td>
-<td>Top-p parameter used for VL model sampling.</td>
+<td><b>Meaning:</b>Top-p parameter used for VL model sampling.</td>
 <td><code>float|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>min_pixels</code></td>
-<td>The minimum number of pixels allowed when the VL model preprocesses images.</td>
+<td><b>Meaning:</b>The minimum number of pixels allowed when the VL model preprocesses images.</td>
 <td><code>int|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>max_pixels</code></td>
-<td>The maximum number of pixels allowed when the VL model preprocesses images.</td>
+<td><b>Meaning:</b>The maximum number of pixels allowed when the VL model preprocesses images.</td>
 <td><code>int|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>max_new_tokens</code></td>
-<td>The maximum number of tokens generated by the VL model.</td>
+<td><b>Meaning:</b>The maximum number of tokens generated by the VL model.</td>
 <td><code>int|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>merge_layout_blocks</code></td>
-<td>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns.</td>
+<td><b>Meaning:</b>Control whether to merge the layout detection boxes for cross-column or staggered top and bottom columns.</td>
 <td><code>bool|None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>markdown_ignore_labels</code></td>
-<td>Layout labels that need to be ignored in Markdown.</td>
+<td><b>Meaning:</b>Layout labels that need to be ignored in Markdown.</td>
 <td><code>list|None</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>vlm_extra_args</code></td>
-<td>Additional configuration parameters for the VLM. The currently supported custom parameters are as follows:
+<td><b>Meaning:</b>Additional configuration parameters for the VLM. The currently supported custom parameters are as follows:
 <ul>
   <li><code>ocr_min_pixels</code>: Minimum resolution for OCR</li>
   <li><code>ocr_max_pixels</code>: Maximum resolution for OCR</li>
@@ -1265,9 +1382,13 @@ Additionally, it also supports obtaining visualized images and prediction result
 </tbody>
 </table>
 
-- The prediction result obtained through the `json` attribute is data of dict type, with relevant content consistent with that saved by calling the `save_to_json()` method.
-- The prediction result returned by the `img` attribute is data of dict type. The keys are `layout_det_res`, `overall_ocr_res`, `text_paragraphs_ocr_res`, `formula_res_region1`, `table_cell_img`, and `seal_res_region1`, with corresponding values being `Image.Image` objects: used to display visualized images of layout region detection, OCR, OCR text paragraphs, formulas, tables, and seal results, respectively. If optional modules are not used, the dict only contains `layout_det_res`.
-- The prediction result returned by the `markdown` attribute is data of dict type. The keys are `markdown_texts`, `markdown_images`, and `page_continuation_flags`, with corresponding values being markdown text, images displayed in Markdown (`Image.Image` objects), and a bool tuple used to identify whether the first element on the current page is the start of a paragraph and whether the last element is the end of a paragraph, respectively.</details>
+<ul>
+  <li>The prediction result obtained through the <code>json</code> attribute is data of dict type, with relevant content consistent with that saved by calling the <code>save_to_json()</code> method.</li>
+  <li>The prediction result returned by the <code>img</code> attribute is data of dict type. The keys are <code>layout_det_res</code>, <code>overall_ocr_res</code>, <code>text_paragraphs_ocr_res</code>, <code>formula_res_region1</code>, <code>table_cell_img</code>, and <code>seal_res_region1</code>, with corresponding values being <code>Image.Image</code> objects: used to display visualized images of layout region detection, OCR, OCR text paragraphs, formulas, tables, and seal results, respectively. If optional modules are not used, the dict only contains <code>layout_det_res</code>.</li>
+  <li>The prediction result returned by the <code>markdown</code> attribute is data of dict type. The keys are <code>markdown_texts</code>, <code>markdown_images</code>, and <code>page_continuation_flags</code>, with corresponding values being markdown text, images displayed in Markdown (<code>Image.Image</code> objects), and a bool tuple used to identify whether the first element on the current page is the start of a paragraph and whether the last element is the end of a paragraph, respectively.</li>
+</ul>
+
+</details>
 
 ## 3. Enhancing VLM Inference Performance Using Inference Acceleration Frameworks
 
@@ -1457,7 +1578,7 @@ Note that the PaddleOCR-VL service described in this section differs from the VL
 
 ### 4.1 Method 1: Deploy Using Docker Compose (Recommended)
 
-You can obtain the Compose file and the environment variables configuration file from [here](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/compose.yaml) and [here](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/.env), respectively, and download them to your local machine. Then, in the directory where the files were just downloaded, execute the following command to start the server, which will listen on port **8080** by default:
+You can obtain the Compose file and the environment variables configuration file from [here](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/accelerators/gpu/compose.yaml) and [here](https://github.com/PaddlePaddle/PaddleOCR/blob/main/deploy/paddleocr_vl_docker/accelerators/gpu/.env), respectively, and download them to your local machine. Then, in the directory where the files were just downloaded, execute the following command to start the server, which will listen on port **8080** by default:
 
 ```shell
 # Must be executed in the directory containing the compose.yaml and .env files
