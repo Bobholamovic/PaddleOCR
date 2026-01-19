@@ -46,6 +46,7 @@ Currently, PaddleOCR-VL offers four inference methods, with varying levels of su
     <th>HYGON DCU</th>
     <th>MetaX GPU</th>
     <th>Iluvatar GPU</th>
+    <th>Ascend NPU</th>
     <th>x64 CPU</th>
   </tr>
 </thead>
@@ -55,7 +56,8 @@ Currently, PaddleOCR-VL offers four inference methods, with varying levels of su
     <td>✅</td>
     <td>✅</td>
     <td>✅</td>
-    <td>🚧</td>
+    <td>✅</td>
+    <td>✅</td>
     <td>🚧</td>
     <td>✅</td>
   </tr>
@@ -66,11 +68,13 @@ Currently, PaddleOCR-VL offers four inference methods, with varying levels of su
     <td>✅</td>
     <td>🚧</td>
     <td>🚧</td>
+    <td>✅</td>
     <td>❌</td>
   </tr>
   <tr style="text-align: center;">
     <td>SGLang</td>
     <td>✅</td>
+    <td>🚧</td>
     <td>🚧</td>
     <td>🚧</td>
     <td>🚧</td>
@@ -82,7 +86,8 @@ Currently, PaddleOCR-VL offers four inference methods, with varying levels of su
     <td>✅</td>
     <td>✅</td>
     <td>🚧</td>
-    <td>🚧</td>
+    <td>✅</td>
+    <td>✅</td>
     <td>🚧</td>
     <td>❌</td>
   </tr>
@@ -109,6 +114,8 @@ Since different hardware requires different dependencies, if your hardware meets
 | KUNLUNXIN XPU  | [PaddleOCR-VL XPU Environment Configuration Tutorial](./PaddleOCR-VL-XPU.en.md)                                              |
 | HYGON DCU      | [PaddleOCR-VL DCU Environment Configuration Tutorial](./PaddleOCR-VL-DCU.en.md)                                              |
 | MetaX GPU      | [PaddleOCR-VL MetaX GPU Environment Configuration Tutorial](./PaddleOCR-VL-MetaX-GPU.en.md)                                              |
+| Iluvatar GPU        | [PaddleOCR-VL Iluvatar GPU Environment Configuration Tutorial](./PaddleOCR-VL-Iluvatar-GPU.en.md) |
+| Ascend NPU        | [PaddleOCR-VL NPU Environment Configuration Tutorial](./PaddleOCR-VL-NPU.en.md) |
 
 > TIP:
 > For example, if you are using an RTX 50 series GPU that meets the device requirements for both PaddlePaddle and vLLM inference methods, please refer to the [PaddleOCR-VL NVIDIA Blackwell Architecture GPU Environment Configuration Tutorial](./PaddleOCR-VL-NVIDIA-Blackwell.en.md) to complete the environment configuration before using PaddleOCR-VL.
@@ -172,14 +179,10 @@ Run the following commands to complete the installation:
 # The following command installs the PaddlePaddle version for CUDA 12.6. For other CUDA versions and the CPU version, please refer to https://www.paddlepaddle.org.cn/install/quick?docurl=/documentation/docs/zh/develop/install/pip/linux-pip.html
 python -m pip install paddlepaddle-gpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
 python -m pip install -U "paddleocr[doc-parser]"
-# For Linux systems, please directly copy and execute the following commands without modifying the cuda version in the link:
-python -m pip install https://paddle-whl.bj.bcebos.com/nightly/cu126/safetensors/safetensors-0.6.2.dev0-cp38-abi3-linux_x86_64.whl
-# For Windows systems, directly copy and execute the following command:
-python -m pip install https://xly-devops.cdn.bcebos.com/safetensors-nightly/safetensors-0.6.2.dev0-cp38-abi3-win_amd64.whl
 ```
 
 > IMPORTANT:
-> **Please ensure that you install PaddlePaddle framework version 3.2.1 or above, along with the special version of safetensors.** For macOS users, please use Docker to set up the environment.
+> **Please ensure that you install PaddlePaddle framework version 3.2.1 or above.** For macOS users, please use Docker to set up the environment.
 
 ## 2. Quick Start
 
@@ -326,7 +329,7 @@ If not set, the official model will be downloaded.</td>
 <tr>
 <td><code>vl_rec_max_concurrency</code></td>
 <td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the maximum number of concurrent requests.</td>
-<td><code>str</code></td>
+<td><code>int</code></td>
 <td></td>
 </tr>
 <tr>
@@ -795,7 +798,7 @@ If set to <code>None</code>, the initialized parameter value will be used.
 <tr>
 <td><code>vl_rec_max_concurrency</code></td>
 <td><b>Meaning:</b>If the multimodal recognition model uses an inference service, this parameter is used to specify the maximum number of concurrent requests.</td>
-<td><code>str|None</code></td>
+<td><code>int|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>

@@ -328,7 +328,7 @@ class PaddleOCRVLCLISubcommandExecutor(PipelineCLISubcommandExecutor):
         )
         subparser.add_argument(
             "--vl_rec_max_concurrency",
-            type=str,
+            type=int,
             help="Maximum concurrency for making VLM requests.",
         )
         subparser.add_argument(
