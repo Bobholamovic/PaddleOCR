@@ -2110,21 +2110,21 @@ Below are the API reference and examples of multi-language service invocation:
 <td>No</td>
 </tr>
 <tr>
-<td><code>concatenatePages</code></td>
+<td><code>restructurePages</code></td>
 <td><code>boolean</code></td>
-<td>Whether to concatenate results across multiple pages. The default is <code>false</code>.</td>
+<td>Whether to restructure results across multiple pages. The default is <code>false</code>.</td>
 <td>No</td>
 </tr>
 <tr>
-<td><code>mergeTable</code></td>
+<td><code>mergeTables</code></td>
 <td><code>boolean</code></td>
-<td>Please refer to the description of the <code>merge_table</code> parameter in the <code>concatenate_pages</code> method of the PaddleOCR-VL object. Valid only when <code>concatenatePages</code> is <code>true</code>.</td>
+<td>Please refer to the description of the <code>merge_tables</code> parameter in the <code>restructure_pages</code> method of the PaddleOCR-VL object. Valid only when <code>restructurePages</code> is <code>true</code>.</td>
 <td>No</td>
 </tr>
 <tr>
-<td><code>titleLevel</code></td>
+<td><code>relevelTitles</code></td>
 <td><code>boolean</code></td>
-<td>Please refer to the description of the <code>title_level</code> parameter in the <code>concatenate_pages</code> method of the PaddleOCR-VL object. Valid only when <code>concatenatePages</code> is <code>true</code>.</td>
+<td>Please refer to the description of the <code>relevel_titles</code> parameter in the <code>restructure_pages</code> method of the PaddleOCR-VL object. Valid only when <code>restructurePages</code> is <code>true</code>.</td>
 <td>No</td>
 </tr>
 <tr>
@@ -2221,10 +2221,10 @@ Below are the API reference and examples of multi-language service invocation:
 </tbody>
 </table>
 <ul>
-  <li><b><code>concatenatePages</code></b></li>
+  <li><b><code>restructurePages</code></b></li>
 </ul>
-<p>Concatenate results across multiple pages.</p>
-<p><code>POST /concatenate-pages</code></p>
+<p>Restructure results across multiple pages.</p>
+<p><code>POST /restructure-pages</code></p>
 
 <ul>
   <li>The request body has the following properties:</li>
@@ -2247,15 +2247,21 @@ Below are the API reference and examples of multi-language service invocation:
       <td>Yes</td>
     </tr>
     <tr>
-    <td><code>mergeTable</code></td>
+    <td><code>mergeTables</code></td>
     <td><code>boolean</code></td>
-    <td>Whether to merge tables across pages.</td>
+    <td>Please refer to the description of the <code>merge_tables</code> parameter in the <code>restructure_pages</code> method of the PaddleOCR-VL object.</td>
     <td>No</td>
     </tr>
     <tr>
-    <td><code>titleLevel</code></td>
+    <td><code>relevelTitles</code></td>
     <td><code>boolean</code></td>
-    <td>Whether to assign title levels.</td>
+    <td>Please refer to the description of the <code>relevel_titles</code> parameter in the <code>restructure_pages</code> method of the PaddleOCR-VL object.</td>
+    <td>No</td>
+    </tr>
+    <tr>
+    <td><code>concatenatePages</code></td>
+    <td><code>boolean</code></td>
+    <td>Please refer to the description of the <code>concatenate_pages</code> parameter in the <code>restructure_pages</code> method of the PaddleOCR-VL object.</td>
     <td>No</td>
     </tr>
     <tr>
@@ -2312,7 +2318,7 @@ Below are the API reference and examples of multi-language service invocation:
     <tr>
       <td><code>layoutParsingResults</code></td>
       <td><code>array</code></td>
-      <td>The concatenated layout parsing results. For the fields that every element contains, please refer to the description of the result returned by the <code>infer</code> operation (excluding visualization result images and intermediate images).</td>
+      <td>The restructured layout parsing results. For the fields that every element contains, please refer to the description of the result returned by the <code>infer</code> operation (excluding visualization result images and intermediate images).</td>
     </tr>
   </tbody>
 </table>
@@ -2356,22 +2362,23 @@ for i, res in enumerate(result["layoutParsingResults"]):
 
 payload = {
     "pages": pages,
+    "concatenatePages": True,
 }
 
-response = requests.post(BASE_URL + "/concatenate-pages", json=payload)
+response = requests.post(BASE_URL + "/restructure-pages", json=payload)
 assert response.status_code == 200, (response.status_code, response.text)
 
 result = response.json()["result"]
-for i, res in enumerate(result["layoutParsingResults"]):
-    print(res["prunedResult"])
-    md_dir = pathlib.Path(f"markdown_{i}")
-    md_dir.mkdir(exist_ok=True)
-    (md_dir / "doc.md").write_text(res["markdown"]["text"])
-    for img_path, img in res["markdown"]["images"].items():
-        img_path = md_dir / img_path
-        img_path.parent.mkdir(parents=True, exist_ok=True)
-        img_path.write_bytes(base64.b64decode(img))
-    print(f"Markdown document saved at {md_dir / 'doc.md'}")
+res = result["layoutParsingResults"][0]
+print(res["prunedResult"])
+md_dir = pathlib.Path("markdown")
+md_dir.mkdir(exist_ok=True)
+(md_dir / "doc.md").write_text(res["markdown"]["text"])
+for img_path, img in res["markdown"]["images"].items():
+    img_path = md_dir / img_path
+    img_path.parent.mkdir(parents=True, exist_ok=True)
+    img_path.write_bytes(base64.b64decode(img))
+print(f"Markdown document saved at {md_dir / 'doc.md'}")
 </code></pre></details>
 
 <details><summary>C++</summary>
