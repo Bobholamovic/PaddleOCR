@@ -246,6 +246,13 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <td></td>
 </tr>
 <tr>
+<td><code>pipeline_version</code></td>
+<td><b>含义：</b>指定产线版本。<br/>
+<b>说明：</b>当前可选值为<code>"v1"</code>和<code>"v1.5"</code>。</td>
+<td><code>str</code></td>
+<td>"v1.5"</td>
+</tr>
+<tr>
 <td><code>layout_detection_model_name</code></td>
 <td><b>含义：</b>版面区域检测排序模型名称。<br/>
 <b>说明：</b>如果不设置，将会使用默认模型。</td>
@@ -399,6 +406,20 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <td></td>
 </tr>
 <tr>
+<td><code>use_seal_recognition</code></td>
+<td><b>含义：</b>是否使用印章识别功能。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><code>bool</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>use_ocr_for_image_block</code></td>
+<td><b>含义：</b>是否对图片中的文字进行识别。<br/>
+<b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><code>bool</code></td>
+<td></td>
+</tr>
+<tr>
 <td><code>format_block_content</code></td>
 <td><b>含义：</b>控制是否将 <code>block_content</code> 中的内容格式化为Markdown格式。<br/>
 <b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
@@ -417,20 +438,6 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False
 <td><b>含义：</b>需要在Markdown中忽略的版面标签。<br/>
 <b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>。</td>
 <td><code>str</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>use_seal_recognition</code></td>
-<td><b>含义：</b>是否使用印章识别功能。<br/>
-<b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
-<td><code>bool</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>use_ocr_for_image_block</code></td>
-<td><b>含义：</b>是否对图片中的文字进行识别。<br/>
-<b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
-<td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
@@ -680,6 +687,13 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 </thead>
 <tbody>
 <tr>
+<td><code>pipeline_version</code></td>
+<td><b>含义：</b>指定产线版本。<br/>
+<b>说明：</b>当前可选值为<code>"v1"</code>和<code>"v1.5"</code>。</td>
+<td><code>str</code></td>
+<td>"v1.5"</td>
+</tr>
+<tr>
 <td><code>layout_detection_model_name</code></td>
 <td><b>含义：</b>版面区域检测排序模型名称。<br/>
 <b>说明：</b>如果设置为<code>None</code>，将会使用默认模型。</td>
@@ -841,6 +855,20 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 <td><code>None</code></td>
 </tr>
 <tr>
+<td><code>use_seal_recognition</code></td>
+<td><b>含义：</b>是否使用印章识别功能。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><code>bool|None</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>use_ocr_for_image_block</code></td>
+<td><b>含义：</b>是否对图片中的文字进行识别。<br/>
+<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
+<td><code>bool|None</code></td>
+<td></td>
+</tr>
+<tr>
 <td><code>format_block_content</code></td>
 <td><b>含义：</b>控制是否将 <code>block_content</code> 中的内容格式化为Markdown格式。<br/>
 <b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
@@ -867,20 +895,6 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 <b>说明：</b>当设置为 <code>True</code> 时，数据加载（如将 PDF 页面渲染为图像）、版面检测模型处理以及 VLM 推理将分别在独立线程中异步执行，通过队列传递数据，从而提升效率。对于页数较多的 PDF 文档，或是包含大量图像或 PDF 文件的目录，这种方式尤其高效。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
-</tr>
-<tr>
-<td><code>use_seal_recognition</code></td>
-<td><b>含义：</b>是否使用印章识别功能。<br/>
-<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
-<td><code>bool|None</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>use_ocr_for_image_block</code></td>
-<td><b>含义：</b>是否对图片中的文字进行识别。<br/>
-<b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>False</code>。</td>
-<td><code>bool|None</code></td>
-<td></td>
 </tr>
 <tr>
 <td><code>device</code></td>
@@ -1575,25 +1589,27 @@ paddleocr doc_parser \
     --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL-1.5'
 ```
 
-硅基流动平台：
+硅基流动平台（目前只支持 PaddleOCR-VL-0.9B，即 v1 版本模型）：
 
 ```shell
 paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
+    --pipeline_version v1 \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url https://api.siliconflow.cn/v1 \
-    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL-1.5' \
+    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL' \
     --vl_rec_api_key xxxxxx
 ```
 
-Novita AI 平台：
+Novita AI 平台（目前只支持 PaddleOCR-VL-0.9B，即 v1 版本模型）：
 
 ```shell
 paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
+    --pipeline_version v1 \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url https://api.novita.ai/openai \
-    --vl_rec_api_model_name 'paddlepaddle/paddleocr-vl-1.5' \
+    --vl_rec_api_model_name 'paddlepaddle/paddleocr-vl' \
     --vl_rec_api_key xxxxxx
 ```
 
@@ -1611,30 +1627,32 @@ pipeline = PaddleOCRVL(vl_rec_backend="vllm-server", vl_rec_server_url="http://l
 
 ```python
 pipeline = PaddleOCRVL(
-    vl_rec_backend="vllm-server", 
+    vl_rec_backend="vllm-server",
     vl_rec_server_url="http://localhost:8000/v1",
     vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL-1.5",
 )
 ```
 
-硅基流动平台：
+硅基流动平台（目前只支持 PaddleOCR-VL-0.9B，即 v1 版本模型）：
 
 ```python
 pipeline = PaddleOCRVL(
+    pipeline_version="v1",
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="https://api.siliconflow.cn/v1",
-    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL-1.5",
+    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL",
     vl_rec_api_key="xxxxxx",
 )
 ```
 
-Novita AI 平台：
+Novita AI 平台（目前只支持 PaddleOCR-VL-0.9B，即 v1 版本模型）：
 
 ```python
 pipeline = PaddleOCRVL(
+    pipeline_version="v1",
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="https://api.novita.ai/openai",
-    vl_rec_api_model_name="paddlepaddle/paddleocr-vl-1.5",
+    vl_rec_api_model_name="paddlepaddle/paddleocr-vl",
     vl_rec_api_key="xxxxxx",
 )
 ```

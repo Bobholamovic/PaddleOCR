@@ -243,6 +243,15 @@ If not set, the inference results will not be saved locally.</td>
 <td></td>
 </tr>
 <tr>
+  <td><code>pipeline_version</code></td>
+  <td>
+    <b>Meaning:</b> Specifies the pipeline version.<br/>
+    <b>Description:</b> The currently available values are <code>"v1"</code> and <code>"v1.5"</code>.
+  </td>
+  <td><code>str</code></td>
+  <td>"v1.5"</td>
+</tr>
+<tr>
 <td><code>layout_detection_model_name</code></td>
 <td><b>Meaning:</b>Name of the layout area detection and ranking model.<br/>
 <b>Description:</b>
@@ -406,6 +415,20 @@ If not set, the initialized default value will be used, which is initialized to 
 <td></td>
 </tr>
 <tr>
+<td><code>use_seal_recognition</code></td>
+<td><b>Meaning:</b>Whether to use the seal recognition function.<br/>
+<b>Description:</b> If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
+<td><code>bool</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>use_ocr_for_image_block</code></td>
+<td><b>Meaning:</b>Whether to perform OCR on text within image blocks.<br/>
+<b>Description:</b> If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
+<td><code>bool</code></td>
+<td></td>
+</tr>
+<tr>
 <td><code>format_block_content</code></td>
 <td><b>Meaning:</b>Controls whether to format the <code>block_content</code> content within as Markdown. <br/>
 <b>Description:</b>
@@ -425,20 +448,6 @@ If not set, the initialized default value will be used, which defaults to initia
 <td><b>Meaning:</b>Layout labels that need to be ignored in Markdown.<br/>
 <b>Description:</b> If not set, the initialized default value will be used, which defaults to initialization as<code>['number','footnote','header','header_image','footer','footer_image','aside_text']</code>.</td>
 <td><code>str</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>use_seal_recognition</code></td>
-<td><b>Meaning:</b>Whether to use the seal recognition function.<br/>
-<b>Description:</b> If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
-<td><code>bool</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>use_ocr_for_image_block</code></td>
-<td><b>Meaning:</b>Whether to perform OCR on text within image blocks.<br/>
-<b>Description:</b> If not set, the initialized default value will be used, which defaults to initialization as <code>False</code>.</td>
-<td><code>bool</code></td>
 <td></td>
 </tr>
 <tr>
@@ -699,6 +708,15 @@ The above Python script performs the following steps:
 </thead>
 <tbody>
 <tr>
+  <td><code>pipeline_version</code></td>
+  <td>
+    <b>Meaning:</b> Specifies the pipeline version.<br/>
+    <b>Description:</b> The currently available values are <code>"v1"</code> and <code>"v1.5"</code>.
+  </td>
+  <td><code>str</code></td>
+  <td>"v1.5"</td>
+</tr>
+<tr>
 <td><code>layout_detection_model_name</code></td>
 <td><b>Meaning:</b>Name of the layout area detection and ranking model. <br/>
 <b>Description:</b>
@@ -870,6 +888,20 @@ If set to <code>None</code>, the initialized default value will be used, which i
 <td><code>None</code></td>
 </tr>
 <tr>
+<td><code>use_seal_recognition</code></td>
+<td><b>Meaning:</b>Whether to use the seal recognition function.<br/>
+<b>Description:</b> If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td><code>bool|None</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>use_ocr_for_image_block</code></td>
+<td><b>Meaning:</b>Whether to perform OCR on text within image blocks.<br/>
+<b>Description:</b> If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
+<td><code>bool|None</code></td>
+<td></td>
+</tr>
+<tr>
 <td><code>format_block_content</code></td>
 <td><b>Meaning:</b>Controls whether to format the <code>block_content</code> content within as Markdown. <br/>
 <b>Description:</b>
@@ -898,20 +930,6 @@ If set to <code>None</code>, the initialized default value will be used, which d
 <b>Description:</b> When set to <code>True</code>, data loading (such as rendering PDF pages as images), layout detection model processing, and VLM inference will be executed asynchronously in separate threads, with data passed through queues, thereby improving efficiency. This approach is particularly efficient for PDF documents with many pages or directories containing a large number of images or PDF files. If set to <code>None</code>, the initialized default value will be used, which defaults to initialization as <code>True</code>.</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
-</tr>
-<tr>
-<td><code>use_seal_recognition</code></td>
-<td><b>Meaning:</b>Whether to use the seal recognition function.<br/>
-<b>Description:</b> If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
-<td><code>bool|None</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>use_ocr_for_image_block</code></td>
-<td><b>Meaning:</b>Whether to perform OCR on text within image blocks.<br/>
-<b>Description:</b> If set to <code>None</code>, the initialized default value will be used, which is initialized to <code>False</code>.</td>
-<td><code>bool|None</code></td>
-<td></td>
 </tr>
 <tr>
 <td><code>device</code></td>
@@ -1530,25 +1548,27 @@ paddleocr doc_parser \
     --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL-1.5'
 ```
 
-SiliconFlow platform:
+SiliconFlow platform (currently only PaddleOCR-VL-0.9B is supported, i.e., the v1 model):
 
 ```shell
 paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
+    --pipeline_version v1 \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url https://api.siliconflow.cn/v1 \
-    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL-1.5' \
+    --vl_rec_api_model_name 'PaddlePaddle/PaddleOCR-VL' \
     --vl_rec_api_key xxxxxx
 ```
 
-Novita AI platform:
+Novita AI platform (currently only PaddleOCR-VL-0.9B is supported, i.e., the v1 model):
 
 ```shell
 paddleocr doc_parser \
     --input paddleocr_vl_demo.png \
+    --pipeline_version v1 \
     --vl_rec_backend vllm-server \
     --vl_rec_server_url https://api.novita.ai/openai \
-    --vl_rec_api_model_name 'paddlepaddle/paddleocr-vl-1.5' \
+    --vl_rec_api_model_name 'paddlepaddle/paddleocr-vl' \
     --vl_rec_api_key xxxxxx
 ```
 
@@ -1572,24 +1592,26 @@ pipeline = PaddleOCRVL(
 )
 ```
 
-SiliconFlow platform:
+SiliconFlow platform (currently only PaddleOCR-VL-0.9B is supported, i.e., the v1 model):
 
 ```python
 pipeline = PaddleOCRVL(
+    pipeline_version="v1",
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="https://api.siliconflow.cn/v1",
-    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL-1.5",
+    vl_rec_api_model_name="PaddlePaddle/PaddleOCR-VL",
     vl_rec_api_key="xxxxxx",
 )
 ```
 
-Novita AI platform:
+Novita AI platform (currently only PaddleOCR-VL-0.9B is supported, i.e., the v1 model):
 
 ```python
 pipeline = PaddleOCRVL(
+    pipeline_version="v1",
     vl_rec_backend="vllm-server", 
     vl_rec_server_url="https://api.novita.ai/openai",
-    vl_rec_api_model_name="paddlepaddle/paddleocr-vl-1.5",
+    vl_rec_api_model_name="paddlepaddle/paddleocr-vl",
     vl_rec_api_key="xxxxxx",
 )
 ```

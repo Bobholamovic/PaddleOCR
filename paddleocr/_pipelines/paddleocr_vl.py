@@ -22,12 +22,15 @@ from .base import PaddleXPipelineWrapper, PipelineCLISubcommandExecutor
 from .utils import create_config_from_structure
 
 
+_AVAILABLE_PIPELINE_VERSIONS = ["v1", "v1.5"]
+_DEFAULT_PIPELINE_VERSION = "v1.5"
 _SUPPORTED_VL_BACKENDS = ["native", "vllm-server", "sglang-server", "fastdeploy-server"]
 
 
 class PaddleOCRVL(PaddleXPipelineWrapper):
     def __init__(
         self,
+        pipeline_version=_DEFAULT_PIPELINE_VERSION,
         layout_detection_model_name=None,
         layout_detection_model_dir=None,
         layout_threshold=None,
@@ -49,14 +52,19 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
         use_doc_unwarping=None,
         use_layout_detection=None,
         use_chart_recognition=None,
+        use_seal_recognition=None,
+        use_ocr_for_image_block=None,
         format_block_content=None,
         merge_layout_blocks=None,
         markdown_ignore_labels=None,
         use_queues=None,
-        use_seal_recognition=None,
-        use_ocr_for_image_block=None,
         **kwargs,
     ):
+        if pipeline_version not in _AVAILABLE_PIPELINE_VERSIONS:
+            raise ValueError(
+                f"Invalid pipeline version: {pipeline_version}. Supported versions are {_AVAILABLE_PIPELINE_VERSIONS}."
+            )
+
         if vl_rec_backend is not None and vl_rec_backend not in _SUPPORTED_VL_BACKENDS:
             raise ValueError(
                 f"Invalid backend for the VL recognition module: {vl_rec_backend}. Supported values are {_SUPPORTED_VL_BACKENDS}."
@@ -64,14 +72,21 @@ class PaddleOCRVL(PaddleXPipelineWrapper):
 
         params = locals().copy()
         params.pop("self")
+        params.pop("pipeline_version")
         params.pop("kwargs")
         self._params = params
+        self.pipeline_version = pipeline_version
 
         super().__init__(**kwargs)
 
     @property
     def _paddlex_pipeline_name(self):
-        return "PaddleOCR-VL"
+        if self.pipeline_version == "v1":
+            return "PaddleOCR-VL"
+        elif self.pipeline_version == "v1.5":
+            return "PaddleOCR-VL-1.5"
+        else:
+            raise AssertionError(f"Unknown pipeline version: {self.pipeline_version}")
 
     def predict_iter(
         self,
@@ -275,6 +290,13 @@ class PaddleOCRVLCLISubcommandExecutor(PipelineCLISubcommandExecutor):
         add_simple_inference_args(subparser)
 
         subparser.add_argument(
+            "--pipeline_version",
+            type=str,
+            default=_DEFAULT_PIPELINE_VERSION,
+            choices=_AVAILABLE_PIPELINE_VERSIONS,
+        )
+
+        subparser.add_argument(
             "--layout_detection_model_name",
             type=str,
             help="Name of the layout detection model.",
@@ -384,6 +406,16 @@ class PaddleOCRVLCLISubcommandExecutor(PipelineCLISubcommandExecutor):
             help="Whether to use chart recognition.",
         )
         subparser.add_argument(
+            "--use_seal_recognition",
+            type=str2bool,
+            help="Whether to use seal recognition.",
+        )
+        subparser.add_argument(
+            "--use_ocr_for_image_block",
+            type=str2bool,
+            help="Whether to use OCR for image blocks.",
+        )
+        subparser.add_argument(
             "--format_block_content",
             type=str2bool,
             help="Whether to format block content to Markdown.",
@@ -404,16 +436,6 @@ class PaddleOCRVLCLISubcommandExecutor(PipelineCLISubcommandExecutor):
             "--use_queues",
             type=str2bool,
             help="Whether to use queues for asynchronous processing.",
-        )
-        subparser.add_argument(
-            "--use_seal_recognition",
-            type=str2bool,
-            help="Whether to use seal recognition.",
-        )
-        subparser.add_argument(
-            "--use_ocr_for_image_block",
-            type=str2bool,
-            help="Whether to use OCR for image blocks.",
         )
 
         subparser.add_argument(
