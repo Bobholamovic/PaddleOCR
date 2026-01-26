@@ -1706,9 +1706,9 @@ PaddleOCR 会将来自单张或多张输入图像中的子图分组并对服务�
 **NVIDIA RTX 3060**
 
 - **服务端**
-    - vLLM：`gpu-memory-utilization: 0.8`
+    - vLLM：`gpu-memory-utilization: 0.7`
     - FastDeploy：
-        - `gpu-memory-utilization: 0.8`
+        - `gpu-memory-utilization: 0.7`
         - `max-concurrency: 2048`
 
 ## 4. 服务化部署

@@ -1665,9 +1665,9 @@ The following configurations are for scenarios with a 1:1 client-to-VLM inferenc
 **NVIDIA RTX 3060**
 
 - **Server-Side**
-    - vLLM: `gpu-memory-utilization: 0.8`
+    - vLLM: `gpu-memory-utilization: 0.7`
     - FastDeploy: 
-        - `gpu-memory-utilization: 0.8`
+        - `gpu-memory-utilization: 0.7`
         - `max-concurrency: 2048`
 
 ## 4. Service Deployment
