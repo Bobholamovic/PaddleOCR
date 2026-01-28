@@ -8,6 +8,17 @@ ENV PIP_NO_CACHE_DIR=0
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        fontconfig \
+        fonts-dejavu-core \
+        fonts-liberation \
+        fonts-noto-cjk \
+        fonts-wqy-microhei \
+        fonts-freefont-ttf \
+    && fc-cache -fv \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN python -m pip install https://paddle-model-ecology.bj.bcebos.com/paddlex/PaddleX3.0/deploy/hardware/whl/paddlepaddle_xpu-0.0.0-cp310-cp310-linux_x86_64.whl
 
 ARG PADDLEOCR_VERSION=">=3.4.0,<3.5"

@@ -8,6 +8,23 @@ ENV PIP_NO_CACHE_DIR=0
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
+RUN yum install -y \
+        fontconfig \
+        dejavu-sans-fonts \
+        dejavu-serif-fonts \
+        liberation-fonts \
+        liberation-mono-fonts \
+        liberation-sans-fonts \
+        liberation-serif-fonts \
+        google-noto-cjk-fonts \
+        wqy-microhei-fonts \
+        gnu-free-fonts-common \
+        gnu-free-mono-fonts \
+        gnu-free-sans-fonts \
+        gnu-free-serif-fonts \
+    && fc-cache -fv \
+    && yum clean all
+
 RUN python -m pip install paddlepaddle-dcu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/dcu/
 
 ARG PADDLEOCR_VERSION=">=3.4.0,<3.5"

@@ -10,6 +10,18 @@ RUN apt-get update \
     && apt-get install -y libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libgl1 \
+    && apt-get install -y --no-install-recommends \
+        fontconfig \
+        fonts-dejavu-core \
+        fonts-liberation \
+        fonts-noto-cjk \
+        fonts-wqy-microhei \
+        fonts-freefont-ttf \
+    && fc-cache -fv \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN python -m pip install paddlepaddle-gpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
 
 ARG PADDLEOCR_VERSION=">=3.4.0,<3.5"

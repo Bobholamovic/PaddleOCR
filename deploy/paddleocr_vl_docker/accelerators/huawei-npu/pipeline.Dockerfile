@@ -23,6 +23,17 @@ ENV PIP_NO_CACHE_DIR=0
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        fontconfig \
+        fonts-dejavu-core \
+        fonts-liberation \
+        fonts-noto-cjk \
+        fonts-wqy-microhei \
+        fonts-freefont-ttf \
+    && fc-cache -fv \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN python -m pip install paddlepaddle==3.2.0 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/ \
     && python -m pip install paddle-custom-npu==3.2.0 -i https://www.paddlepaddle.org.cn/packages/stable/npu/
 
