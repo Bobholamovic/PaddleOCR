@@ -15,12 +15,12 @@ show_usage() {
 Usage: $(basename "$0") [OPTIONS]
 
 Options:
-  --device-type <type>      Device type (nvidia-gpu|nvidia-gpu-sm120|hygon-dcu|kunlunxin-xpu|metax-gpu|iluvatar-gpu|huawei-npu) [default: nvidia-gpu]
+  --device-type <type>      Device type (nvidia-gpu|nvidia-gpu-sm120|hygon-dcu|kunlunxin-xpu|metax-gpu|iluvatar-gpu|huawei-npu) [default: ${device_type}]
   --offline                 Build offline version
-  --ppocr-version <ver>     PaddleOCR version [default: 3.4.0]
-  --paddlex-version <ver>   PaddleX version [default: 3.4.0]
-  --platform <platform>     Build platform [default: linux/amd64]
-  --action <action>         Post-build action: load|push|tar|none [default: load]
+  --ppocr-version <ver>     PaddleOCR version [default: ${paddleocr_version}]
+  --pdx-version <ver>       PaddleX version [default: ${paddlex_version}]
+  --platform <platform>     Build platform [default: ${platform}]
+  --action <action>         Post-build action: load|push|tar|none [default: ${action}]
                             load: Load to local Docker
                             push: Push to image registry
                             tar: Export as tar file
@@ -67,9 +67,9 @@ while [[ $# -gt 0 ]]; do
             shift
             shift
             ;;
-        --paddlex-version)
+        --pdx-version)
             [ -z "$2" ] && {
-                echo "Error: '--paddlex-version' requires a value" >&2
+                echo "Error: '--pdx-version' requires a value" >&2
                 exit 2
             }
             paddlex_version="$2"
