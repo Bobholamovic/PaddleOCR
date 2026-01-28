@@ -3,7 +3,7 @@
 ARG BACKEND=fastdeploy
 
 
-FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-fastdeploy-metax:2.3.0 AS base-fastdeploy
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-fastdeploy-metax-gpu:2.3.0 AS base-fastdeploy
 
 
 FROM base-${BACKEND}

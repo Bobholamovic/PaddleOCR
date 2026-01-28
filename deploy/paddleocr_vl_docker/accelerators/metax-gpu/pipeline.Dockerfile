@@ -1,6 +1,6 @@
 # TODO: Allow regular users
 
-FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-paddle-metax:3.3.0
+FROM ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddlex-paddle-metax-gpu:3.3.0
 
 ENV DEBIAN_FRONTEND=noninteractive
 

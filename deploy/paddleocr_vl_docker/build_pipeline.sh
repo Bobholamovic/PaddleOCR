@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-device_type='gpu'
+device_type='nvidia-gpu'
 build_for_offline='false'
 paddleocr_version='3.4.0'
 paddlex_version='3.4.0'
@@ -15,7 +15,7 @@ show_usage() {
 Usage: $(basename "$0") [OPTIONS]
 
 Options:
-  --device-type <type>      Device type (gpu|sm120|dcu|xpu|metax|iluvatar|npu) [default: gpu]
+  --device-type <type>      Device type (nvidia-gpu|nvidia-gpu-sm120|hygon-dcu|kunlunxin-xpu|metax-gpu|iluvatar-gpu|huawei-npu) [default: nvidia-gpu]
   --offline                 Build offline version
   --ppocr-version <ver>     PaddleOCR version [default: 3.4.0]
   --paddlex-version <ver>   PaddleX version [default: 3.4.0]
@@ -29,9 +29,9 @@ Options:
   -h, --help               Show this help message
 
 Examples:
-  $0 --device-type gpu --action push
-  $0 --device-type gpu --platform linux/amd64,linux/arm64 --action push
-  $0 --device-type gpu --action tar --platform linux/amd64
+  $0 --device-type nvidia-gpu --action push
+  $0 --device-type nvidia-gpu --platform linux/amd64,linux/arm64 --action push
+  $0 --device-type nvidia-gpu --action tar --platform linux/amd64
 EOF
 }
 
@@ -46,7 +46,7 @@ while [[ $# -gt 0 ]]; do
             shift
             shift
             case "${device_type}" in
-                gpu|sm120|dcu|xpu|metax|iluvatar|npu)
+                nvidia-gpu|nvidia-gpu-sm120|hygon-dcu|kunlunxin-xpu|metax-gpu|iluvatar-gpu|huawei-npu)
                     ;;
                 *)
                     echo "Error: Unknown device type: ${device_type}" >&2
