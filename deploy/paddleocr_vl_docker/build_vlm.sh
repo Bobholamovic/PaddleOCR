@@ -181,6 +181,7 @@ base_image_name="paddleocr-genai-${backend}-server"
 # Main tags
 main_tag="${registry}/${base_image_name}:${tag_suffix}"
 version_tag="${registry}/${base_image_name}:${tag_suffix/latest/${image_version}}"
+paddleocr_version_tag="${registry}/${base_image_name}:${tag_suffix/latest/paddleocr${paddleocr_version%.*}}"
 
 # Build arguments array
 build_args=(
@@ -188,6 +189,7 @@ build_args=(
     '-f' "${dockerfile}"
     '-t' "${main_tag}"
     '-t' "${version_tag}"
+    '-t' "${paddleocr_version_tag}"
     '--build-arg' "BUILD_FOR_OFFLINE=${build_for_offline}"
     '--build-arg' "PADDLEOCR_VERSION===${paddleocr_version}"
     '--build-arg' "PADDLEX_VERSION===${paddlex_version}"
