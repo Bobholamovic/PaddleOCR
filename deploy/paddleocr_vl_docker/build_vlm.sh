@@ -10,6 +10,7 @@ paddlex_version='3.4.0'
 platform='linux/amd64'
 action='load'
 registry='ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle'
+builder=''
 
 show_usage() {
     cat << EOF
@@ -28,6 +29,7 @@ Options:
                             tar: Export as tar file
                             none: Build only, no output
   --registry <registry>     Custom image registry [default: ${registry}]
+  --builder <name>          Buildx builder name (override default)
   -h, --help               Show this help message
 
 Examples:
@@ -129,6 +131,14 @@ while [[ $# -gt 0 ]]; do
             shift
             shift
             ;;
+        --builder)
+            [ -z "${2-}" ] && {
+                echo "Error: '--builder' requires a value" >&2
+                exit 2
+            }
+            builder="$2"
+            shift 2
+            ;;
         -h|--help)
             show_usage
             exit 0
@@ -191,6 +201,10 @@ build_args=(
     '.'
 )
 
+if [[ -n "${builder}" ]]; then
+    build_args=('--builder' "${builder}" "${build_args[@]}")
+fi
+
 echo "========================================="
 echo "Build Configuration:"
 echo "  Device Type:     ${device_type}"
@@ -201,6 +215,7 @@ echo "  PaddleX:         ${paddlex_version}"
 echo "  Platform:        ${platform}"
 echo "  Action:          ${action}"
 echo "  Registry:        ${registry}"
+echo "  Builder:         ${builder:-<default>}"
 echo "  Dockerfile:      ${dockerfile}"
 echo "  Tags:"
 echo "    - ${main_tag}"
