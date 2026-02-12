@@ -2,11 +2,11 @@
 comments: true
 ---
 
-# PaddleOCR-VL KUNLUNXIN XPU Environment Configuration Tutorial
+# PaddleOCR-VL Kunlunxin XPU Usage Tutorial
 
-This tutorial is a guide for configuring the environment for PaddleOCR-VL KUNLUNXIN XPU. After completing the environment setup, please refer to the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md) to use PaddleOCR-VL.
+This tutorial is a guide for using PaddleOCR-VL on Kunlunxin XPU, covering the complete workflow from environment preparation to service deployment.
 
-PaddleOCR-VL has been verified for accuracy and speed on the KUNLUNXIN P800. However, due to hardware diversity, compatibility with other KUNLUNXIN XPUs has not yet been confirmed. We welcome the community to test on different hardware setups and share your results.
+PaddleOCR-VL has been verified for accuracy and speed on the Kunlunxin P800. However, due to hardware diversity, compatibility with other Kunlunxin XPUs has not yet been confirmed. We welcome the community to test on different hardware setups and share your results.
 
 ## 1. Environment Preparation
 
@@ -27,7 +27,7 @@ docker run \
     -it \
     --network host \
     --user root \
-    --priviledged \
+    --privileged \
     --shm-size 64g \
     ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddleocr-vl:latest-kunlunxin-xpu \
     /bin/bash
@@ -65,7 +65,7 @@ python -m pip install -U "paddleocr[doc-parser]"
 
 ## 2. Quick Start
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md), making sure to specify `device='xpu'`.
+Please refer to [PaddleOCR-VL Usage Tutorial - 2. Quick Start](./PaddleOCR-VL.en.md#2-quick-start), making sure to specify `device='xpu'`.
 
 ## 3. Enhancing VLM Inference Performance Using Inference Acceleration Framework
 
@@ -110,11 +110,11 @@ docker run \
 
 ### 3.2 Client Usage Method
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 3.2 Client Usage Method](./PaddleOCR-VL.en.md#32-client-usage-method).
 
 ### 3.3 Performance Tuning
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 3.3 Performance Tuning](./PaddleOCR-VL.en.md#33-performance-tuning).
 
 ## 4. Service Deployment
 
@@ -218,12 +218,12 @@ Refer to the <a href="./PaddleOCR-VL.en.md#44-pipeline-configuration-adjustment-
 
 ### 4.3 Client Invocation Methods
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 4.3 Client Invocation Methods](./PaddleOCR-VL.en.md#43-client-invocation-methods).
 
 ### 4.4 Pipeline Configuration Adjustment Instructions
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 4.4 Pipeline Configuration Adjustment Instructions](./PaddleOCR-VL.en.md#44-pipeline-configuration-adjustment-instructions).
 
 ## 5. Model Fine-Tuning
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 5. Model Fine-Tuning](./PaddleOCR-VL.en.md#5-model-fine-tuning).

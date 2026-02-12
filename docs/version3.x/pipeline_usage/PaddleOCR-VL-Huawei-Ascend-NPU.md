@@ -2,9 +2,9 @@
 comments: true
 ---
 
-# PaddleOCR-VL 华为昇腾 NPU 环境配置教程
+# PaddleOCR-VL 华为昇腾 NPU 使用教程
 
-本教程是 PaddleOCR-VL 华为昇腾 NPU 的环境配置教程，目的是完成相关的环境配置，环境配置完毕后请参考 [PaddleOCR-VL 使用教程](./PaddleOCR-VL.md) 使用 PaddleOCR-VL。
+本教程是 PaddleOCR-VL 在华为昇腾 NPU 上的使用指南，涵盖了从环境准备到服务化部署的完整流程。
 
 目前 PaddleOCR-VL 已在华为昇腾 910B 上完成精度、速度验证；鉴于硬件环境的多样性，其他华为昇腾 NPU 的兼容性尚未验证。我们诚挚欢迎社区用户在不同硬件上进行测试并反馈您的运行结果。
 
@@ -116,11 +116,11 @@ docker run -it \
 
 ### 3.2 客户端使用方法
 
-请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md) 相同章节。
+请参考[PaddleOCR-VL 使用教程 - 3.2 客户端使用方法](./PaddleOCR-VL.md#32-客户端使用方法)。
 
 ### 3.3 性能调优
 
-请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md) 相同章节。
+请参考[PaddleOCR-VL 使用教程 - 3.3 性能调优](./PaddleOCR-VL.md#33-性能调优)。
 
 ## 4. 服务化部署
 
@@ -208,7 +208,7 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
   paddleocr-vlm-server:
     ...
     volumes: /path/to/your_config.yaml:/home/paddleocr/vlm_server_config.yaml
-    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend fastdeploy --backend_config /home/paddleocr/vlm_server_config.yaml
+    command: paddleocr genai_server --model_name PaddleOCR-VL-0.9B --host 0.0.0.0 --port 8118 --backend vllm --backend_config /home/paddleocr/vlm_server_config.yaml
     ...
 ```
 
@@ -223,12 +223,12 @@ Docker Compose 通过读取 `.env` 和 `compose.yaml` 文件中配置，先后�
 
 ### 4.3 客户端调用方式
 
-请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md) 相同章节。
+请参考[PaddleOCR-VL 使用教程 - 4.3 客户端调用方式](./PaddleOCR-VL.md#43-客户端调用方式)。
 
 ### 4.4 产线配置调整说明
 
-请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md) 相同章节。
+请参考[PaddleOCR-VL 使用教程 - 4.4 产线配置调整说明](./PaddleOCR-VL.md#44-产线配置调整说明)。
 
 ## 5. 模型微调
 
-请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md) 相同章节。
+请参考[PaddleOCR-VL 使用教程 - 5. 模型微调](./PaddleOCR-VL.md#5-模型微调)。

@@ -2,9 +2,9 @@
 comments: true
 ---
 
-# PaddleOCR-VL Iluvatar GPU Environment Configuration Tutorial
+# PaddleOCR-VL Iluvatar GPU Usage Tutorial
 
-This tutorial is a guide for configuring the PaddleOCR-VL Iluvatar GPU environment. The purpose is to complete the relevant environment setup. After the environment configuration is complete, please refer to the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md) to use PaddleOCR-VL.
+This tutorial is a guide for using PaddleOCR-VL on Iluvatar GPU covering the complete workflow from environment preparation to service deployment.
 
 PaddleOCR-VL has been verified for accuracy and speed on the Iluvatar BI-V150. However, due to hardware diversity, compatibility with other Iluvatar GPUs has not yet been confirmed. We welcome the community to test on different hardware setups and share your results.
 
@@ -70,7 +70,7 @@ python -m pip install -U "paddleocr[doc-parser]"
 
 ## 2. Quick Start
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md), making sure to specify `device='iluvatar_gpu'`.
+Please refer to [PaddleOCR-VL Usage Tutorial - 2. Quick Start](./PaddleOCR-VL.en.md#2-quick-start), making sure to specify `device="iluvatar_gpu"`.
 
 ## 3. Improving VLM Inference Performance Using Inference Acceleration Framework
 
@@ -122,11 +122,11 @@ docker run -it \
 
 ### 3.2 Client Usage Method
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 3.2 Client Usage Methods](./PaddleOCR-VL.en.md#32-client-usage-methods).
 
 ### 3.3 Performance Tuning
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 3.3 Performance Tuning](./PaddleOCR-VL.en.md#33-performance-tuning).
 
 ## 4. Service Deployment
 
@@ -208,7 +208,7 @@ Edit <code>environment</code> in the <code>compose.yaml</code> file to change th
 <details>
 <summary>3. Adjust VLM server-side configuration</summary>
 
-If you want to adjust the VLM server configuration, refer to <a href="./PaddleOCR-VL.en.md#331-server-parameter-adjustment">3.3.1 Server Parameter Adjustment</a> to generate a configuration file.
+If you want to adjust the VLM server configuration, refer to <a href="./PaddleOCR-VL.en.md#331-server-side-parameter-adjustment">3.3.1 Server-side Parameter Adjustment</a> to generate a configuration file.
 
 After generating the configuration file, add the following <code>paddleocr-vlm-server.volumes</code> and <code>paddleocr-vlm-server.command</code> fields to your <code>compose.yaml</code>. Replace <code>/path/to/your_config.yaml</code> with your actual configuration file path.
 
@@ -231,12 +231,12 @@ Refer to the <a href="./PaddleOCR-VL.en.md#44-pipeline-configuration-adjustment-
 
 ### 4.3 Client Invocation Method
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 4.3 Client-Side Invocation](./PaddleOCR-VL.en.md#43-client-side-invocation).
 
 ### 4.4 Pipeline Configuration Adjustment Instructions
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 4.4 Pipeline Configuration Adjustment Instructions](./PaddleOCR-VL.en.md#44-pipeline-configuration-adjustment-instructions).
 
 ## 5. Model Fine-Tuning
 
-Please refer to the corresponding section in the [PaddleOCR-VL Usage Tutorial](./PaddleOCR-VL.en.md).
+Please refer to [PaddleOCR-VL Usage Tutorial - 5. Model Fine-Tuning](./PaddleOCR-VL.en.md#5-model-fine-tuning).
