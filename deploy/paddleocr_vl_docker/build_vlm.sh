@@ -17,7 +17,7 @@ show_usage() {
 Usage: $(basename "$0") [OPTIONS]
 
 Options:
-  --device-type <type>      Device type (nvidia-gpu|nvidia-gpu-sm120|hygon-dcu|kunlunxin-xpu|metax-gpu|iluvatar-gpu|huawei-npu) [default: ${device_type}]
+  --device-type <type>      Device type (nvidia-gpu|nvidia-gpu-sm120|hygon-dcu|kunlunxin-xpu|metax-gpu|iluvatar-gpu|huawei-npu|intel-gpu|amd-gpu) [default: ${device_type}]
   --backend <backend>       Backend type (vllm|fastdeploy) [default: ${backend}]
   --offline                 Build offline version
   --ppocr-version <ver>     PaddleOCR version [default: ${paddleocr_version}]
@@ -50,7 +50,7 @@ while [[ $# -gt 0 ]]; do
             shift
             shift
             case "${device_type}" in
-                nvidia-gpu|nvidia-gpu-sm120|hygon-dcu|kunlunxin-xpu|metax-gpu|iluvatar-gpu|huawei-npu)
+                nvidia-gpu|nvidia-gpu-sm120|hygon-dcu|kunlunxin-xpu|metax-gpu|iluvatar-gpu|huawei-npu|intel-gpu|amd-gpu)
                     ;;
                 *)
                     echo "Error: Unknown device type: ${device_type}" >&2

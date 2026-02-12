@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM intel/llm-scaler-vllm:0.11.1-b7
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -6,7 +6,6 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libgl1 \
     && apt-get install -y --no-install-recommends \
         fontconfig \
         fonts-dejavu-core \
@@ -18,7 +17,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN --mount=type=cache,target=/root/.cache/pip \
-    python -m pip install paddlepaddle-gpu==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cu126/
+    python -m pip install paddlepaddle==3.2.1 -i https://www.paddlepaddle.org.cn/packages/stable/cpu/
 
 ARG PADDLEOCR_VERSION=">=3.4.0,<3.5"
 ARG PADDLEX_VERSION=">=3.4.0,<3.5"
