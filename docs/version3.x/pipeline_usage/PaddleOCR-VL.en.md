@@ -1729,7 +1729,7 @@ pipeline = PaddleOCRVL(
 
 ### 3.3 Performance Tuning
 
-The default configurations are optimized for single NVIDIA A100 GPUs with exclusive client access and may not be suitable for other environments. If users encounter performance issues in actual use, the following optimization methods can be attempted.
+The default configuration cannot guarantee optimal performance in all environments. If users encounter performance issues in actual use, the following optimization methods can be attempted.
 
 #### 3.3.1 Server-Side Parameter Adjustment
 

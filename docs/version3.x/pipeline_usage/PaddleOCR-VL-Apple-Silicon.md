@@ -89,7 +89,7 @@ pipeline = PaddleOCRVL(
 
 ## 4. 服务化部署
 
-目前仅支持**手动部署**方式，请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md) **4.2 方法二：手动部署**。
+目前仅支持**手动部署**方式，请参考[PaddleOCR-VL 使用教程](./PaddleOCR-VL.md)。
 
 ### 4.3 客户端调用方式
 
