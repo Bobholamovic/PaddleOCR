@@ -15,6 +15,7 @@ comments: true
     - **OCR**：对图像和 PDF 文件进行文本检测与识别。
     - **PP-StructureV3**：从图像或 PDF 文件中识别和提取文本块、标题、段落、图片、表格以及其他版面元素，将输入转换为 Markdown 文档。
     - **PaddleOCR-VL**：使用基于多模态大模型的方案，从图像或 PDF 文件中识别和提取文本块、标题、段落、图片、表格以及其他版面元素，将输入转换为 Markdown 文档。
+    - **PaddleOCR-VL-1.5**：PaddleOCR-VL 的升级版，相较于 PaddleOCR-VL，PaddleOCR-VL-1.5 在速度与准确率上均有提升。
 - **支持运行在如下工作模式**
     - **本地 Python 库**：在本机直接运行 PaddleOCR 产线。此模式对本地环境与计算机性能有一定要求，适用于需要离线使用、对数据隐私有严格要求的场景。
     - **PaddleOCR 官方服务**：调用 [PaddleOCR 官网](https://aistudio.baidu.com/paddleocr) 提供的云服务。此模式适合快速体验功能、快速验证方案等，也适用于零代码开发场景。
@@ -249,7 +250,7 @@ paddleocr_mcp --help
         pipeline.export_paddlex_config_to_yaml("PP-StructureV3.yaml")
         ```
     
-    **对于 PaddleOCR-VL产线，不建议使用 CPU 推理。**
+    **对于 PaddleOCR-VL 系列，不建议使用 CPU 推理。**
 
 #### 模式二：PaddleOCR 官方服务
 
@@ -285,7 +286,7 @@ paddleocr_mcp --help
 
 **说明**：
 
-- `PADDLEOCR_MCP_PIPELINE` 需要被设置为产线名称。详见第 4 节。千帆平台服务目前仅支持 PaddleOCR-VL 和 PP-StructureV3。
+- `PADDLEOCR_MCP_PIPELINE` 需要被设置为产线名称。详见第 4 节。千帆平台服务目前仅支持 PP-StructureV3 和 PaddleOCR-VL。
 
 #### 模式四：自托管服务
 
@@ -402,7 +403,7 @@ paddleocr_mcp --pipeline OCR --ppocr_source self_hosted --server_url http://127.
 
 | 环境变量 | 命令行参数 | 类型 | 描述 | 可选值 | 默认值 |
 |:---------|:-----------|:-----|:-----|:-------|:-------|
-| `PADDLEOCR_MCP_PIPELINE` | `--pipeline` | `str` | 要运行的产线。 | `"OCR"`，`"PP-StructureV3"`，`"PaddleOCR-VL"` | `"OCR"` |
+| `PADDLEOCR_MCP_PIPELINE` | `--pipeline` | `str` | 要运行的产线。 | `"OCR"`，`"PP-StructureV3"`，`"PaddleOCR-VL"`，`"PaddleOCR-VL-1.5"` | `"OCR"` |
 | `PADDLEOCR_MCP_PPOCR_SOURCE` | `--ppocr_source` | `str` | PaddleOCR 能力来源。 | `"local"`（本地 Python 库），`"aistudio"`（PaddleOCR 官方服务），`"qianfan"`（千帆平台服务），`"self_hosted"`（自托管服务） | `"local"` |
 | `PADDLEOCR_MCP_SERVER_URL` | `--server_url` | `str` | 底层服务基础 URL（`aistudio`、`qianfan`、`self_hosted` 模式下必需）。 | - | `None` |
 | `PADDLEOCR_MCP_AISTUDIO_ACCESS_TOKEN` | `--aistudio_access_token` | `str` | AI Studio 访问令牌（`aistudio` 模式下必需）。 | - | `None` |
@@ -418,4 +419,4 @@ paddleocr_mcp --pipeline OCR --ppocr_source self_hosted --server_url http://127.
 
 - 在本地 Python 库模式下，当前提供的工具无法处理 Base64 编码的 PDF 文档输入。
 - 在本地 Python 库模式下，当前提供的工具不会根据模型提示的 `file_type` 推断文件类型，对于一些复杂 URL 可能处理失败。
-- 对于 PP-StructureV3 和 PaddleOCR-VL 产线，若输入文件中包含图像，返回结果可能会显著增加 token 使用量。若无需图像内容，可通过提示词明确排除，以降低资源消耗。
+- 对于 PP-StructureV3 和 PaddleOCR-VL 系列，若输入文件中包含图像，返回结果可能会显著增加 token 使用量。若无需图像内容，可通过提示词明确排除，以降低资源消耗。
