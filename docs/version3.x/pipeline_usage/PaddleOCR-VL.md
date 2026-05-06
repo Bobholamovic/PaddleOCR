@@ -11,9 +11,11 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
 
 **2026年1月29日，我们发布了PaddleOCR-VL-1.5。PaddleOCR-VL-1.5不仅以94.5%精度大幅刷新了评测集OmniDocBench v1.5，更创新性地支持了异形框定位，使得PaddleOCR-VL-1.5 在扫描、倾斜、弯折、屏幕拍摄及复杂光照等真实场景中均表现优异。此外，模型还新增了印章识别与文本检测识别能力，关键指标持续领跑。**
 
-PaddleOCR-VL 整体由版面检测模型、VLM、后处理 3 个核心部分组成。下图展示了一个简化的流程：
+PaddleOCR-VL 整体由版面检测模型、元素裁剪、VLM、后处理 4 个核心部分组成。下图展示了一个简化的流程：
 
-在该流程中，版面检测模型以整图作为输入，定位图像中的各类版面元素（例如表格、公式）；随后，一系列包含单个版面元素的子图被裁剪出来，并送入 VLM，生成对应的识别结果（例如 Markdown 文本）；最后，系统通过后处理将各元素结果拼接为整幅图像的完整解析结果。因此，**若需使用 PaddleOCR-VL 的完整能力，必须采用版面检测模型、VLM 与后处理串联的完整流程，而不能仅单独使用 VLM**。后文会多次涉及相关概念，请注意区分完整的 PaddleOCR-VL 流程与其中的 VLM 组件。以 PaddleOCR-VL v1 为例，版面检测模型为 PP-DocLayoutV2，VLM 为 PaddleOCR-VL-0.9B。需要特别说明的是，“PaddleOCR-VL-0.9B” 并不是 PaddleOCR-VL 的一个模型变种，而是 PaddleOCR-VL v1 完整流程中的 VLM 组件；这与常见 LLM / VLM 的命名习惯不同，例如 Qwen2-72B 通常表示 Qwen2 系列下的一个具体模型变体。
+<img src="https://raw.githubusercontent.com/cuicheng01/PaddleX_doc_images/refs/heads/main/images/paddleocr_vl_1_5/paddleocr-vl-1.5_metrics.png"/>
+
+在该流程中，版面检测模型以整图作为输入，定位图像中的各类版面元素（例如表格、公式）；随后，系统根据检测结果对原图进行裁剪，生成包含单个版面元素的子图；这些子图被送入 VLM，生成对应的识别结果（例如 Markdown 文本）；最后，系统通过后处理将各元素结果拼接为整幅图像的完整解析结果。因此，**若需使用 PaddleOCR-VL 的完整能力，必须采用版面检测模型、元素裁剪、VLM 与后处理串联的完整流程，而不能仅单独使用 VLM。** 后文会多次涉及相关概念，请注意区分完整的 PaddleOCR-VL 流程与其中的 VLM 组件。以 PaddleOCR-VL v1 为例，版面检测模型为 PP-DocLayoutV2，VLM 为 PaddleOCR-VL-0.9B。需要特别说明的是，"PaddleOCR-VL-0.9B" 并不是 PaddleOCR-VL 的一个模型变种，而是 PaddleOCR-VL v1 完整流程中的 VLM 组件；这与常见 LLM / VLM 的命名习惯不同，例如 Qwen2-72B 通常表示 Qwen2 系列下的一个具体模型变体。
 
 **如果在使用过程中出现无法复现论文或 PaddleOCR 官网精度、模型输出大量幻觉文本等问题，首先应确认当前使用的是完整的 PaddleOCR-VL 流程，而不是仅使用其中的 VLM 组件。** 例如，直接通过 Transformers 本地执行 PaddleOCR-VL-0.9B 模型，或直接请求 vLLM / SGLang / FastDeploy 服务，都不等同于运行完整的 PaddleOCR-VL 流程。
 
