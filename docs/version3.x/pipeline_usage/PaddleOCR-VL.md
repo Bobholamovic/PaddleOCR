@@ -11,11 +11,11 @@ PaddleOCR-VL 是一款先进、高效的文档解析模型，专为文档中的�
 
 **2026年1月29日，我们发布了PaddleOCR-VL-1.5。PaddleOCR-VL-1.5不仅以94.5%精度大幅刷新了评测集OmniDocBench v1.5，更创新性地支持了异形框定位，使得PaddleOCR-VL-1.5 在扫描、倾斜、弯折、屏幕拍摄及复杂光照等真实场景中均表现优异。此外，模型还新增了印章识别与文本检测识别能力，关键指标持续领跑。**
 
-PaddleOCR-VL 整体由版面检测模型、元素裁剪、VLM、后处理 4 个核心部分组成。下图展示了一个简化的流程：
+PaddleOCR-VL 整体由版面分析与 VLM 识别两个核心阶段组成。下图展示了一个简化的流程：
 
 <img src="https://raw.githubusercontent.com/cuicheng01/PaddleX_doc_images/refs/heads/main/images/paddleocr_vl_1_5/paddleocr-vl-1.5_metrics.png"/>
 
-在该流程中，版面检测模型以整图作为输入，定位图像中的各类版面元素（例如表格、公式）；随后，系统根据检测结果对原图进行裁剪，生成包含单个版面元素的子图；这些子图被送入 VLM，生成对应的识别结果（例如 Markdown 文本）；最后，系统通过后处理将各元素结果拼接为整幅图像的完整解析结果。因此，**若需使用 PaddleOCR-VL 的完整能力，必须采用版面检测模型、元素裁剪、VLM 与后处理串联的完整流程，而不能仅单独使用 VLM。** 后文会多次涉及相关概念，请注意区分完整的 PaddleOCR-VL 流程与其中的 VLM 组件。以 PaddleOCR-VL v1 为例，版面检测模型为 PP-DocLayoutV2，VLM 为 PaddleOCR-VL-0.9B。需要特别说明的是，"PaddleOCR-VL-0.9B" 并不是 PaddleOCR-VL 的一个模型变种，而是 PaddleOCR-VL v1 完整流程中的 VLM 组件；这与常见 LLM / VLM 的命名习惯不同，例如 Qwen2-72B 通常表示 Qwen2 系列下的一个具体模型变体。
+在该流程中，第一阶段为版面分析：模型以整图作为输入，检测并定位图像中的各类版面元素（例如表格、公式等），同时确定其阅读顺序，并根据检测结果裁剪出对应的元素子图；第二阶段为 VLM 识别：将每个子图独立输入 VLM，生成对应的识别结果（例如 Markdown 文本），随后再按照版面分析阶段给出的顺序对各元素结果进行合并，得到整幅图像的完整解析结果。因此，**若需使用 PaddleOCR-VL 的完整能力，必须采用版面分析与 VLM 识别协同的完整流程，而不能仅单独使用 VLM。** 后文会多次涉及相关概念，请注意区分完整的 PaddleOCR-VL 流程与其中的 VLM 组件。以 PaddleOCR-VL v1 为例，版面分析模型为 PP-DocLayoutV2，VLM 为 PaddleOCR-VL-0.9B。需要特别说明的是，“PaddleOCR-VL-0.9B” 并不是 PaddleOCR-VL 的一个模型变种，而是 PaddleOCR-VL v1 完整流程中的 VLM 组件；这与常见 LLM / VLM 的命名习惯不同，例如 Qwen2-72B 通常表示 Qwen2 系列下的一个具体模型变体。
 
 **如果在使用过程中出现无法复现论文或 PaddleOCR 官网精度、模型输出大量幻觉文本等问题，首先应确认当前使用的是完整的 PaddleOCR-VL 流程，而不是仅使用其中的 VLM 组件。** 例如，直接通过 Transformers 本地执行 PaddleOCR-VL-0.9B 模型，或直接请求 vLLM / SGLang / FastDeploy 服务，都不等同于运行完整的 PaddleOCR-VL 流程。
 
@@ -23,19 +23,19 @@ PaddleOCR-VL 整体由版面检测模型、元素裁剪、VLM、后处理 4 个�
 
 请先根据硬件选择对应教程。
 
-| 硬件                         | 阅读哪篇教程                                                                              |
-| -------------------------- | ----------------------------------------------------------------------------------- |
-| x64 CPU                    | 继续阅读本教程。请使用第 1.2 节的手动安装路径；仅适用于 NVIDIA GPU 的 Docker 步骤不适用。                           |
-| 除 Blackwell 之外的 NVIDIA GPU | 继续阅读本教程。 |
-| NVIDIA Blackwell GPU       | 阅读 [PaddleOCR-VL NVIDIA Blackwell 架构 GPU 使用教程](./PaddleOCR-VL-NVIDIA-Blackwell.md)。 |
-| Apple Silicon              | 阅读 [PaddleOCR-VL Apple Silicon 使用教程](./PaddleOCR-VL-Apple-Silicon.md)。              |
-| 昆仑芯 XPU                    | 阅读 [PaddleOCR-VL 昆仑芯 XPU 使用教程](./PaddleOCR-VL-Kunlunxin-XPU.md)。                    |
-| 海光 DCU                     | 阅读 [PaddleOCR-VL 海光 DCU 使用教程](./PaddleOCR-VL-Hygon-DCU.md)。                         |
-| 沐曦 GPU                     | 阅读 [PaddleOCR-VL 沐曦 GPU 使用教程](./PaddleOCR-VL-MetaX-GPU.md)。                         |
-| 天数 GPU                     | 阅读 [PaddleOCR-VL 天数 GPU 使用教程](./PaddleOCR-VL-Iluvatar-GPU.md)。                      |
-| 华为昇腾 NPU                   | 阅读 [PaddleOCR-VL 华为昇腾 NPU 使用教程](./PaddleOCR-VL-Huawei-Ascend-NPU.md)。               |
-| AMD GPU                    | 阅读 [PaddleOCR-VL AMD GPU 使用教程](./PaddleOCR-VL-AMD-GPU.md)。                          |
-| Intel Arc GPU              | 阅读 [PaddleOCR-VL Intel Arc GPU 使用教程](./PaddleOCR-VL-Intel-Arc-GPU.md)。              |
+| 硬件　　　　　　　　　　　　　 | 阅读哪篇教程　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 |
+| --------------------------------| ----------------------------------------------------------------------------------------------|
+| x64 CPU　　　　　　　　　　　　| 继续阅读本教程。请使用第 1.2 节的手动安装路径；仅适用于 NVIDIA GPU 的 Docker 步骤不适用。　　|
+| 除 Blackwell 之外的 NVIDIA GPU | 继续阅读本教程。　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 |
+| NVIDIA Blackwell GPU　　　　　 | 阅读 [PaddleOCR-VL NVIDIA Blackwell 架构 GPU 使用教程](./PaddleOCR-VL-NVIDIA-Blackwell.md)。 |
+| Apple Silicon　　　　　　　　　| 阅读 [PaddleOCR-VL Apple Silicon 使用教程](./PaddleOCR-VL-Apple-Silicon.md)。　　　　　　　　|
+| 昆仑芯 XPU　　　　　　　　　　 | 阅读 [PaddleOCR-VL 昆仑芯 XPU 使用教程](./PaddleOCR-VL-Kunlunxin-XPU.md)。　　　　　　　　　 |
+| 海光 DCU　　　　　　　　　　　 | 阅读 [PaddleOCR-VL 海光 DCU 使用教程](./PaddleOCR-VL-Hygon-DCU.md)。　　　　　　　　　　　　 |
+| 沐曦 GPU　　　　　　　　　　　 | 阅读 [PaddleOCR-VL 沐曦 GPU 使用教程](./PaddleOCR-VL-MetaX-GPU.md)。　　　　　　　　　　　　 |
+| 天数 GPU　　　　　　　　　　　 | 阅读 [PaddleOCR-VL 天数 GPU 使用教程](./PaddleOCR-VL-Iluvatar-GPU.md)。　　　　　　　　　　　|
+| 华为昇腾 NPU　　　　　　　　　 | 阅读 [PaddleOCR-VL 华为昇腾 NPU 使用教程](./PaddleOCR-VL-Huawei-Ascend-NPU.md)。　　　　　　 |
+| AMD GPU　　　　　　　　　　　　| 阅读 [PaddleOCR-VL AMD GPU 使用教程](./PaddleOCR-VL-AMD-GPU.md)。　　　　　　　　　　　　　　|
+| Intel Arc GPU　　　　　　　　　| 阅读 [PaddleOCR-VL Intel Arc GPU 使用教程](./PaddleOCR-VL-Intel-Arc-GPU.md)。　　　　　　　　|
 
 如果你只是想先确认 PaddleOCR-VL 支持在哪些硬件上部署，或是特定硬件支持哪些推理方式，请先阅读下方的 [PaddleOCR-VL 推理方式与硬件支持矩阵](#paddleocr-vl-对推理设备的支持情况)。
 
