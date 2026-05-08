@@ -64,12 +64,12 @@ PaddleOCR-VL 整体由版面分析与 VLM 识别两个核心阶段组成。下�
 
 **推理方式说明**
 
-`PaddlePaddle` 表示版面检测模型与 VLM 均使用本地飞桨框架推理；在实际执行时，各模块会根据模型形态解析为 `paddle_static` 或 `paddle_dynamic`。`Transformers` 表示版面检测模型与 VLM 均通过 `transformers` 引擎推理；其余推理方式遵循 `版面检测模型推理方式 + VLM 推理方式` 的格式，例如 `PaddlePaddle + vLLM` 表示版面检测模型使用本地飞桨框架，VLM 使用 vLLM 推理。
+`PaddlePaddle` 表示版面分析模型与 VLM 均使用本地飞桨框架推理；在实际执行时，各模块会根据模型形态解析为 `paddle_static` 或 `paddle_dynamic`。`Transformers` 表示版面分析模型与 VLM 均通过 `transformers` 引擎推理；其余推理方式遵循 `版面分析模型推理方式 + VLM 推理方式` 的格式，例如 `PaddlePaddle + vLLM` 表示版面分析模型使用本地飞桨框架，VLM 使用 vLLM 推理。
 
 **判定补充说明**
 
 - vLLM、SGLang 和 FastDeploy 无法在 Windows 上原生运行，请使用我们提供的 Docker 镜像。
-- 由于不同库之间存在依赖冲突，使用 Transformers + vLLM 等混合推理方式时，通常需要将版面检测模型和 VLM 服务部署在不同环境中。
+- 由于不同库之间存在依赖冲突，使用 Transformers + vLLM 等混合推理方式时，通常需要将版面分析模型和 VLM 服务部署在不同环境中。
 
 ## 环境要求
 
@@ -228,7 +228,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_doc_orientation_classify T
 # 通过 --use_doc_unwarping 指定是否使用文本图像矫正模块
 paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_doc_unwarping True --save_path ./output
 
-# 通过 --use_layout_detection 指定是否使用版面区域检测排序模块
+# 通过 --use_layout_detection 指定是否使用版面分析模块
 paddleocr doc_parser -i ./paddleocr_vl_demo.png --use_layout_detection False --save_path ./output
 ```
 
@@ -277,14 +277,14 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --engine transformers --save_pat
 </tr>
 <tr>
 <td><code>layout_detection_model_name</code></td>
-<td><b>含义：</b>版面区域检测排序模型名称。<br/>
+<td><b>含义：</b>版面分析模型名称。<br/>
 <b>说明：</b>如果不设置，将会使用默认模型。</td>
 <td><code>str</code></td>
 <td></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_dir</code></td>
-<td><b>含义：</b>版面区域检测排序模型的目录路径。<br/>
+<td><b>含义：</b>版面分析模型的目录路径。<br/>
 <b>说明：</b>如果不设置，将会下载官方模型。</td>
 <td><code>str</code></td>
 <td></td>
@@ -300,7 +300,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --engine transformers --save_pat
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td><b>含义：</b>版面检测是否使用后处理NMS。<br/>
+<td><b>含义：</b>版面分析是否使用后处理NMS。<br/>
 <b>说明：</b>如果不设置，将使用初始化的默认值。</td>
 <td><code>bool</code></td>
 <td></td>
@@ -316,7 +316,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --engine transformers --save_pat
 </tr>
 <tr>
 <td><code>layout_merge_bboxes_mode</code></td>
-<td><b>含义：</b>版面检测中模型输出的检测框的合并处理模式。<br/>
+<td><b>含义：</b>版面分析中模型输出的检测框的合并处理模式。<br/>
 <b>说明：</b>
 <ul>
 <li><b>large</b>，设置为large时，表示在模型输出的检测框中，对于互相重叠包含的检测框，只保留外部最大的框，删除重叠的内部框；</li>
@@ -417,7 +417,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --engine transformers --save_pat
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td><b>含义：</b>是否加载并使用版面区域检测排序模块。<br/>
+<td><b>含义：</b>是否加载并使用版面分析模块。<br/>
 <b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
 <td><code>bool</code></td>
 <td></td>
@@ -452,7 +452,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --engine transformers --save_pat
 </tr>
 <tr>
 <td><code>merge_layout_blocks</code></td>
-<td><b>含义：</b>控制是否对跨栏或上下交错分栏的版面检测框进行合并。<br/>
+<td><b>含义：</b>控制是否对跨栏或上下交错分栏的版面分析框进行合并。<br/>
 <b>说明：</b>如果不设置，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
 <td><code>bool</code></td>
 <td></td>
@@ -466,7 +466,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --engine transformers --save_pat
 </tr>
 <tr>
 <td><code>layout_shape_mode</code></td>
-<td><b>含义：</b>用于指定版面检测结果的几何形状表示模式。该参数决定了检测区域（如文本块、图片、表格等）边界的计算方式及展示形态。<br/>
+<td><b>含义：</b>用于指定版面分析结果的几何形状表示模式。该参数决定了检测区域（如文本块、图片、表格等）边界的计算方式及展示形态。<br/>
 <b>说明：</b>取值说明：
     <ul>
     <li><b>rect (矩形)</b>: 输出水平正向的边界框（包含 x1, y1, x2, y2）。适用于标准的水平排版版面。</li>
@@ -481,7 +481,7 @@ paddleocr doc_parser -i ./paddleocr_vl_demo.png --engine transformers --save_pat
 <tr>
 <td><code>use_queues</code></td>
 <td><b>含义：</b>用于控制是否启用内部队列。<br/>
-<b>说明：</b>当设置为 <code>True</code> 时，数据加载（如将 PDF 页面渲染为图像）、版面检测模型处理以及 VLM 推理将分别在独立线程中异步执行，通过队列传递数据，从而提升效率。对于页数较多的 PDF 文档，或是包含大量图像或 PDF 文件的目录，这种方式尤其高效。如果不设置，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
+<b>说明：</b>当设置为 <code>True</code> 时，数据加载（如将 PDF 页面渲染为图像）、版面分析模型处理以及 VLM 推理将分别在独立线程中异步执行，通过队列传递数据，从而提升效率。对于页数较多的 PDF 文档，或是包含大量图像或 PDF 文件的目录，这种方式尤其高效。如果不设置，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
 <td><code>bool</code></td>
 <td></td>
 </tr>
@@ -643,7 +643,7 @@ pipeline = PaddleOCRVL()
 
 # pipeline = PaddleOCRVL(use_doc_orientation_classify=True) # 通过 use_doc_orientation_classify 指定是否使用文档方向分类模型
 # pipeline = PaddleOCRVL(use_doc_unwarping=True) # 通过 use_doc_unwarping 指定是否使用文本图像矫正模块
-# pipeline = PaddleOCRVL(use_layout_detection=False) # 通过 use_layout_detection 指定是否使用版面区域检测排序模块
+# pipeline = PaddleOCRVL(use_layout_detection=False) # 通过 use_layout_detection 指定是否使用版面分析模块
 
 output = pipeline.predict("./paddleocr_vl_demo.png")
 for res in output:
@@ -741,14 +741,14 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 </tr>
 <tr>
 <td><code>layout_detection_model_name</code></td>
-<td><b>含义：</b>版面区域检测排序模型名称。<br/>
+<td><b>含义：</b>版面分析模型名称。<br/>
 <b>说明：</b>如果设置为<code>None</code>，将会使用默认模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
 </tr>
 <tr>
 <td><code>layout_detection_model_dir</code></td>
-<td><b>含义：</b>版面区域检测排序模型的目录路径。<br/>
+<td><b>含义：</b>版面分析模型的目录路径。<br/>
 <b>说明：</b>如果设置为<code>None</code>，将会下载官方模型。</td>
 <td><code>str|None</code></td>
 <td><code>None</code></td>
@@ -768,7 +768,7 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 </tr>
 <tr>
 <td><code>layout_nms</code></td>
-<td><b>含义：</b>版面检测是否使用后处理NMS。<br/>
+<td><b>含义：</b>版面分析是否使用后处理NMS。<br/>
 <b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
@@ -888,7 +888,7 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 </tr>
 <tr>
 <td><code>use_layout_detection</code></td>
-<td><b>含义：</b>是否加载并使用版面区域检测排序模块。<br/>
+<td><b>含义：</b>是否加载并使用版面分析模块。<br/>
 <b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
@@ -923,7 +923,7 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 </tr>
 <tr>
 <td><code>merge_layout_blocks</code></td>
-<td><b>含义：</b>控制是否对跨栏或上下交错分栏的版面检测框进行合并。<br/>
+<td><b>含义：</b>控制是否对跨栏或上下交错分栏的版面分析框进行合并。<br/>
 <b>说明：</b>如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
 <td><code>bool|None</code></td>
 <td></td>
@@ -938,7 +938,7 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 <tr>
 <td><code>use_queues</code></td>
 <td><b>含义：</b>用于控制是否启用内部队列。<br/>
-<b>说明：</b>当设置为 <code>True</code> 时，数据加载（如将 PDF 页面渲染为图像）、版面检测模型处理以及 VLM 推理将分别在独立线程中异步执行，通过队列传递数据，从而提升效率。对于页数较多的 PDF 文档，或是包含大量图像或 PDF 文件的目录，这种方式尤其高效。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
+<b>说明：</b>当设置为 <code>True</code> 时，数据加载（如将 PDF 页面渲染为图像）、版面分析模型处理以及 VLM 推理将分别在独立线程中异步执行，通过队列传递数据，从而提升效率。对于页数较多的 PDF 文档，或是包含大量图像或 PDF 文件的目录，这种方式尤其高效。如果设置为<code>None</code>，将使用初始化的默认值，默认初始化为<code>True</code>。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -1134,7 +1134,7 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 </tr>
 <tr>
 <td><code>layout_shape_mode</code></td>
-<td><b>含义：</b>用于指定版面检测结果的几何形状表示模式。该参数决定了检测区域（如文本块、图片、表格等）边界的计算方式及展示形态。<br/>
+<td><b>含义：</b>用于指定版面分析结果的几何形状表示模式。该参数决定了检测区域（如文本块、图片、表格等）边界的计算方式及展示形态。<br/>
 <b>说明：</b>取值说明：
     <ul>
     <li><b>rect (矩形)</b>: 输出水平正向的边界框（包含 x1, y1, x2, y2）。适用于标准的水平排版版面。</li>
@@ -1206,7 +1206,7 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 </tr>
 <tr>
 <td><code>merge_layout_blocks</code></td>
-<td><b>含义：</b>控制是否对跨栏或上下交错分栏的版面检测框进行合并。</td>
+<td><b>含义：</b>控制是否对跨栏或上下交错分栏的版面分析框进行合并。</td>
 <td><code>bool|None</code></td>
 <td><code>None</code></td>
 </tr>
@@ -1383,7 +1383,7 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
       <li><code>model_settings</code>: <code>(Dict[str, bool])</code> 配置产线所需的模型参数
         <ol>
           <li><code>use_doc_preprocessor</code>: <code>(bool)</code> 控制是否启用文档预处理子产线</li>
-          <li><code>use_layout_detection</code>: <code>(bool)</code> 控制是否启用版面检测模块</li>
+          <li><code>use_layout_detection</code>: <code>(bool)</code> 控制是否启用版面分析模块</li>
           <li><code>use_chart_recognition</code>: <code>(bool)</code> 控制是否开启图表识别功能</li>
           <li><code>format_block_content</code>: <code>(bool)</code> 控制是否在<code>JSON</code>中保存格式化后的markdown内容</li>
         </ol>
@@ -1419,7 +1419,7 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
       <li><code>model_settings</code>: <code>(Dict[str, bool])</code> 配置产线所需的模型参数
         <ol>
           <li><code>use_doc_preprocessor</code>: <code>(bool)</code> 控制是否启用文档预处理子产线</li>
-          <li><code>use_layout_detection</code>: <code>(bool)</code> 控制是否启用版面检测模块</li>
+          <li><code>use_layout_detection</code>: <code>(bool)</code> 控制是否启用版面分析模块</li>
           <li><code>use_chart_recognition</code>: <code>(bool)</code> 控制是否开启图表识别功能</li>
           <li><code>format_block_content</code>: <code>(bool)</code> 控制是否在<code>JSON</code>中保存格式化后的markdown内容</li>
         </ol>
@@ -1485,7 +1485,7 @@ output = pipeline.predict(["imgs/file1.png", "imgs/file2.png", "imgs/file3.png"]
 <a id="3-vlm"></a>
 ## 3. 使用 VLM 推理服务提升推理性能
 
-只使用 PaddlePaddle 或 Transformers 通常无法得到最优的推理性能。此步骤主要介绍如何通过 VLM 推理服务提升 PaddleOCR-VL 的推理性能。您既可以自行部署基于 vLLM、SGLang、FastDeploy、MLX-VLM、llama.cpp 等后端的 VLM 推理服务，也可以直接使用兼容的托管服务。这一节对应“版面检测推理方式 + VLM 推理服务”类组合，其核心思路是：**客户端继续负责版面检测等完整流程中的其他环节，仅将 VLM 推理交给专用服务处理。**
+只使用 PaddlePaddle 或 Transformers 通常无法得到最优的推理性能。此步骤主要介绍如何通过 VLM 推理服务提升 PaddleOCR-VL 的推理性能。您既可以自行部署基于 vLLM、SGLang、FastDeploy、MLX-VLM、llama.cpp 等后端的 VLM 推理服务，也可以直接使用兼容的托管服务。这一节对应“版面分析推理方式 + VLM 推理服务”类组合，其核心思路是：**客户端继续负责版面分析等完整流程中的其他环节，仅将 VLM 推理交给专用服务处理。**
 
 ### 3.1 启动 VLM 推理服务
 
@@ -1605,7 +1605,7 @@ paddleocr install_genai_server_deps <推理加速框架名称>
 通过 `paddleocr install_genai_server_deps` 安装的 vLLM 与 SGLang 均为 **CUDA 12.6** 版本，请确保本地 NVIDIA 驱动与此版本一致或更高。
 
 > WARNING:
-> 目前 vLLM 和 SGLang 与 Transformers 引擎所需的 transformers 库版本存在冲突，因此同一环境中无法同时安装 Transformers 引擎与 vLLM 或 SGLang。如果使用 Transformers + vLLM 或 Transformers + SGLang 的推理方式，请将版面检测模型和 VLM 服务部署在不同环境中。
+> 目前 vLLM 和 SGLang 与 Transformers 引擎所需的 transformers 库版本存在冲突，因此同一环境中无法同时安装 Transformers 引擎与 vLLM 或 SGLang。如果使用 Transformers + vLLM 或 Transformers + SGLang 的推理方式，请将版面分析模型和 VLM 服务部署在不同环境中。
 
 安装完成后，可通过 `paddleocr genai_server` 命令启动服务：
 
@@ -1649,7 +1649,7 @@ paddleocr genai_server --model_name PaddleOCR-VL-1.5-0.9B --backend vllm --port 
 
 ### 3.2 客户端使用方法
 
-启动 VLM 推理服务后，客户端即可通过 PaddleOCR 调用该服务。本节既适用于调用 3.1 中自建的 VLM 推理服务，也适用于调用第三方提供的兼容托管服务。**请注意，由于客户端仍需要调用版面检测模型并完成其他流程环节，仍建议在 GPU 等加速设备上运行客户端，以获得更稳定和高效的性能。客户端环境配置请参考第 1 节，3.1 节介绍的环境配置仅适用于启动服务，不适用于客户端。若您希望客户端只通过 HTTP 接口调用 PaddleOCR-VL 的完整能力，请直接参考第 4 节“服务化部署”。**
+启动 VLM 推理服务后，客户端即可通过 PaddleOCR 调用该服务。本节既适用于调用 3.1 中自建的 VLM 推理服务，也适用于调用第三方提供的兼容托管服务。**请注意，由于客户端仍需要调用版面分析模型并完成其他流程环节，仍建议在 GPU 等加速设备上运行客户端，以获得更稳定和高效的性能。客户端环境配置请参考第 1 节，3.1 节介绍的环境配置仅适用于启动服务，不适用于客户端。若您希望客户端只通过 HTTP 接口调用 PaddleOCR-VL 的完整能力，请直接参考第 4 节“服务化部署”。**
 
 #### 3.2.1 CLI 调用
 
@@ -3116,4 +3116,4 @@ services:
 
 若您发现 PaddleOCR-VL 在特定业务场景中的精度表现未达预期，我们推荐使用 [ERNIEKit 套件](https://github.com/PaddlePaddle/ERNIE/tree/release/v1.4) 对视觉语言模型（例如 PaddleOCR-VL-0.9B）进行有监督微调（SFT）。具体操作步骤可参考 [ERNIEKit 官方文档](https://github.com/PaddlePaddle/ERNIE/blob/release/v1.4/docs/paddleocr_vl_sft_zh.md)。
 
-> 目前暂不支持对版面检测排序模型进行微调。
+> 目前暂不支持对版面分析排序模型进行微调。
